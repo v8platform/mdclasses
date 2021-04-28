@@ -1,4 +1,4 @@
-package mdclasses
+package classes
 
 type Document struct {
 }

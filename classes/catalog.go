@@ -1,0 +1,148 @@
+package classes
+
+import "encoding/xml"
+
+type ObjectTypeRef struct {
+	TypeId      string `xml:"typeId,attr"`
+	ValueTypeId string `xml:"valueTypeId,attr"`
+}
+
+type ValueTypeRef struct {
+	Key   string `xml:"key"`
+	Value string `xml:"value"`
+}
+
+type Catalog struct {
+	XMLName       xml.Name `xml:"Catalog"`
+	Xsi           string   `xml:"xsi,attr"`
+	Core          string   `xml:"core,attr"`
+	Mdclass       string   `xml:"mdclass,attr"`
+	Uuid          string   `xml:"uuid,attr"`
+	ProducedTypes struct {
+		ObjectType    ObjectTypeRef `xml:"objectType"`
+		RefType       ObjectTypeRef `xml:"refType"`
+		SelectionType ObjectTypeRef `xml:"selectionType"`
+		ListType      ObjectTypeRef `xml:"listType"`
+		ManagerType   ObjectTypeRef `xml:"managerType"`
+	} `xml:"producedTypes"`
+	Name                          string       `xml:"name"`
+	Synonym                       ValueTypeRef `xml:"synonym"`
+	InputByString                 string       `xml:"inputByString"`
+	FullTextSearchOnInputByString string       `xml:"fullTextSearchOnInputByString"`
+	StandardAttributes            []struct {
+		DataHistory string `xml:"dataHistory"`
+		Name        string `xml:"name"`
+		FillValue   struct {
+			Type  string `xml:"type,attr"`
+			Value string `xml:"value"`
+		} `xml:"fillValue"`
+		FullTextSearch string `xml:"fullTextSearch"`
+		MinValue       struct {
+			Type string `xml:"type,attr"`
+		} `xml:"minValue"`
+		MaxValue struct {
+			Type string `xml:"type,attr"`
+		} `xml:"maxValue"`
+		FillFromFillingValue string       `xml:"fillFromFillingValue"`
+		FillChecking         string       `xml:"fillChecking"`
+		ToolTip              ValueTypeRef `xml:"toolTip"`
+	} `xml:"standardAttributes"`
+	CreateOnInput       string       `xml:"createOnInput"`
+	DataLockControlMode string       `xml:"dataLockControlMode"`
+	FullTextSearch      string       `xml:"fullTextSearch"`
+	ObjectPresentation  ValueTypeRef `xml:"objectPresentation"`
+	Hierarchical        string       `xml:"hierarchical"`
+	LevelCount          string       `xml:"levelCount"`
+	FoldersOnTop        string       `xml:"foldersOnTop"`
+	DescriptionLength   string       `xml:"descriptionLength"`
+	CodeType            string       `xml:"codeType"`
+	CodeAllowedLength   string       `xml:"codeAllowedLength"`
+	DefaultPresentation string       `xml:"defaultPresentation"`
+	EditType            string       `xml:"editType"`
+	ChoiceMode          string       `xml:"choiceMode"`
+	Attributes          []struct {
+		Uuid    string       `xml:"uuid,attr"`
+		Name    string       `xml:"name"`
+		Synonym ValueTypeRef `xml:"synonym"`
+		Comment string       `xml:"comment"`
+		Type    struct {
+			Types            string `xml:"types"`
+			DateQualifiers   string `xml:"dateQualifiers"`
+			NumberQualifiers struct {
+				Precision string `xml:"precision"`
+			} `xml:"numberQualifiers"`
+			StringQualifiers struct {
+				Length string `xml:"length"`
+			} `xml:"stringQualifiers"`
+		} `xml:"type"`
+		ToolTip  ValueTypeRef `xml:"toolTip"`
+		MinValue struct {
+			Type string `xml:"type,attr"`
+		} `xml:"minValue"`
+		MaxValue struct {
+			Type string `xml:"type,attr"`
+		} `xml:"maxValue"`
+		FillChecking  string `xml:"fillChecking"`
+		QuickChoice   string `xml:"quickChoice"`
+		CreateOnInput string `xml:"createOnInput"`
+		FillValue     struct {
+			Type  string `xml:"type,attr"`
+			Value string `xml:"value"`
+		} `xml:"fillValue"`
+		Indexing       string       `xml:"indexing"`
+		FullTextSearch string       `xml:"fullTextSearch"`
+		Use            string       `xml:"use"`
+		DataHistory    string       `xml:"dataHistory"`
+		Format         ValueTypeRef `xml:"format"`
+		EditFormat     ValueTypeRef `xml:"editFormat"`
+		Mask           string       `xml:"mask"`
+		MultiLine      string       `xml:"multiLine"`
+	} `xml:"attributes"`
+	TabularSections []struct {
+		Uuid          string `xml:"uuid,attr"`
+		ProducedTypes struct {
+			ObjectType ObjectTypeRef `xml:"objectType"`
+			RowType    ObjectTypeRef `xml:"rowType"`
+		} `xml:"producedTypes"`
+		Name               string       `xml:"name"`
+		Synonym            ValueTypeRef `xml:"synonym"`
+		ToolTip            ValueTypeRef `xml:"toolTip"`
+		StandardAttributes struct {
+			DataHistory string `xml:"dataHistory"`
+			Name        string `xml:"name"`
+			FillValue   struct {
+				Type string `xml:"type,attr"`
+			} `xml:"fillValue"`
+			FullTextSearch string `xml:"fullTextSearch"`
+			MinValue       struct {
+				Type string `xml:"type,attr"`
+			} `xml:"minValue"`
+			MaxValue struct {
+				Type string `xml:"type,attr"`
+			} `xml:"maxValue"`
+		} `xml:"standardAttributes"`
+		Attributes []struct {
+			Uuid    string       `xml:"uuid,attr"`
+			Name    string       `xml:"name"`
+			Synonym ValueTypeRef `xml:"synonym"`
+			Type    struct {
+				Types            string `xml:"types"`
+				DateQualifiers   string `xml:"dateQualifiers"`
+				StringQualifiers struct {
+					Length string `xml:"length"`
+				} `xml:"stringQualifiers"`
+			} `xml:"type"`
+			ToolTip  ValueTypeRef `xml:"toolTip"`
+			MinValue struct {
+				Type string `xml:"type,attr"`
+			} `xml:"minValue"`
+			MaxValue struct {
+				Type string `xml:"type,attr"`
+			} `xml:"maxValue"`
+			DataHistory    string `xml:"dataHistory"`
+			FullTextSearch string `xml:"fullTextSearch"`
+			Comment        string `xml:"comment"`
+			Indexing       string `xml:"indexing"`
+		} `xml:"attributes"`
+	} `xml:"tabularSections"`
+}

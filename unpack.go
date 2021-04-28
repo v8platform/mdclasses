@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/pkg/errors"
 	"io/ioutil"
-	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -40,6 +39,7 @@ var dirMap = map[string]string{
 	"Configuration": "Configuration", // Для конифгурации
 	"Subsystem":     "Subsystems",
 	"Catalog":       "Catalogs",
+	"Document":      "Documents",
 }
 
 func (cfg UnpackConfig) WithName(name string, tag string) UnpackConfig {

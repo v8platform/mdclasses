@@ -2,7 +2,7 @@ package mdclasses
 
 import (
 	"encoding/xml"
-	"log"
+	"mdclasses/classes"
 	"strings"
 )
 
@@ -38,7 +38,8 @@ func (conf *Subsystem) Unpack(cfg UnpackConfig) error {
 		names := strings.Split(name, ".")
 
 		if len(names) != 2 {
-			log.Panic("Error")
+			log.Warnf("Error parce subsystems: %s", name)
+			continue
 		}
 
 		contentType := names[0]
@@ -67,11 +68,11 @@ func objectByType(contentType string) interface{} {
 	case "businessprocess":
 		return nil
 	case "catalog":
-		return &Catalog{}
+		return &classes.Catalog{}
 	case "document":
-		return &Document{}
+		return &classes.Document{}
 	default:
-		log.Print("Unknown content type")
+		log.Warnf("Unknown content type: %s", contentType)
 	}
 
 	return nil
