@@ -6,7 +6,7 @@ import (
 	"github.com/v8platform/mdclasses/classes"
 )
 
-var log = logos.New("v8platforms/mdclasses").Sugar()
+var log = logos.New("v8platform/mdclasses").Sugar()
 
 type Configuration struct {
 	XMLName xml.Name `xml:"Configuration"`
