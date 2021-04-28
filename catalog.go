@@ -2,6 +2,11 @@ package mdclasses
 
 import "encoding/xml"
 
+type ObjectTypeRef struct {
+	TypeId      string `xml:"typeId,attr"`
+	ValueTypeId string `xml:"valueTypeId,attr"`
+}
+
 type Catalog struct {
 	XMLName       xml.Name `xml:"Catalog"`
 	Text          string   `xml:",chardata"`
