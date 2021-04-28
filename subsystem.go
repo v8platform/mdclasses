@@ -2,7 +2,6 @@ package mdclasses
 
 import (
 	"encoding/xml"
-	"mdclasses/classes"
 	"strings"
 )
 
@@ -15,7 +14,7 @@ type Subsystem struct {
 	SubsystemsNames           []string    `xml:"subsystems"`
 	Subsystems                []Subsystem `xml:"-"`
 
-	СontentNames []string      `xml:"content"`
+	ContentNames []string      `xml:"content"`
 	Content      []interface{} `xml:"-"`
 	// Добавить другие обхекты
 }
@@ -33,7 +32,7 @@ func (conf *Subsystem) Unpack(cfg UnpackConfig) error {
 		conf.Subsystems = append(conf.Subsystems, subsystem)
 	}
 
-	for _, name := range conf.СontentNames {
+	for _, name := range conf.ContentNames {
 
 		names := strings.Split(name, ".")
 
@@ -68,9 +67,9 @@ func objectByType(contentType string) interface{} {
 	case "businessprocess":
 		return nil
 	case "catalog":
-		return &classes.Catalog{}
+		return &Catalog{}
 	case "document":
-		return &classes.Document{}
+		return &Document{}
 	default:
 		log.Warnf("Unknown content type: %s", contentType)
 	}
