@@ -1,4 +1,4 @@
-module mdclasses
+module github.com/v8platform/mdclasses
 
 go 1.16
 
