@@ -39,6 +39,7 @@ const ExtMdo = ".mdo"
 var dirMap = map[string]string{
 	"Configuration": "Configuration", // Для конифгурации
 	"Subsystem":     "Subsystems",
+	"Catalog":       "Catalogs",
 }
 
 func (cfg UnpackConfig) WithName(name string, tag string) UnpackConfig {

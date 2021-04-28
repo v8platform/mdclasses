@@ -79,41 +79,42 @@ type Configuration struct {
 	Subsystems      []Subsystem `xml:"-"`
 	SubsystemsNames []string    `xml:"subsystems"`
 
-	StyleItems                  []string `xml:"styleItems"`
-	CommonPictures              []string `xml:"commonPictures"`
-	SessionParameters           []string `xml:"sessionParameters"`
-	Roles                       []string `xml:"roles"`
-	CommonTemplates             []string `xml:"commonTemplates"`
-	FilterCriteria              []string `xml:"filterCriteria"`
-	CommonModules               []string `xml:"commonModules"`
-	CommonAttributes            []string `xml:"commonAttributes"`
-	ExchangePlans               []string `xml:"exchangePlans"`
-	XDTOPackages                []string `xml:"xDTOPackages"`
-	WebServices                 []string `xml:"webServices"`
-	HttpServices                []string `xml:"httpServices"`
-	WsReferences                []string `xml:"wsReferences"`
-	EventSubscriptions          []string `xml:"eventSubscriptions"`
-	ScheduledJobs               []string `xml:"scheduledJobs"`
-	SettingsStorages            []string `xml:"settingsStorages"`
-	FunctionalOptions           []string `xml:"functionalOptions"`
-	FunctionalOptionsParameters []string `xml:"functionalOptionsParameters"`
-	DefinedTypes                []string `xml:"definedTypes"`
-	CommonCommands              []string `xml:"commonCommands"`
-	CommandGroups               []string `xml:"commandGroups"`
-	Constants                   []string `xml:"constants"`
-	CommonForms                 []string `xml:"commonForms"`
-	Catalogs                    []string `xml:"catalogs"`
-	Documents                   []string `xml:"documents"`
-	DocumentNumerators          []string `xml:"documentNumerators"`
-	DocumentJournals            []string `xml:"documentJournals"`
-	Enums                       []string `xml:"enums"`
-	Reports                     []string `xml:"reports"`
-	DataProcessors              []string `xml:"dataProcessors"`
-	InformationRegisters        []string `xml:"informationRegisters"`
-	AccumulationRegisters       []string `xml:"accumulationRegisters"`
-	ChartsOfCharacteristicTypes []string `xml:"chartsOfCharacteristicTypes"`
-	BusinessProcesses           []string `xml:"businessProcesses"`
-	Tasks                       []string `xml:"tasks"`
+	StyleItems                  []string  `xml:"styleItems"`
+	CommonPictures              []string  `xml:"commonPictures"`
+	SessionParameters           []string  `xml:"sessionParameters"`
+	Roles                       []string  `xml:"roles"`
+	CommonTemplates             []string  `xml:"commonTemplates"`
+	FilterCriteria              []string  `xml:"filterCriteria"`
+	CommonModules               []string  `xml:"commonModules"`
+	CommonAttributes            []string  `xml:"commonAttributes"`
+	ExchangePlans               []string  `xml:"exchangePlans"`
+	XDTOPackages                []string  `xml:"xDTOPackages"`
+	WebServices                 []string  `xml:"webServices"`
+	HttpServices                []string  `xml:"httpServices"`
+	WsReferences                []string  `xml:"wsReferences"`
+	EventSubscriptions          []string  `xml:"eventSubscriptions"`
+	ScheduledJobs               []string  `xml:"scheduledJobs"`
+	SettingsStorages            []string  `xml:"settingsStorages"`
+	FunctionalOptions           []string  `xml:"functionalOptions"`
+	FunctionalOptionsParameters []string  `xml:"functionalOptionsParameters"`
+	DefinedTypes                []string  `xml:"definedTypes"`
+	CommonCommands              []string  `xml:"commonCommands"`
+	CommandGroups               []string  `xml:"commandGroups"`
+	Constants                   []string  `xml:"constants"`
+	CommonForms                 []string  `xml:"commonForms"`
+	CatalogsNames               []string  `xml:"catalogs"`
+	Catalogs                    []Catalog `xml:"-"`
+	Documents                   []string  `xml:"documents"`
+	DocumentNumerators          []string  `xml:"documentNumerators"`
+	DocumentJournals            []string  `xml:"documentJournals"`
+	Enums                       []string  `xml:"enums"`
+	Reports                     []string  `xml:"reports"`
+	DataProcessors              []string  `xml:"dataProcessors"`
+	InformationRegisters        []string  `xml:"informationRegisters"`
+	AccumulationRegisters       []string  `xml:"accumulationRegisters"`
+	ChartsOfCharacteristicTypes []string  `xml:"chartsOfCharacteristicTypes"`
+	BusinessProcesses           []string  `xml:"businessProcesses"`
+	Tasks                       []string  `xml:"tasks"`
 }
 
 const ConfigurationFile = "Configuration.mdo"
@@ -129,6 +130,17 @@ func (conf *Configuration) Unpack(cfg UnpackConfig) error {
 		}
 
 		conf.Subsystems = append(conf.Subsystems, subsystem)
+	}
+
+	for _, name := range conf.CatalogsNames {
+
+		value := Catalog{}
+		err := Unpack(cfg.WithName(name, "Catalog"), &value)
+		if err != nil {
+			return err
+		}
+
+		conf.Catalogs = append(conf.Catalogs, value)
 	}
 
 	return nil
