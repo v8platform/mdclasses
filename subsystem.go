@@ -2,7 +2,6 @@ package mdclasses
 
 import (
 	"encoding/xml"
-	"github.com/v8platform/mdclasses/classes"
 	"strings"
 )
 
@@ -68,9 +67,9 @@ func objectByType(contentType string) interface{} {
 	case "businessprocess":
 		return nil
 	case "catalog":
-		return &classes.Catalog{}
+		return &Catalog{}
 	case "document":
-		return &classes.Document{}
+		return &Document{}
 	default:
 		log.Warnf("Unknown content type: %s", contentType)
 	}
