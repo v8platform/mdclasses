@@ -9,38 +9,16 @@ type ObjectTypeRef struct {
 
 type Catalog struct {
 	XMLName       xml.Name `xml:"Catalog"`
-	Text          string   `xml:",chardata"`
 	Xsi           string   `xml:"xsi,attr"`
 	Core          string   `xml:"core,attr"`
 	Mdclass       string   `xml:"mdclass,attr"`
 	Uuid          string   `xml:"uuid,attr"`
 	ProducedTypes struct {
-		Text       string `xml:",chardata"`
-		ObjectType struct {
-			Text        string `xml:",chardata"`
-			TypeId      string `xml:"typeId,attr"`
-			ValueTypeId string `xml:"valueTypeId,attr"`
-		} `xml:"objectType"`
-		RefType struct {
-			Text        string `xml:",chardata"`
-			TypeId      string `xml:"typeId,attr"`
-			ValueTypeId string `xml:"valueTypeId,attr"`
-		} `xml:"refType"`
-		SelectionType struct {
-			Text        string `xml:",chardata"`
-			TypeId      string `xml:"typeId,attr"`
-			ValueTypeId string `xml:"valueTypeId,attr"`
-		} `xml:"selectionType"`
-		ListType struct {
-			Text        string `xml:",chardata"`
-			TypeId      string `xml:"typeId,attr"`
-			ValueTypeId string `xml:"valueTypeId,attr"`
-		} `xml:"listType"`
-		ManagerType struct {
-			Text        string `xml:",chardata"`
-			TypeId      string `xml:"typeId,attr"`
-			ValueTypeId string `xml:"valueTypeId,attr"`
-		} `xml:"managerType"`
+		ObjectType    ObjectTypeRef `xml:"objectType"`
+		RefType       ObjectTypeRef `xml:"refType"`
+		SelectionType ObjectTypeRef `xml:"selectionType"`
+		ListType      ObjectTypeRef `xml:"listType"`
+		ManagerType   ObjectTypeRef `xml:"managerType"`
 	} `xml:"producedTypes"`
 	Name    string `xml:"name"`
 	Synonym struct {
