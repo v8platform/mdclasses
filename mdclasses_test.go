@@ -21,7 +21,7 @@ func TestUnpackConfiguration(t *testing.T) {
 			"simple",
 			"./tests/metadata/edt/src",
 			Configuration{},
-			false,
+			true,
 		},
 	}
 	for _, tt := range tests {

@@ -3,11 +3,12 @@ package mdclasses
 import "encoding/xml"
 
 type Catalog struct {
-	XMLName       xml.Name `xml:"Catalog"`
-	Xsi           string   `xml:"xsi,attr"`
-	Core          string   `xml:"core,attr"`
-	Mdclass       string   `xml:"mdclass,attr"`
-	Uuid          string   `xml:"uuid,attr"`
+	MDObjectBase
+	XMLName xml.Name `xml:"Catalog"`
+
+	Xsi  string `xml:"xsi,attr"`
+	Core string `xml:"core,attr"`
+
 	ProducedTypes struct {
 		ObjectType    ObjectTypeRef `xml:"objectType"`
 		RefType       ObjectTypeRef `xml:"refType"`
