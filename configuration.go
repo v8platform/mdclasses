@@ -1,18 +1,31 @@
 package mdclasses
 
 import (
-	"encoding/xml"
 	"github.com/khorevaa/logos"
+	"github.com/v8platform/mdclasses/encoding/xml"
 )
 
 var log = logos.New("github.com/v8platform/mdclasses").Sugar()
 
+type Mdclass struct {
+	xml.Name
+	value string
+}
+
+type Name struct {
+	xml.Name
+	value string
+}
+
 type Configuration struct {
-	XMLName          xml.Name     `xml:"Configuration"`
-	Mdclass          string       `xml:"mdclass,attr"`
-	Uuid             string       `xml:"uuid,attr"`
-	Name             string       `xml:"name"`
-	Synonym          ValueTypeRef `xml:"synonym"`
+	XMLName xml.Name `xml:"mdclass Configuration"`
+	Mdclass xml.Attr `xml:"mdclass,attr"`
+	Uuid    string   `xml:"uuid,attr"`
+	Name    string   `xml:"name"`
+	Synonym struct {
+		Key   string `xml:"key"`
+		Value string `xml:"value"`
+	} `xml:"synonym"`
 	ContainedObjects []struct {
 		ClassId  string `xml:"classId,attr,allowempty"`
 		ObjectId string `xml:"objectId,attr,allowempty"`
@@ -112,6 +125,44 @@ type Configuration struct {
 	ChartsOfCharacteristicTypes []string  `xml:"chartsOfCharacteristicTypes"`
 	BusinessProcesses           []string  `xml:"businessProcesses"`
 	Tasks                       []string  `xml:"tasks"`
+}
+
+const ConfigurationFile = "Configuration.mdo"
+
+func (conf *Name) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
+	panic("implement me")
+}
+
+func (conf *Mdclass) MarshalXMLAttr(name xml.Name) (xml.Attr, error) {
+	//pp.Println(name)
+	return xml.Attr{
+		conf.Name,
+		conf.value,
+	}, nil
+}
+
+func (conf *Mdclass) UnmarshalXMLAttr(attr xml.Attr) error {
+
+	conf.Name = attr.Name
+	conf.value = attr.Value
+
+	return nil
+}
+
+func (conf *Name) MarshalXMLAttr(name xml.Name) (xml.Attr, error) {
+	//pp.Println(name)
+	return xml.Attr{
+		conf.Name,
+		conf.value,
+	}, nil
+}
+
+func (conf *Name) UnmarshalXMLAttr(attr xml.Attr) error {
+
+	conf.Name = attr.Name
+	conf.value = attr.Value
+
+	return nil
 }
 
 func (conf *Configuration) Unpack(cfg UnpackConfig) error {

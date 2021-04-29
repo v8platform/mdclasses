@@ -359,9 +359,10 @@ func (d *Decoder) translate(n *Name, isElementName bool) {
 	case n.Space == "" && n.Local == xmlnsPrefix:
 		return
 	}
-	if v, ok := d.ns[n.Space]; ok {
-		n.Space = v
-	} else if n.Space == "" {
+	// if v, ok := d.ns[n.Space]; ok {
+	// 	n.Space = v
+	// } else
+	if n.Space == "" {
 		n.Space = d.DefaultSpace
 	}
 }

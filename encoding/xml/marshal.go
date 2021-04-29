@@ -353,7 +353,8 @@ func (p *printer) createAttrPrefix(url string) string {
 	//    (('X'|'x') ('M'|'m') ('L'|'l'))
 	// See Section 2.3 of https://www.w3.org/TR/REC-xml/
 	if len(prefix) >= 3 && strings.EqualFold(prefix[:3], "xml") {
-		prefix = "_" + prefix
+		// prefix = "_" + prefix
+		return prefix
 	}
 	if p.attrNS[prefix] != "" {
 		// Name is taken. Find a better one.
@@ -722,13 +723,12 @@ func (p *printer) writeStart(start *StartElement, selfClosing bool) error {
 	}
 
 	p.WriteByte('<')
-	p.WriteString(start.Name.Local)
 
 	if start.Name.Space != "" {
-		p.WriteString(` xmlns="`)
 		p.EscapeString(start.Name.Space)
-		p.WriteByte('"')
+		p.WriteByte(':')
 	}
+	p.WriteString(start.Name.Local)
 
 	// Attributes
 	for _, attr := range start.Attr {
@@ -772,7 +772,13 @@ func (p *printer) writeEnd(name Name) error {
 	p.writeIndent(-1)
 	p.WriteByte('<')
 	p.WriteByte('/')
+	if name.Space != "" {
+		p.EscapeString(name.Space)
+		p.WriteByte(':')
+	}
+
 	p.WriteString(name.Local)
+
 	p.WriteByte('>')
 	p.popPrefix()
 	return nil
