@@ -8,18 +8,15 @@ import (
 var log = logos.New("github.com/v8platform/mdclasses").Sugar()
 
 type Configuration struct {
-	XMLName xml.Name `xml:"Configuration"`
-	Mdclass string   `xml:"mdclass,attr"`
-	Uuid    string   `xml:"uuid,attr"`
-	Name    string   `xml:"name"`
-	Synonym struct {
-		Key   string `xml:"key"`
-		Value string `xml:"value"`
-	} `xml:"synonym"`
+	XMLName          xml.Name     `xml:"Configuration"`
+	Mdclass          string       `xml:"mdclass,attr"`
+	Uuid             string       `xml:"uuid,attr"`
+	Name             string       `xml:"name"`
+	Synonym          ValueTypeRef `xml:"synonym"`
 	ContainedObjects []struct {
-		ClassId  string `xml:"classId,attr"`
-		ObjectId string `xml:"objectId,attr"`
-	} `xml:"containedObjects"`
+		ClassId  string `xml:"classId,attr,allowempty"`
+		ObjectId string `xml:"objectId,attr,allowempty"`
+	} `xml:"containedObjects,allowempty"`
 	ConfigurationExtensionCompatibilityMode string   `xml:"configurationExtensionCompatibilityMode"`
 	DefaultRunMode                          string   `xml:"defaultRunMode"`
 	UsePurposes                             string   `xml:"usePurposes"`
@@ -27,7 +24,7 @@ type Configuration struct {
 	DefaultRoles                            []string `xml:"defaultRoles"`
 	Vendor                                  string   `xml:"vendor"`
 	Version                                 string   `xml:"version"`
-	UpdateCatalogAddress                    string   `xml:"updateCatalogAddress"`
+	UpdateCatalogAddress                    string   `xml:"updateCatalogAddress,omitempty"`
 	UseManagedFormInOrdinaryApplication     string   `xml:"useManagedFormInOrdinaryApplication"`
 	UseOrdinaryFormInManagedApplication     string   `xml:"useOrdinaryFormInManagedApplication"`
 	ReportsVariantsStorage                  string   `xml:"reportsVariantsStorage"`
@@ -37,11 +34,11 @@ type Configuration struct {
 	DefaultSearchForm                       string   `xml:"defaultSearchForm"`
 	UsedMobileApplicationFunctionalities    struct {
 		Functionality []struct {
+			Functionality string `xml:"functionality,omitempty"`
 			Use           string `xml:"use"`
-			Functionality string `xml:"functionality"`
 		} `xml:"functionality"`
 	} `xml:"usedMobileApplicationFunctionalities"`
-	MainSectionPicture string `xml:"mainSectionPicture"`
+	MainSectionPicture string `xml:"mainSectionPicture,allowempty"`
 	DefaultLanguage    string `xml:"defaultLanguage"`
 	BriefInformation   struct {
 		Key   string `xml:"key"`
@@ -51,7 +48,7 @@ type Configuration struct {
 		Key   string `xml:"key"`
 		Value string `xml:"value"`
 	} `xml:"detailedInformation"`
-	Splash    string `xml:"splash"`
+	Splash    string `xml:"splash,omitempty"`
 	Copyright struct {
 		Key   string `xml:"key"`
 		Value string `xml:"value"`
@@ -60,16 +57,13 @@ type Configuration struct {
 		Key   string `xml:"key"`
 		Value string `xml:"value"`
 	} `xml:"vendorInformationAddress"`
-	ConfigurationInformationAddress struct {
-		Key   string `xml:"key"`
-		Value string `xml:"value"`
-	} `xml:"configurationInformationAddress"`
-	DataLockControlMode        string `xml:"dataLockControlMode"`
-	ObjectAutonumerationMode   string `xml:"objectAutonumerationMode"`
-	ModalityUseMode            string `xml:"modalityUseMode"`
-	InterfaceCompatibilityMode string `xml:"interfaceCompatibilityMode"`
-	CompatibilityMode          string `xml:"compatibilityMode"`
-	Languages                  struct {
+	ConfigurationInformationAddress ValueTypeRef `xml:"configurationInformationAddress,omitempty"`
+	DataLockControlMode             string       `xml:"dataLockControlMode"`
+	ObjectAutonumerationMode        string       `xml:"objectAutonumerationMode"`
+	ModalityUseMode                 string       `xml:"modalityUseMode"`
+	InterfaceCompatibilityMode      string       `xml:"interfaceCompatibilityMode"`
+	CompatibilityMode               string       `xml:"compatibilityMode"`
+	Languages                       struct {
 		Uuid    string `xml:"uuid,attr"`
 		Name    string `xml:"name"`
 		Synonym struct {
