@@ -1,7 +1,7 @@
 package mdclasses
 
 import (
-	"encoding/xml"
+	"github.com/v8platform/mdclasses/encoding/xml"
 	"strings"
 )
 

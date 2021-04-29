@@ -1,6 +1,6 @@
 package mdclasses
 
-import "encoding/xml"
+import "github.com/v8platform/mdclasses/encoding/xml"
 
 type Catalog struct {
 	XMLName       xml.Name `xml:"Catalog"`

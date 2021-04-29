@@ -1,9 +1,9 @@
 package mdclasses
 
 import (
-	"encoding/xml"
 	"fmt"
 	"github.com/pkg/errors"
+	"github.com/v8platform/mdclasses/encoding/xml"
 	"io/ioutil"
 	"os"
 	"path/filepath"

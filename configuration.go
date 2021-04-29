@@ -1,8 +1,8 @@
 package mdclasses
 
 import (
-	"encoding/xml"
 	"github.com/khorevaa/logos"
+	"github.com/v8platform/mdclasses/encoding/xml"
 )
 
 var log = logos.New("github.com/v8platform/mdclasses").Sugar()
