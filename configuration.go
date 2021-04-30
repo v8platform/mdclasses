@@ -22,10 +22,7 @@ type Configuration struct {
 	Mdclass xml.Attr `xml:"mdclass,attr"`
 	Uuid    string   `xml:"uuid,attr"`
 	Name    string   `xml:"name"`
-	Synonym struct {
-		Key   string `xml:"key"`
-		Value string `xml:"value"`
-	} `xml:"synonym"`
+	Synonym ObjectKeyValueType   `xml:"synonym"`
 	ContainedObjects []struct {
 		ClassId  string `xml:"classId,attr,allowempty"`
 		ObjectId string `xml:"objectId,attr,allowempty"`
@@ -51,39 +48,24 @@ type Configuration struct {
 			Use           string `xml:"use"`
 		} `xml:"functionality"`
 	} `xml:"usedMobileApplicationFunctionalities"`
-	MainSectionPicture string `xml:"mainSectionPicture,allowempty"`
-	DefaultLanguage    string `xml:"defaultLanguage"`
-	BriefInformation   struct {
-		Key   string `xml:"key"`
-		Value string `xml:"value"`
-	} `xml:"briefInformation"`
-	DetailedInformation struct {
-		Key   string `xml:"key"`
-		Value string `xml:"value"`
-	} `xml:"detailedInformation"`
-	Splash    string `xml:"splash,omitempty"`
-	Copyright struct {
-		Key   string `xml:"key"`
-		Value string `xml:"value"`
-	} `xml:"copyright"`
-	VendorInformationAddress struct {
-		Key   string `xml:"key"`
-		Value string `xml:"value"`
-	} `xml:"vendorInformationAddress"`
-	ConfigurationInformationAddress ValueTypeRef `xml:"configurationInformationAddress,omitempty"`
-	DataLockControlMode             string       `xml:"dataLockControlMode"`
-	ObjectAutonumerationMode        string       `xml:"objectAutonumerationMode"`
-	ModalityUseMode                 string       `xml:"modalityUseMode"`
-	InterfaceCompatibilityMode      string       `xml:"interfaceCompatibilityMode"`
-	CompatibilityMode               string       `xml:"compatibilityMode"`
+	MainSectionPicture 				string 				`xml:"mainSectionPicture,allowempty"`
+	DefaultLanguage    				string 				`xml:"defaultLanguage"`
+	BriefInformation   				ObjectKeyValueType `xml:"briefInformation"`
+	DetailedInformation 			ObjectKeyValueType `xml:"detailedInformation"`
+	Splash    						string 				`xml:"splash,omitempty"`
+	Copyright 						ObjectKeyValueType `xml:"copyright"`
+	VendorInformationAddress 		ObjectKeyValueType `xml:"vendorInformationAddress"`
+	ConfigurationInformationAddress ObjectKeyValueType `xml:"configurationInformationAddress,omitempty"`
+	DataLockControlMode             string             `xml:"dataLockControlMode"`
+	ObjectAutonumerationMode        string             `xml:"objectAutonumerationMode"`
+	ModalityUseMode                 string             `xml:"modalityUseMode"`
+	InterfaceCompatibilityMode      string             `xml:"interfaceCompatibilityMode"`
+	CompatibilityMode               string             `xml:"compatibilityMode"`
 	Languages                       struct {
-		Uuid    string `xml:"uuid,attr"`
-		Name    string `xml:"name"`
-		Synonym struct {
-			Key   string `xml:"key"`
-			Value string `xml:"value"`
-		} `xml:"synonym"`
-		LanguageCode string `xml:"languageCode"`
+		Uuid         string             `xml:"uuid,attr"`
+		Name         string             `xml:"name"`
+		Synonym      ObjectKeyValueType `xml:"synonym"`
+		LanguageCode string             `xml:"languageCode"`
 	} `xml:"languages"`
 
 	Subsystems      []Subsystem `xml:"-"`

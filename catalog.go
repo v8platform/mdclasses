@@ -15,10 +15,10 @@ type Catalog struct {
 		ListType      ObjectTypeRef `xml:"listType"`
 		ManagerType   ObjectTypeRef `xml:"managerType"`
 	} `xml:"producedTypes"`
-	Name                          string       `xml:"name"`
-	Synonym                       ValueTypeRef `xml:"synonym"`
-	InputByString                 string       `xml:"inputByString"`
-	FullTextSearchOnInputByString string       `xml:"fullTextSearchOnInputByString"`
+	Name                          string             `xml:"name"`
+	Synonym                       ObjectKeyValueType `xml:"synonym"`
+	InputByString                 string             `xml:"inputByString"`
+	FullTextSearchOnInputByString string             `xml:"fullTextSearchOnInputByString"`
 	StandardAttributes            []struct {
 		DataHistory string `xml:"dataHistory"`
 		Name        string `xml:"name"`
@@ -33,28 +33,28 @@ type Catalog struct {
 		MaxValue struct {
 			Type string `xml:"type,attr"`
 		} `xml:"maxValue"`
-		FillFromFillingValue string       `xml:"fillFromFillingValue"`
-		FillChecking         string       `xml:"fillChecking"`
-		ToolTip              ValueTypeRef `xml:"toolTip"`
+		FillFromFillingValue string             `xml:"fillFromFillingValue"`
+		FillChecking         string             `xml:"fillChecking"`
+		ToolTip              ObjectKeyValueType `xml:"toolTip"`
 	} `xml:"standardAttributes"`
-	CreateOnInput       string       `xml:"createOnInput"`
-	DataLockControlMode string       `xml:"dataLockControlMode"`
-	FullTextSearch      string       `xml:"fullTextSearch"`
-	ObjectPresentation  ValueTypeRef `xml:"objectPresentation"`
-	Hierarchical        string       `xml:"hierarchical"`
-	LevelCount          string       `xml:"levelCount"`
-	FoldersOnTop        string       `xml:"foldersOnTop"`
-	DescriptionLength   string       `xml:"descriptionLength"`
-	CodeType            string       `xml:"codeType"`
-	CodeAllowedLength   string       `xml:"codeAllowedLength"`
-	DefaultPresentation string       `xml:"defaultPresentation"`
-	EditType            string       `xml:"editType"`
-	ChoiceMode          string       `xml:"choiceMode"`
+	CreateOnInput       string             `xml:"createOnInput"`
+	DataLockControlMode string             `xml:"dataLockControlMode"`
+	FullTextSearch      string             `xml:"fullTextSearch"`
+	ObjectPresentation  ObjectKeyValueType `xml:"objectPresentation"`
+	Hierarchical        string             `xml:"hierarchical"`
+	LevelCount          string             `xml:"levelCount"`
+	FoldersOnTop        string             `xml:"foldersOnTop"`
+	DescriptionLength   string             `xml:"descriptionLength"`
+	CodeType            string             `xml:"codeType"`
+	CodeAllowedLength   string             `xml:"codeAllowedLength"`
+	DefaultPresentation string             `xml:"defaultPresentation"`
+	EditType            string             `xml:"editType"`
+	ChoiceMode          string             `xml:"choiceMode"`
 	Attributes          []struct {
-		Uuid    string       `xml:"uuid,attr"`
-		Name    string       `xml:"name"`
-		Synonym ValueTypeRef `xml:"synonym"`
-		Comment string       `xml:"comment"`
+		Uuid    string             `xml:"uuid,attr"`
+		Name    string             `xml:"name"`
+		Synonym ObjectKeyValueType `xml:"synonym"`
+		Comment string             `xml:"comment"`
 		Type    struct {
 			Types            string `xml:"types"`
 			DateQualifiers   string `xml:"dateQualifiers"`
@@ -65,7 +65,7 @@ type Catalog struct {
 				Length string `xml:"length"`
 			} `xml:"stringQualifiers"`
 		} `xml:"type"`
-		ToolTip  ValueTypeRef `xml:"toolTip"`
+		ToolTip  ObjectKeyValueType `xml:"toolTip"`
 		MinValue struct {
 			Type string `xml:"type,attr"`
 		} `xml:"minValue"`
@@ -79,14 +79,14 @@ type Catalog struct {
 			Type  string `xml:"type,attr"`
 			Value string `xml:"value"`
 		} `xml:"fillValue"`
-		Indexing       string       `xml:"indexing"`
-		FullTextSearch string       `xml:"fullTextSearch"`
-		Use            string       `xml:"use"`
-		DataHistory    string       `xml:"dataHistory"`
-		Format         ValueTypeRef `xml:"format"`
-		EditFormat     ValueTypeRef `xml:"editFormat"`
-		Mask           string       `xml:"mask"`
-		MultiLine      string       `xml:"multiLine"`
+		Indexing       string             `xml:"indexing"`
+		FullTextSearch string             `xml:"fullTextSearch"`
+		Use            string             `xml:"use"`
+		DataHistory    string             `xml:"dataHistory"`
+		Format         ObjectKeyValueType `xml:"format"`
+		EditFormat     ObjectKeyValueType `xml:"editFormat"`
+		Mask           string             `xml:"mask"`
+		MultiLine      string             `xml:"multiLine"`
 	} `xml:"attributes"`
 	TabularSections []struct {
 		Uuid          string `xml:"uuid,attr"`
@@ -94,9 +94,9 @@ type Catalog struct {
 			ObjectType ObjectTypeRef `xml:"objectType"`
 			RowType    ObjectTypeRef `xml:"rowType"`
 		} `xml:"producedTypes"`
-		Name               string       `xml:"name"`
-		Synonym            ValueTypeRef `xml:"synonym"`
-		ToolTip            ValueTypeRef `xml:"toolTip"`
+		Name               string             `xml:"name"`
+		Synonym            ObjectKeyValueType `xml:"synonym"`
+		ToolTip            ObjectKeyValueType `xml:"toolTip"`
 		StandardAttributes struct {
 			DataHistory string `xml:"dataHistory"`
 			Name        string `xml:"name"`
@@ -112,9 +112,9 @@ type Catalog struct {
 			} `xml:"maxValue"`
 		} `xml:"standardAttributes"`
 		Attributes []struct {
-			Uuid    string       `xml:"uuid,attr"`
-			Name    string       `xml:"name"`
-			Synonym ValueTypeRef `xml:"synonym"`
+			Uuid    string             `xml:"uuid,attr"`
+			Name    string             `xml:"name"`
+			Synonym ObjectKeyValueType `xml:"synonym"`
 			Type    struct {
 				Types            string `xml:"types"`
 				DateQualifiers   string `xml:"dateQualifiers"`
@@ -122,7 +122,7 @@ type Catalog struct {
 					Length string `xml:"length"`
 				} `xml:"stringQualifiers"`
 			} `xml:"type"`
-			ToolTip  ValueTypeRef `xml:"toolTip"`
+			ToolTip  ObjectKeyValueType `xml:"toolTip"`
 			MinValue struct {
 				Type string `xml:"type,attr"`
 			} `xml:"minValue"`

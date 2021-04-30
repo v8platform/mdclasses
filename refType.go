@@ -5,7 +5,11 @@ type ObjectTypeRef struct {
 	ValueTypeId string `xml:"valueTypeId,attr"`
 }
 
-type ValueTypeRef struct {
-	Key   string `xml:"key,,omitempty"`
+type ObjectKeyValueType struct {
+	Key   string `xml:"key,omitempty"`
 	Value string `xml:"value,omitempty"`
+}
+
+func (v ObjectKeyValueType) IsNull() bool {
+	return len(v.Key) == 0 && len(v.Value) == 0
 }

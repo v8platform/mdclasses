@@ -401,10 +401,16 @@ func (p *printer) popPrefix() {
 	}
 }
 
+type Nullable interface {
+	IsNull() bool
+}
+
 var (
 	marshalerType     = reflect.TypeOf((*Marshaler)(nil)).Elem()
 	marshalerAttrType = reflect.TypeOf((*MarshalerAttr)(nil)).Elem()
 	textMarshalerType = reflect.TypeOf((*encoding.TextMarshaler)(nil)).Elem()
+	nullableType      = reflect.TypeOf((*Nullable)(nil)).Elem()
+
 )
 
 // marshalValue writes one or more XML elements representing val.
@@ -1084,6 +1090,10 @@ func isEmptyValue(v reflect.Value) bool {
 		return v.Uint() == 0
 	case reflect.Float32, reflect.Float64:
 		return v.Float() == 0
+	case reflect.Struct:
+		if v.CanInterface() && v.Type().Implements(nullableType)  {
+			return v.Interface().(Nullable).IsNull()
+		}
 	case reflect.Interface, reflect.Ptr:
 		return v.IsNil()
 	}
