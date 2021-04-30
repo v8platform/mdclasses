@@ -1,11 +1,11 @@
 package mdclasses
 
 import (
-	"bytes"
 	"fmt"
 	"github.com/pkg/errors"
 	"path/filepath"
 	"reflect"
+	"strings"
 )
 
 type MDOType string
@@ -83,6 +83,7 @@ type MDORef interface {
 	Parent() MDORef
 	String() string
 	Dir() string
+	Empty() bool
 }
 
 type MDOTypeRef struct {
@@ -103,13 +104,16 @@ func (m MDOTypeRef) Ref() string {
 func (m MDOTypeRef) Parent() MDORef {
 	return m.parent
 }
+func (m MDOTypeRef) Empty() bool {
+	return m.mdoType.IsNull() && len(m.ref) == 0
+}
 
 func (m MDOTypeRef) String() string {
 
-	if m.parent == nil {
+	if m.parent == nil || m.parent.Empty() {
 		return fmt.Sprintf("%s.%s", m.mdoType, m.ref)
 	}
-	return fmt.Sprintf("%s.%s.%s", m.parent.String(), m.mdoType, m.ref)
+	return fmt.Sprintf("%s.%s.%s", m.parent, m.mdoType, m.ref)
 
 }
 
@@ -132,7 +136,10 @@ func (m MDOTypeRef) Unpack(cfg UnpackConfig, value interface{}) error {
 	return err
 }
 
-func UnpackAll(rows []MDOTypeRef, cfg UnpackConfig, value interface{}) error {
+type EachMDOTypeRef []MDOTypeRef
+
+func (e EachMDOTypeRef) Unpack(cfg UnpackConfig, value interface{}) error {
+
 	var v reflect.Value
 
 	v = reflect.ValueOf(value)
@@ -146,15 +153,18 @@ func UnpackAll(rows []MDOTypeRef, cfg UnpackConfig, value interface{}) error {
 		return errors.New("NotSlice")
 	}
 
-	for _, row := range rows {
+	for _, item := range e {
+		var ielem interface{}
+
 		elem := reflectAlloc(v.Type().Elem())
 
-		if elem.CanAddr() {
-			log.Debugf("can addr")
+		if v.Type().Elem().Kind() == reflect.Ptr {
+			ielem = elem.Interface()
+		} else {
+			ielem = elem.Elem().Interface()
 		}
 
-		ielem := elem.Interface()
-		err := row.Unpack(cfg, ielem)
+		err := item.Unpack(cfg, ielem)
 		if err != nil {
 			return err
 		}
@@ -180,32 +190,71 @@ func (m MDOTypeRef) MarshalText() ([]byte, error) {
 
 func (m *MDOTypeRef) UnmarshalText(text []byte) error {
 
-	m.raw = string(text)
-
-	values := bytes.SplitN(text, []byte("."), 2)
-
-	// TODO Сделать парсинг родителей тоже
-	if len(values) == 2 {
-
-		var mdoType MDOType
-		err := mdoType.UnmarshalText(values[0])
-		if err != nil {
-			return err
-		}
-
-		m.mdoType = mdoType
-		m.ref = string(values[1])
-
-		return nil
-	}
-
-	m.mdoType = REF
-	m.ref = m.raw
-
-	log.Debugf("readed ref type %s", m.ref)
-	// return errors.New("unknown <MDOTypeRef> " + string(text))
+	*m = NewMDOTypeRefFromString(string(text))
 
 	return nil
+
+}
+
+func newMDOTypeRef(modType MDOType, ref string, parent MDOTypeRef) MDOTypeRef {
+
+	raw := fmt.Sprintf("%s.%s", modType, ref)
+	if modType == REF {
+		raw = ref
+	}
+
+	return MDOTypeRef{
+		mdoType: modType,
+		ref:     ref,
+		parent:  parent,
+		raw:     raw,
+	}
+}
+
+func NewMDOTypeRefFromString(raw string) MDOTypeRef {
+
+	values := strings.Split(raw, ".")
+	mdoType := REF
+	ref := raw
+
+	parent := MDOTypeRef{}
+
+	if len(values) > 2 {
+		//add := len(values)%2
+		parent = getParentMDOTypeRef(raw, parent)
+	}
+
+	if len(values)%2 == 0 {
+		mdoType = MDOType(values[len(values)-2])
+		ref = values[len(values)-1]
+	}
+
+	return newMDOTypeRef(mdoType, ref, parent)
+}
+
+func getParentMDOTypeRef(name string, parent MDOTypeRef) MDOTypeRef {
+
+	val := parent
+
+	n := 0
+
+	for i, c := range name {
+
+		if c == '.' {
+			n++
+		}
+
+		if n == 2 {
+			n = 0
+			parentName := name[0:i]
+			if parentName != "" {
+				values := strings.Split(parentName, ".")
+				val = newMDOTypeRef(MDOType(values[0]), values[1], val)
+			}
+		}
+
+	}
+	return val
 
 }
 
@@ -221,11 +270,11 @@ func (m MDOTypeRef) Filename() string {
 
 func (m MDOTypeRef) Dir() string {
 
-	if m.parent != nil {
-		return filepath.Join(m.parent.Dir(), m.mdoType.Group(), m.ref)
+	if m.parent == nil || m.parent.Empty() {
+		return filepath.Join(m.mdoType.Group(), m.ref)
 	}
 
-	return filepath.Join(m.mdoType.Group(), m.ref)
+	return filepath.Join(m.parent.Dir(), m.mdoType.Group(), m.ref)
 
 }
 

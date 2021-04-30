@@ -22,23 +22,17 @@ type SubsystemChildSubsystems struct {
 
 func (conf *Subsystem) Unpack(cfg UnpackConfig) error {
 
-	parentMDO := conf.ParentSubsystem
-
-	if parentMDO.IsNull() {
-		parentMDO.mdoType = SUBSYSTEM
-		parentMDO.ref = conf.Name
-	}
+	parentMDO := newMDOTypeRef(SUBSYSTEM, conf.Name, conf.ParentSubsystem)
 
 	var subsystems []MDOTypeRef
 
 	for _, name := range conf.SubsystemChildSubsystems.Subsystems {
 
-		subsystems = append(subsystems, MDOTypeRef{
+		subsystems = append(subsystems, newMDOTypeRef(
 			SUBSYSTEM,
 			name,
 			parentMDO,
-			"",
-		})
+		))
 
 		// subsystem := Subsystem{}
 		// err := Unpack(cfg.WithName(name, "Subsystem"), &subsystem)
@@ -49,7 +43,7 @@ func (conf *Subsystem) Unpack(cfg UnpackConfig) error {
 		// conf.Subsystems = append(conf.Subsystems, subsystem)
 	}
 
-	err := UnpackAll(subsystems, cfg, &conf.Subsystems)
+	err := EachMDOTypeRef(subsystems).Unpack(cfg, &conf.Subsystems)
 	if err != nil {
 		return err
 	}

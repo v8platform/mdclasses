@@ -3,7 +3,7 @@ package mdclasses
 import "encoding/xml"
 
 type Catalog struct {
-	MDObjectBase
+	MDOBaseType
 	XMLName xml.Name `xml:"Catalog"`
 
 	Xsi  string `xml:"xsi,attr"`

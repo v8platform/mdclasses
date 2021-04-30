@@ -11,5 +11,4 @@
   <content>ae467b85-19b9-43fd-835g-1252da6334c7</content>
   <content>DataProcessor.Обработка1</content>
   <parentSubsystem>Subsystem.ПерваяПодсистема</parentSubsystem>
-  <parentSubsystem>ae4347b85-16b9-43fd-835g-1252da6334c7</parentSubsystem>
 </mdclass:Subsystem>

@@ -169,12 +169,12 @@ func (conf *Configuration) Unpack(cfg UnpackConfig) error {
 	conf.idxMDOType = make(idxMDOTypeRef)
 	cfg.IdxObjects = conf.idxMDOType
 
-	err := UnpackAll(conf.ConfigurationChildObjects.Subsystems, cfg, &conf.Subsystems)
+	err := EachMDOTypeRef(conf.ConfigurationChildObjects.Subsystems).Unpack(cfg, &conf.Subsystems)
 	if err != nil {
 		return err
 	}
 
-	err = UnpackAll(conf.ConfigurationChildObjects.Catalogs, cfg, &conf.Catalogs)
+	err = EachMDOTypeRef(conf.ConfigurationChildObjects.Catalogs).Unpack(cfg, &conf.Catalogs)
 	if err != nil {
 		return err
 	}
