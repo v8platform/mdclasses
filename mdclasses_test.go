@@ -38,8 +38,6 @@ func TestUnpackConfiguration(t *testing.T) {
 	}
 }
 
-
-
 func Test(t *testing.T) {
 	tests := []struct {
 		name    string

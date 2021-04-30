@@ -4,12 +4,18 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/pkg/errors"
+	"path/filepath"
+	"reflect"
 )
 
 type MDOType string
 
 func (m MDOType) String() string {
 	return string(m)
+}
+
+func (m MDOType) IsNull() bool {
+	return len(m) == 0
 }
 
 func (m MDOType) MarshalText() ([]byte, error) {
@@ -34,7 +40,8 @@ func (m MDOType) isUnknown() bool {
 		WEB_SERVICE, WS_REFERENCE, XDTO_PACKAGE,
 		// MDO Для вложенных объектов
 		FORM, COMMAND, TEMPLATE, ATTRIBUTE,
-		RECALCULATION, WS_OPERATION, HTTP_SERVICE_URL_TEMPLATE, HTTP_SERVICE_METHOD:
+		RECALCULATION, WS_OPERATION, HTTP_SERVICE_URL_TEMPLATE, HTTP_SERVICE_METHOD,
+		REF:
 
 		return false
 
@@ -61,6 +68,10 @@ func (m MDOType) Group() string {
 	switch m {
 	case ACCOUNTING_REGISTER:
 		return "AccountingRegisters"
+	case CATALOG:
+		return "Catalogs"
+	case SUBSYSTEM:
+		return "Subsystems"
 	default:
 		return ""
 	}
@@ -71,6 +82,7 @@ type MDORef interface {
 	Ref() string
 	Parent() MDORef
 	String() string
+	Dir() string
 }
 
 type MDOTypeRef struct {
@@ -101,6 +113,65 @@ func (m MDOTypeRef) String() string {
 
 }
 
+func (m MDOTypeRef) Unpack(cfg UnpackConfig, value interface{}) error {
+
+	if val, ok := cfg.HasUnpacked(m); ok {
+		value = val
+		return nil
+	}
+
+	if m.mdoType == REF {
+		return nil
+	}
+
+	filename := m.Filename()
+	err := Unpack(cfg, filename, value)
+
+	cfg.StoreUnpacked(m, value)
+
+	return err
+}
+
+func UnpackAll(rows []MDOTypeRef, cfg UnpackConfig, value interface{}) error {
+	var v reflect.Value
+
+	v = reflect.ValueOf(value)
+	if v.Kind() != reflect.Ptr || v.IsNil() {
+		return errors.New("ErrInvalidPointer")
+	}
+	v = v.Elem()
+
+	isSlice := v.Kind() == reflect.Slice && v.Type().Elem().Kind() != reflect.Uint8
+	if !isSlice {
+		return errors.New("NotSlice")
+	}
+
+	for _, row := range rows {
+		elem := reflectAlloc(v.Type().Elem())
+
+		if elem.CanAddr() {
+			log.Debugf("can addr")
+		}
+
+		ielem := elem.Interface()
+		err := row.Unpack(cfg, ielem)
+		if err != nil {
+			return err
+		}
+
+		v.Set(reflect.Append(v, elem))
+	}
+
+	return nil
+}
+
+func reflectAlloc(typ reflect.Type) reflect.Value {
+	if typ.Kind() == reflect.Ptr {
+		return reflect.New(typ.Elem())
+	}
+	return reflect.New(typ).Elem()
+}
+
 func (m MDOTypeRef) MarshalText() ([]byte, error) {
 
 	return []byte(m.String()), nil
@@ -128,15 +199,39 @@ func (m *MDOTypeRef) UnmarshalText(text []byte) error {
 		return nil
 	}
 
-	return errors.New("unknown <MDOTypeRef> " + string(text))
+	m.mdoType = REF
+	m.ref = m.raw
+
+	log.Debugf("readed ref type %s", m.ref)
+	// return errors.New("unknown <MDOTypeRef> " + string(text))
+
+	return nil
+
 }
 
 func (m MDOTypeRef) IsNull() bool {
 	return m.mdoType.isUnknown() && len(m.ref) == 0
 }
 
+func (m MDOTypeRef) Filename() string {
+
+	return filepath.Join(m.Dir(), m.ref+ExtMdo)
+
+}
+
+func (m MDOTypeRef) Dir() string {
+
+	if m.parent != nil {
+		return filepath.Join(m.parent.Dir(), m.mdoType.Group(), m.ref)
+	}
+
+	return filepath.Join(m.mdoType.Group(), m.ref)
+
+}
+
 const (
 	UNKNOWN                       MDOType = ""
+	REF                           MDOType = "_RefType_"
 	ACCOUNTING_REGISTER           MDOType = "AccountingRegister"
 	ACCUMULATION_REGISTER         MDOType = "AccumulationRegister"       // "AccumulationRegisters", "РегистрНакопления", "РегистрыНакопления"),
 	BUSINESS_PROCESS              MDOType = "BusinessProcess"            // "BusinessProcesses", "БизнесПроцесс", "БизнесПроцессы"),

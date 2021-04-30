@@ -6,57 +6,80 @@ import (
 )
 
 type Subsystem struct {
-	XMLName                   xml.Name    `xml:"Subsystem"`
-	UUID                      string      `xml:"uuid,attr"`
-	Name                      string      `xml:"name"`
-	IncludeHelpInContents     bool        `xml:"includeHelpInContents"`
-	IncludeInCommandInterface bool        `xml:"includeInCommandInterface"`
-	SubsystemsNames           []string    `xml:"subsystems"`
-	Subsystems                []Subsystem `xml:"-"`
+	MDOBaseType
+	SubsystemChildSubsystems
+	XMLName                   xml.Name     `xml:"Subsystem"`
+	IncludeHelpInContents     bool         `xml:"includeHelpInContents"`
+	IncludeInCommandInterface bool         `xml:"includeInCommandInterface"`
+	Subsystems                []*Subsystem `xml:"-"`
+	Content                   []MDOTypeRef `xml:"content"`
+	ParentSubsystem           MDOTypeRef   `xml:"parentSubsystem"`
+}
 
-	ContentNames []string      `xml:"content"`
-	Content      []interface{} `xml:"-"`
-	// Добавить другие обхекты
+type SubsystemChildSubsystems struct {
+	Subsystems []string `xml:"subsystems"`
 }
 
 func (conf *Subsystem) Unpack(cfg UnpackConfig) error {
 
-	for _, name := range conf.SubsystemsNames {
+	parentMDO := conf.ParentSubsystem
 
-		subsystem := Subsystem{}
-		err := Unpack(cfg.WithName(name, "Subsystem"), &subsystem)
-		if err != nil {
-			return err
-		}
-
-		conf.Subsystems = append(conf.Subsystems, subsystem)
+	if parentMDO.IsNull() {
+		parentMDO.mdoType = SUBSYSTEM
+		parentMDO.ref = conf.Name
 	}
 
-	for _, name := range conf.ContentNames {
+	var subsystems []MDOTypeRef
 
-		names := strings.Split(name, ".")
+	for _, name := range conf.SubsystemChildSubsystems.Subsystems {
 
-		if len(names) != 2 {
-			log.Warnf("Error parce subsystems: %s", name)
-			continue
-		}
+		subsystems = append(subsystems, MDOTypeRef{
+			SUBSYSTEM,
+			name,
+			parentMDO,
+			"",
+		})
 
-		contentType := names[0]
-
-		value := objectByType(contentType)
-
-		// TODO Временно убрать, после реализации
-		if value == nil {
-			continue
-		}
-
-		err := Unpack(cfg.WithName(name, contentType), value)
-		if err != nil {
-			return err
-		}
-
-		conf.Content = append(conf.Content, value)
+		// subsystem := Subsystem{}
+		// err := Unpack(cfg.WithName(name, "Subsystem"), &subsystem)
+		// if err != nil {
+		// 	return err
+		// }
+		//
+		// conf.Subsystems = append(conf.Subsystems, subsystem)
 	}
+
+	err := UnpackAll(subsystems, cfg, &conf.Subsystems)
+	if err != nil {
+		return err
+	}
+
+	//
+	// for _, name := range conf.ContentNames {
+	//
+	// 	names := strings.Split(name, ".")
+	//
+	// 	if len(names) != 2 {
+	// 		log.Warnf("Error parce subsystems: %s", name)
+	// 		continue
+	// 	}
+	//
+	// 	contentType := names[0]
+	//
+	// 	value := objectByType(contentType)
+	//
+	// 	// TODO Временно убрать, после реализации
+	// 	if value == nil {
+	// 		continue
+	// 	}
+	//
+	// 	err := Unpack(cfg.WithName(name, contentType), value)
+	// 	if err != nil {
+	// 		return err
+	// 	}
+	//
+	// 	conf.Content = append(conf.Content, value)
+	// }
 
 	return nil
 }

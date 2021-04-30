@@ -8,7 +8,6 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	"sync"
 )
 
 type Unpacker interface {
@@ -16,20 +15,16 @@ type Unpacker interface {
 }
 
 type UnpackConfig struct {
-	Tag        string
-	Name       string // Subsystems
 	Base       string
 	Path       string
-	IdxObjects *sync.Map
+	IdxObjects idxMDOTypeRef
 }
 
-func NewUnpackConfig(name string, base string) UnpackConfig {
+func NewUnpackConfig(base string) UnpackConfig {
 	return UnpackConfig{
-		"",
-		name,
 		base,
 		base,
-		&sync.Map{},
+		make(idxMDOTypeRef),
 	}
 }
 
@@ -42,87 +37,52 @@ var dirMap = map[string]string{
 	"Document":      "Documents",
 }
 
-func (cfg UnpackConfig) WithName(name string, tag string) UnpackConfig {
-
-	return UnpackConfig{
-		tag,
-		name,
-		cfg.Base,
-		cfg.Path,
-		cfg.IdxObjects,
-	}
-}
-
 func (cfg UnpackConfig) WithPath(path string) UnpackConfig {
 
 	return UnpackConfig{
-		cfg.Tag,
-		cfg.Name,
 		cfg.Base,
 		path,
 		cfg.IdxObjects,
 	}
 }
 
-func (cfg UnpackConfig) HasUnpacked() (interface{}, bool) {
-
-	return cfg.IdxObjects.Load(cfg.Name)
+func (cfg UnpackConfig) HasUnpacked(ref MDOTypeRef) (interface{}, bool) {
+	val, ok := cfg.IdxObjects[ref]
+	return val, ok
 
 }
 
-func (cfg UnpackConfig) StoreUnpacked(value interface{}) {
+func (cfg UnpackConfig) StoreUnpacked(ref MDOTypeRef, value interface{}) {
 
 	// TODO Надо добавить тег для в имя ключа, возможно пересечение имен
-	cfg.IdxObjects.Store(cfg.Name, value)
+	cfg.IdxObjects[ref] = value
 
 }
 
 var NoNameFile = errors.New("no name unpack config")
 
-func getFilename(cfg UnpackConfig) (string, error) {
+func (cfg UnpackConfig) getFilename(name string) (string, error) {
 
-	names := strings.Split(cfg.Name, ".")
+	var filename string
 
-	switch len(names) {
-	case 0:
-		return "", NoNameFile
-	case 1:
-		name := names[0]
-		dir := dirMap[cfg.Tag]
-
-		filename := filepath.Join(cfg.Path, dir, name, name+ExtMdo)
-		_, err := os.Stat(filename)
-		if err != nil {
-			return "", err
-		}
-
-		return filename, nil
-	case 2:
-
-		dir := dirMap[names[0]]
-		name := names[1]
-
-		filename := filepath.Join(cfg.Base, dir, name, name+ExtMdo)
-		_, err := os.Stat(filename)
-		if err != nil {
-			return "", err
-		}
-		return filename, nil
+	if strings.HasPrefix(name, ".") {
+		filename = filepath.Join(cfg.Path, name)
 	}
 
-	return "", NoNameFile
+	filename = filepath.Join(cfg.Base, name)
+
+	_, err := os.Stat(filename)
+	if err != nil {
+		return "", err
+	}
+	return filename, nil
 
 }
 
-func Unpack(cfg UnpackConfig, value interface{}) error {
+func Unpack(cfg UnpackConfig, filename string, value interface{}) error {
 	// TODO Сделать проверку что value это поинтер
 
-	if val, ok := cfg.HasUnpacked(); ok {
-		value = val
-		return nil
-	}
-
-	filename, err := getFilename(cfg)
+	filename, err := cfg.getFilename(filename)
 	if err != nil {
 		return err
 	}

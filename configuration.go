@@ -27,46 +27,14 @@ type Language struct {
 
 type Configuration struct {
 	MDOBaseType
-	XMLName                                 xml.Name          `xml:"mdclass Configuration"`
-	ContainedObjects                        []ContainedObject `xml:"containedObjects,allowempty"`
-	ConfigurationExtensionCompatibilityMode string            `xml:"configurationExtensionCompatibilityMode"`
-	DefaultRunMode                          string            `xml:"defaultRunMode"`
-	UsePurposes                             string            `xml:"usePurposes"`
-	ScriptVariant                           string            `xml:"scriptVariant"`
-	DefaultRoles                            []MDOTypeRef      `xml:"defaultRoles"`
-	Vendor                                  string            `xml:"vendor"`
-	Version                                 string            `xml:"version"`
-	UpdateCatalogAddress                    string            `xml:"updateCatalogAddress,omitempty"`
-	UseManagedFormInOrdinaryApplication     string            `xml:"useManagedFormInOrdinaryApplication"`
-	UseOrdinaryFormInManagedApplication     string            `xml:"useOrdinaryFormInManagedApplication"`
-	ReportsVariantsStorage                  string            `xml:"reportsVariantsStorage"`
-	DefaultReportForm                       MDOTypeRef        `xml:"defaultReportForm"`
-	DefaultReportVariantForm                MDOTypeRef        `xml:"defaultReportVariantForm"`
-	DefaultReportSettingsForm               MDOTypeRef        `xml:"defaultReportSettingsForm"`
-	DefaultSearchForm                       MDOTypeRef        `xml:"defaultSearchForm"`
-	UsedMobileApplicationFunctionalities    struct {
-		Functionality []struct {
-			Functionality string `xml:"functionality,omitempty"`
-			Use           string `xml:"use"`
-		} `xml:"functionality"`
-	} `xml:"usedMobileApplicationFunctionalities"`
-	MainSectionPicture              string             `xml:"mainSectionPicture,allowempty"`
-	DefaultLanguage                 MDOTypeRef         `xml:"defaultLanguage"`
-	BriefInformation                ObjectKeyValueType `xml:"briefInformation"`
-	DetailedInformation             ObjectKeyValueType `xml:"detailedInformation"`
-	Splash                          string             `xml:"splash,omitempty"`
-	Copyright                       ObjectKeyValueType `xml:"copyright"`
-	VendorInformationAddress        ObjectKeyValueType `xml:"vendorInformationAddress"`
-	ConfigurationInformationAddress ObjectKeyValueType `xml:"configurationInformationAddress,omitempty"`
-	DataLockControlMode             string             `xml:"dataLockControlMode"`
-	ObjectAutonumerationMode        string             `xml:"objectAutonumerationMode"`
-	ModalityUseMode                 string             `xml:"modalityUseMode"`
-	InterfaceCompatibilityMode      string             `xml:"interfaceCompatibilityMode"`
-	CompatibilityMode               string             `xml:"compatibilityMode"`
-	Languages                       []Language         `xml:"languages"`
+	ConfigurationProperties
+	ConfigurationChildObjects
 
-	Subsystems []Subsystem `xml:"-"`
-	// SubsystemsNames []MDOTypeRef `xml:"subsystems"`
+	XMLName          xml.Name          `xml:"mdclass Configuration"`
+	ContainedObjects []ContainedObject `xml:"containedObjects,allowempty"`
+
+	Languages  []*Language  `xml:"languages"`
+	Subsystems []*Subsystem `xml:"-"`
 
 	// StyleItems                  []MDOTypeRef `xml:"styleItems"`
 	// CommonPictures              []MDOTypeRef `xml:"commonPictures"`
@@ -92,7 +60,7 @@ type Configuration struct {
 	// Constants                   []MDOTypeRef `xml:"constants"`
 	// CommonForms                 []MDOTypeRef `xml:"commonForms"`
 	// CatalogsNames               []MDOTypeRef `xml:"catalogs"`
-	Catalogs []Catalog `xml:"-"`
+	Catalogs []*Catalog `xml:"-"`
 	// Documents                   []MDOTypeRef `xml:"documents"`
 	// DocumentNumerators          []MDOTypeRef `xml:"documentNumerators"`
 	// DocumentJournals            []MDOTypeRef `xml:"documentJournals"`
@@ -105,7 +73,51 @@ type Configuration struct {
 	// BusinessProcesses           []MDOTypeRef `xml:"businessProcesses"`
 	// Tasks                       []MDOTypeRef `xml:"tasks"`
 
-	ConfigurationChildObjects
+	idxMDOType idxMDOTypeRef
+}
+
+type idxMDOTypeRef map[MDOTypeRef]interface{}
+
+type MobileApplicationFunctionality struct {
+	Functionality string `xml:"functionality,omitempty"`
+	Use           string `xml:"use"`
+}
+
+type MobileApplicationFunctionalities struct {
+	Functionality []MobileApplicationFunctionality `xml:"functionality,omitempty"`
+}
+
+type ConfigurationProperties struct {
+	ConfigurationExtensionCompatibilityMode string                           `xml:"configurationExtensionCompatibilityMode"`
+	DefaultRunMode                          string                           `xml:"defaultRunMode"`
+	UsePurposes                             string                           `xml:"usePurposes"`
+	ScriptVariant                           string                           `xml:"scriptVariant"`
+	DefaultRoles                            []MDOTypeRef                     `xml:"defaultRoles"`
+	Vendor                                  string                           `xml:"vendor"`
+	Version                                 string                           `xml:"version"`
+	UpdateCatalogAddress                    string                           `xml:"updateCatalogAddress,omitempty"`
+	UseManagedFormInOrdinaryApplication     string                           `xml:"useManagedFormInOrdinaryApplication"`
+	UseOrdinaryFormInManagedApplication     string                           `xml:"useOrdinaryFormInManagedApplication"`
+	ReportsVariantsStorage                  string                           `xml:"reportsVariantsStorage"`
+	DefaultReportForm                       MDOTypeRef                       `xml:"defaultReportForm"`
+	DefaultReportVariantForm                MDOTypeRef                       `xml:"defaultReportVariantForm"`
+	DefaultReportSettingsForm               MDOTypeRef                       `xml:"defaultReportSettingsForm"`
+	DefaultSearchForm                       MDOTypeRef                       `xml:"defaultSearchForm"`
+	UsedMobileApplicationFunctionalities    MobileApplicationFunctionalities `xml:"usedMobileApplicationFunctionalities,omitempty"`
+	RequiredMobileApplicationPermissions    []string                         `xml:"requiredMobileApplicationPermissions"`
+	MainSectionPicture                      string                           `xml:"mainSectionPicture,allowempty"`
+	DefaultLanguage                         MDOTypeRef                       `xml:"defaultLanguage"`
+	BriefInformation                        ObjectKeyValueType               `xml:"briefInformation"`
+	DetailedInformation                     ObjectKeyValueType               `xml:"detailedInformation"`
+	Splash                                  string                           `xml:"splash,omitempty"`
+	Copyright                               ObjectKeyValueType               `xml:"copyright"`
+	VendorInformationAddress                ObjectKeyValueType               `xml:"vendorInformationAddress"`
+	ConfigurationInformationAddress         ObjectKeyValueType               `xml:"configurationInformationAddress,omitempty"`
+	DataLockControlMode                     string                           `xml:"dataLockControlMode"`
+	ObjectAutonumerationMode                string                           `xml:"objectAutonumerationMode"`
+	ModalityUseMode                         string                           `xml:"modalityUseMode"`
+	InterfaceCompatibilityMode              string                           `xml:"interfaceCompatibilityMode"`
+	CompatibilityMode                       string                           `xml:"compatibilityMode"`
 }
 
 type ConfigurationChildObjects struct {
@@ -154,27 +166,44 @@ const ConfigurationFile = "Configuration.mdo"
 
 func (conf *Configuration) Unpack(cfg UnpackConfig) error {
 
-	for _, name := range conf.ConfigurationChildObjects.Subsystems {
+	conf.idxMDOType = make(idxMDOTypeRef)
+	cfg.IdxObjects = conf.idxMDOType
 
-		subsystem := Subsystem{}
-		err := Unpack(cfg.WithName(name.String(), "Subsystem"), &subsystem)
-		if err != nil {
-			return err
-		}
-
-		conf.Subsystems = append(conf.Subsystems, subsystem)
+	err := UnpackAll(conf.ConfigurationChildObjects.Subsystems, cfg, &conf.Subsystems)
+	if err != nil {
+		return err
 	}
 
-	for _, name := range conf.ConfigurationChildObjects.Catalogs {
-
-		value := Catalog{}
-		err := Unpack(cfg.WithName(name.String(), "Catalog"), &value)
-		if err != nil {
-			return err
-		}
-
-		conf.Catalogs = append(conf.Catalogs, value)
+	err = UnpackAll(conf.ConfigurationChildObjects.Catalogs, cfg, &conf.Catalogs)
+	if err != nil {
+		return err
 	}
+	// for _, mdoTypeRef := range conf.ConfigurationChildObjects.Subsystems {
+	//
+	// 	subsystem := Subsystem{}
+	// 	err := mdoTypeRef.Unpack(cfg, &subsystem)
+	// 	if err != nil {
+	// 		return err
+	// 	}
+	//
+	// 	conf.Subsystems = append(conf.Subsystems, subsystem)
+	//
+	// 	conf.idxMDOType[mdoTypeRef] = subsystem
+	//
+	// }
+
+	// for _, name := range conf.ConfigurationChildObjects.Catalogs {
+	//
+	// 	value := Catalog{}
+	// 	err := Unpack(cfg.WithName(name.String(), "Catalog"), &value)
+	// 	if err != nil {
+	// 		return err
+	// 	}
+	//
+	// 	conf.Catalogs = append(conf.Catalogs, value)
+	// 	conf.idxMDOType[name] = value
+	//
+	// }
 
 	return nil
 }
