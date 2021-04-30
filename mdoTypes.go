@@ -70,8 +70,14 @@ func (m MDOType) Group() string {
 		return "AccountingRegisters"
 	case CATALOG:
 		return "Catalogs"
+	case DOCUMENT:
+		return "Documents"
 	case SUBSYSTEM:
 		return "Subsystems"
+	case COMMON_TEMPLATE:
+		return "CommonTemplates"
+	case COMMON_MODULE:
+		return "CommonModules"
 	default:
 		return ""
 	}

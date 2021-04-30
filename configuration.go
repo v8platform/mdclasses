@@ -8,10 +8,12 @@ import (
 var log = logos.New("github.com/v8platform/mdclasses").Sugar()
 
 type MDOBaseType struct {
-	Mdclass xml.Attr           `xml:"mdclass,attr"`
-	Uuid    string             `xml:"uuid,attr"`
 	Name    string             `xml:"name"`
 	Synonym ObjectKeyValueType `xml:"synonym"`
+	Uuid    string             `xml:"uuid,attr"`
+	Mdclass xml.Attr           `xml:"mdclass,attr"`
+	Xsi     xml.Attr           `xml:"xsi,attr"`
+	Core    xml.Attr           `xml:"core,attr"`
 }
 type ContainedObject struct {
 	ClassId  string `xml:"classId,attr,allowempty"`
@@ -40,9 +42,9 @@ type Configuration struct {
 	// CommonPictures              []MDOTypeRef `xml:"commonPictures"`
 	// SessionParameters           []MDOTypeRef `xml:"sessionParameters"`
 	// Roles                       []MDOTypeRef `xml:"roles"`
-	// CommonTemplates             []MDOTypeRef `xml:"commonTemplates"`
+	CommonTemplates []*CommonTemplates
 	// FilterCriteria              []MDOTypeRef `xml:"filterCriteria"`
-	// CommonModules               []MDOTypeRef `xml:"commonModules"`
+	CommonModules []*CommonModule
 	// CommonAttributes            []MDOTypeRef `xml:"commonAttributes"`
 	// ExchangePlans               []MDOTypeRef `xml:"exchangePlans"`
 	// XDTOPackages                []MDOTypeRef `xml:"xDTOPackages"`
@@ -60,8 +62,8 @@ type Configuration struct {
 	// Constants                   []MDOTypeRef `xml:"constants"`
 	// CommonForms                 []MDOTypeRef `xml:"commonForms"`
 	// CatalogsNames               []MDOTypeRef `xml:"catalogs"`
-	Catalogs []*Catalog `xml:"-"`
-	// Documents                   []MDOTypeRef `xml:"documents"`
+	Catalogs  []*Catalog
+	Documents []*Document
 	// DocumentNumerators          []MDOTypeRef `xml:"documentNumerators"`
 	// DocumentJournals            []MDOTypeRef `xml:"documentJournals"`
 	// Enums                       []MDOTypeRef `xml:"enums"`
@@ -175,6 +177,21 @@ func (conf *Configuration) Unpack(cfg UnpackConfig) error {
 	}
 
 	err = EachMDOTypeRef(conf.ConfigurationChildObjects.Catalogs).Unpack(cfg, &conf.Catalogs)
+	if err != nil {
+		return err
+	}
+
+	err = EachMDOTypeRef(conf.ConfigurationChildObjects.Documents).Unpack(cfg, &conf.Documents)
+	if err != nil {
+		return err
+	}
+
+	err = EachMDOTypeRef(conf.ConfigurationChildObjects.CommonTemplates).Unpack(cfg, &conf.CommonTemplates)
+	if err != nil {
+		return err
+	}
+
+	err = EachMDOTypeRef(conf.ConfigurationChildObjects.CommonModules).Unpack(cfg, &conf.CommonModules)
 	if err != nil {
 		return err
 	}
