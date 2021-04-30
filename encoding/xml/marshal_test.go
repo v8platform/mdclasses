@@ -945,7 +945,7 @@ var marshalTests = []struct {
 		UnmarshalOnly: true,
 	},
 
-	// xml.Name works in a plain field as well.
+	// xml.ref works in a plain field as well.
 	{
 		Value:     &NameInField{Name{Space: "ns", Local: "foo"}},
 		ExpectXML: `<NameInField><foo xmlns="ns"></foo></NameInField>`,
@@ -956,7 +956,7 @@ var marshalTests = []struct {
 		UnmarshalOnly: true,
 	},
 
-	// Marshaling zero xml.Name uses the tag or field name.
+	// Marshaling zero xml.ref uses the tag or field name.
 	{
 		Value:       &NameInField{},
 		ExpectXML:   `<NameInField><foo xmlns="ns"></foo></NameInField>`,

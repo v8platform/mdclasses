@@ -357,7 +357,7 @@ func (p *printer) createAttrPrefix(url string) string {
 		return prefix
 	}
 	if p.attrNS[prefix] != "" {
-		// Name is taken. Find a better one.
+		// ref is taken. Find a better one.
 		for p.seq++; ; p.seq++ {
 			if id := prefix + "_" + strconv.Itoa(p.seq); p.attrNS[id] == "" {
 				prefix = id
@@ -410,7 +410,6 @@ var (
 	marshalerAttrType = reflect.TypeOf((*MarshalerAttr)(nil)).Elem()
 	textMarshalerType = reflect.TypeOf((*encoding.TextMarshaler)(nil)).Elem()
 	nullableType      = reflect.TypeOf((*Nullable)(nil)).Elem()
-
 )
 
 // marshalValue writes one or more XML elements representing val.
@@ -1091,7 +1090,7 @@ func isEmptyValue(v reflect.Value) bool {
 	case reflect.Float32, reflect.Float64:
 		return v.Float() == 0
 	case reflect.Struct:
-		if v.CanInterface() && v.Type().Implements(nullableType)  {
+		if v.CanInterface() && v.Type().Implements(nullableType) {
 			return v.Interface().(Nullable).IsNull()
 		}
 	case reflect.Interface, reflect.Ptr:

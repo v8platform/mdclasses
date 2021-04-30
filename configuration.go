@@ -7,152 +7,157 @@ import (
 
 var log = logos.New("github.com/v8platform/mdclasses").Sugar()
 
-type Mdclass struct {
-	xml.Name
-	value string
+type MDOBaseType struct {
+	Mdclass xml.Attr           `xml:"mdclass,attr"`
+	Uuid    string             `xml:"uuid,attr"`
+	Name    string             `xml:"name"`
+	Synonym ObjectKeyValueType `xml:"synonym"`
+}
+type ContainedObject struct {
+	ClassId  string `xml:"classId,attr,allowempty"`
+	ObjectId string `xml:"objectId,attr,allowempty"`
 }
 
-type Name struct {
-	xml.Name
-	value string
+type Language struct {
+	Uuid         string             `xml:"uuid,attr"`
+	Name         string             `xml:"name"`
+	Synonym      ObjectKeyValueType `xml:"synonym"`
+	LanguageCode string             `xml:"languageCode"`
 }
 
 type Configuration struct {
-	XMLName xml.Name `xml:"mdclass Configuration"`
-	Mdclass xml.Attr `xml:"mdclass,attr"`
-	Uuid    string   `xml:"uuid,attr"`
-	Name    string   `xml:"name"`
-	Synonym ObjectKeyValueType   `xml:"synonym"`
-	ContainedObjects []struct {
-		ClassId  string `xml:"classId,attr,allowempty"`
-		ObjectId string `xml:"objectId,attr,allowempty"`
-	} `xml:"containedObjects,allowempty"`
-	ConfigurationExtensionCompatibilityMode string   `xml:"configurationExtensionCompatibilityMode"`
-	DefaultRunMode                          string   `xml:"defaultRunMode"`
-	UsePurposes                             string   `xml:"usePurposes"`
-	ScriptVariant                           string   `xml:"scriptVariant"`
-	DefaultRoles                            []string `xml:"defaultRoles"`
-	Vendor                                  string   `xml:"vendor"`
-	Version                                 string   `xml:"version"`
-	UpdateCatalogAddress                    string   `xml:"updateCatalogAddress,omitempty"`
-	UseManagedFormInOrdinaryApplication     string   `xml:"useManagedFormInOrdinaryApplication"`
-	UseOrdinaryFormInManagedApplication     string   `xml:"useOrdinaryFormInManagedApplication"`
-	ReportsVariantsStorage                  string   `xml:"reportsVariantsStorage"`
-	DefaultReportForm                       string   `xml:"defaultReportForm"`
-	DefaultReportVariantForm                string   `xml:"defaultReportVariantForm"`
-	DefaultReportSettingsForm               string   `xml:"defaultReportSettingsForm"`
-	DefaultSearchForm                       string   `xml:"defaultSearchForm"`
+	MDOBaseType
+	XMLName                                 xml.Name          `xml:"mdclass Configuration"`
+	ContainedObjects                        []ContainedObject `xml:"containedObjects,allowempty"`
+	ConfigurationExtensionCompatibilityMode string            `xml:"configurationExtensionCompatibilityMode"`
+	DefaultRunMode                          string            `xml:"defaultRunMode"`
+	UsePurposes                             string            `xml:"usePurposes"`
+	ScriptVariant                           string            `xml:"scriptVariant"`
+	DefaultRoles                            []MDOTypeRef      `xml:"defaultRoles"`
+	Vendor                                  string            `xml:"vendor"`
+	Version                                 string            `xml:"version"`
+	UpdateCatalogAddress                    string            `xml:"updateCatalogAddress,omitempty"`
+	UseManagedFormInOrdinaryApplication     string            `xml:"useManagedFormInOrdinaryApplication"`
+	UseOrdinaryFormInManagedApplication     string            `xml:"useOrdinaryFormInManagedApplication"`
+	ReportsVariantsStorage                  string            `xml:"reportsVariantsStorage"`
+	DefaultReportForm                       MDOTypeRef        `xml:"defaultReportForm"`
+	DefaultReportVariantForm                MDOTypeRef        `xml:"defaultReportVariantForm"`
+	DefaultReportSettingsForm               MDOTypeRef        `xml:"defaultReportSettingsForm"`
+	DefaultSearchForm                       MDOTypeRef        `xml:"defaultSearchForm"`
 	UsedMobileApplicationFunctionalities    struct {
 		Functionality []struct {
 			Functionality string `xml:"functionality,omitempty"`
 			Use           string `xml:"use"`
 		} `xml:"functionality"`
 	} `xml:"usedMobileApplicationFunctionalities"`
-	MainSectionPicture 				string 				`xml:"mainSectionPicture,allowempty"`
-	DefaultLanguage    				string 				`xml:"defaultLanguage"`
-	BriefInformation   				ObjectKeyValueType `xml:"briefInformation"`
-	DetailedInformation 			ObjectKeyValueType `xml:"detailedInformation"`
-	Splash    						string 				`xml:"splash,omitempty"`
-	Copyright 						ObjectKeyValueType `xml:"copyright"`
-	VendorInformationAddress 		ObjectKeyValueType `xml:"vendorInformationAddress"`
+	MainSectionPicture              string             `xml:"mainSectionPicture,allowempty"`
+	DefaultLanguage                 MDOTypeRef         `xml:"defaultLanguage"`
+	BriefInformation                ObjectKeyValueType `xml:"briefInformation"`
+	DetailedInformation             ObjectKeyValueType `xml:"detailedInformation"`
+	Splash                          string             `xml:"splash,omitempty"`
+	Copyright                       ObjectKeyValueType `xml:"copyright"`
+	VendorInformationAddress        ObjectKeyValueType `xml:"vendorInformationAddress"`
 	ConfigurationInformationAddress ObjectKeyValueType `xml:"configurationInformationAddress,omitempty"`
 	DataLockControlMode             string             `xml:"dataLockControlMode"`
 	ObjectAutonumerationMode        string             `xml:"objectAutonumerationMode"`
 	ModalityUseMode                 string             `xml:"modalityUseMode"`
 	InterfaceCompatibilityMode      string             `xml:"interfaceCompatibilityMode"`
 	CompatibilityMode               string             `xml:"compatibilityMode"`
-	Languages                       struct {
-		Uuid         string             `xml:"uuid,attr"`
-		Name         string             `xml:"name"`
-		Synonym      ObjectKeyValueType `xml:"synonym"`
-		LanguageCode string             `xml:"languageCode"`
-	} `xml:"languages"`
+	Languages                       []Language         `xml:"languages"`
 
-	Subsystems      []Subsystem `xml:"-"`
-	SubsystemsNames []string    `xml:"subsystems"`
+	Subsystems []Subsystem `xml:"-"`
+	// SubsystemsNames []MDOTypeRef `xml:"subsystems"`
 
-	StyleItems                  []string  `xml:"styleItems"`
-	CommonPictures              []string  `xml:"commonPictures"`
-	SessionParameters           []string  `xml:"sessionParameters"`
-	Roles                       []string  `xml:"roles"`
-	CommonTemplates             []string  `xml:"commonTemplates"`
-	FilterCriteria              []string  `xml:"filterCriteria"`
-	CommonModules               []string  `xml:"commonModules"`
-	CommonAttributes            []string  `xml:"commonAttributes"`
-	ExchangePlans               []string  `xml:"exchangePlans"`
-	XDTOPackages                []string  `xml:"xDTOPackages"`
-	WebServices                 []string  `xml:"webServices"`
-	HttpServices                []string  `xml:"httpServices"`
-	WsReferences                []string  `xml:"wsReferences"`
-	EventSubscriptions          []string  `xml:"eventSubscriptions"`
-	ScheduledJobs               []string  `xml:"scheduledJobs"`
-	SettingsStorages            []string  `xml:"settingsStorages"`
-	FunctionalOptions           []string  `xml:"functionalOptions"`
-	FunctionalOptionsParameters []string  `xml:"functionalOptionsParameters"`
-	DefinedTypes                []string  `xml:"definedTypes"`
-	CommonCommands              []string  `xml:"commonCommands"`
-	CommandGroups               []string  `xml:"commandGroups"`
-	Constants                   []string  `xml:"constants"`
-	CommonForms                 []string  `xml:"commonForms"`
-	CatalogsNames               []string  `xml:"catalogs"`
-	Catalogs                    []Catalog `xml:"-"`
-	Documents                   []string  `xml:"documents"`
-	DocumentNumerators          []string  `xml:"documentNumerators"`
-	DocumentJournals            []string  `xml:"documentJournals"`
-	Enums                       []string  `xml:"enums"`
-	Reports                     []string  `xml:"reports"`
-	DataProcessors              []string  `xml:"dataProcessors"`
-	InformationRegisters        []string  `xml:"informationRegisters"`
-	AccumulationRegisters       []string  `xml:"accumulationRegisters"`
-	ChartsOfCharacteristicTypes []string  `xml:"chartsOfCharacteristicTypes"`
-	BusinessProcesses           []string  `xml:"businessProcesses"`
-	Tasks                       []string  `xml:"tasks"`
+	// StyleItems                  []MDOTypeRef `xml:"styleItems"`
+	// CommonPictures              []MDOTypeRef `xml:"commonPictures"`
+	// SessionParameters           []MDOTypeRef `xml:"sessionParameters"`
+	// Roles                       []MDOTypeRef `xml:"roles"`
+	// CommonTemplates             []MDOTypeRef `xml:"commonTemplates"`
+	// FilterCriteria              []MDOTypeRef `xml:"filterCriteria"`
+	// CommonModules               []MDOTypeRef `xml:"commonModules"`
+	// CommonAttributes            []MDOTypeRef `xml:"commonAttributes"`
+	// ExchangePlans               []MDOTypeRef `xml:"exchangePlans"`
+	// XDTOPackages                []MDOTypeRef `xml:"xDTOPackages"`
+	// WebServices                 []MDOTypeRef `xml:"webServices"`
+	// HttpServices                []MDOTypeRef `xml:"httpServices"`
+	// WsReferences                []MDOTypeRef `xml:"wsReferences"`
+	// EventSubscriptions          []MDOTypeRef `xml:"eventSubscriptions"`
+	// ScheduledJobs               []MDOTypeRef `xml:"scheduledJobs"`
+	// SettingsStorages            []MDOTypeRef `xml:"settingsStorages"`
+	// FunctionalOptions           []MDOTypeRef `xml:"functionalOptions"`
+	// FunctionalOptionsParameters []MDOTypeRef `xml:"functionalOptionsParameters"`
+	// DefinedTypes                []MDOTypeRef `xml:"definedTypes"`
+	// CommonCommands              []MDOTypeRef `xml:"commonCommands"`
+	// CommandGroups               []MDOTypeRef `xml:"commandGroups"`
+	// Constants                   []MDOTypeRef `xml:"constants"`
+	// CommonForms                 []MDOTypeRef `xml:"commonForms"`
+	// CatalogsNames               []MDOTypeRef `xml:"catalogs"`
+	Catalogs []Catalog `xml:"-"`
+	// Documents                   []MDOTypeRef `xml:"documents"`
+	// DocumentNumerators          []MDOTypeRef `xml:"documentNumerators"`
+	// DocumentJournals            []MDOTypeRef `xml:"documentJournals"`
+	// Enums                       []MDOTypeRef `xml:"enums"`
+	// Reports                     []MDOTypeRef `xml:"reports"`
+	// DataProcessors              []MDOTypeRef `xml:"dataProcessors"`
+	// InformationRegisters        []MDOTypeRef `xml:"informationRegisters"`
+	// AccumulationRegisters       []MDOTypeRef `xml:"accumulationRegisters"`
+	// ChartsOfCharacteristicTypes []MDOTypeRef `xml:"chartsOfCharacteristicTypes"`
+	// BusinessProcesses           []MDOTypeRef `xml:"businessProcesses"`
+	// Tasks                       []MDOTypeRef `xml:"tasks"`
+
+	ConfigurationChildObjects
+}
+
+type ConfigurationChildObjects struct {
+	Subsystems                  []MDOTypeRef `xml:"subsystems"`
+	StyleItems                  []MDOTypeRef `xml:"styleItems"`
+	CommonPictures              []MDOTypeRef `xml:"commonPictures"`
+	SessionParameters           []MDOTypeRef `xml:"sessionParameters"`
+	Roles                       []MDOTypeRef `xml:"roles"`
+	CommonTemplates             []MDOTypeRef `xml:"commonTemplates"`
+	FilterCriteria              []MDOTypeRef `xml:"filterCriteria"`
+	CommonModules               []MDOTypeRef `xml:"commonModules"`
+	CommonAttributes            []MDOTypeRef `xml:"commonAttributes"`
+	ExchangePlans               []MDOTypeRef `xml:"exchangePlans"`
+	XDTOPackages                []MDOTypeRef `xml:"xDTOPackages"`
+	WebServices                 []MDOTypeRef `xml:"webServices"`
+	HttpServices                []MDOTypeRef `xml:"httpServices"`
+	WsReferences                []MDOTypeRef `xml:"wsReferences"`
+	EventSubscriptions          []MDOTypeRef `xml:"eventSubscriptions"`
+	ScheduledJobs               []MDOTypeRef `xml:"scheduledJobs"`
+	SettingsStorages            []MDOTypeRef `xml:"settingsStorages"`
+	FunctionalOptions           []MDOTypeRef `xml:"functionalOptions"`
+	FunctionalOptionsParameters []MDOTypeRef `xml:"functionalOptionsParameters"`
+	DefinedTypes                []MDOTypeRef `xml:"definedTypes"`
+	CommonCommands              []MDOTypeRef `xml:"commonCommands"`
+	CommandGroups               []MDOTypeRef `xml:"commandGroups"`
+	Constants                   []MDOTypeRef `xml:"constants"`
+	CommonForms                 []MDOTypeRef `xml:"commonForms"`
+	Catalogs                    []MDOTypeRef `xml:"catalogs"`
+	Documents                   []MDOTypeRef `xml:"documents"`
+	DocumentNumerators          []MDOTypeRef `xml:"documentNumerators"`
+	DocumentJournals            []MDOTypeRef `xml:"documentJournals"`
+	Enums                       []MDOTypeRef `xml:"enums"`
+	Reports                     []MDOTypeRef `xml:"reports"`
+	DataProcessors              []MDOTypeRef `xml:"dataProcessors"`
+	InformationRegisters        []MDOTypeRef `xml:"informationRegisters"`
+	AccumulationRegisters       []MDOTypeRef `xml:"accumulationRegisters"`
+	ChartsOfCharacteristicTypes []MDOTypeRef `xml:"chartsOfCharacteristicTypes"`
+	BusinessProcesses           []MDOTypeRef `xml:"businessProcesses"`
+	Tasks                       []MDOTypeRef `xml:"tasks"`
+	WebService                  []MDOTypeRef `xml:"serviceService"`
+	WSReference                 []MDOTypeRef `xml:"wsReferenceReference"`
+	XDTOPackage                 []MDOTypeRef `xml:"xdtoPackage"`
 }
 
 const ConfigurationFile = "Configuration.mdo"
 
-func (conf *Name) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
-	panic("implement me")
-}
-
-func (conf *Mdclass) MarshalXMLAttr(name xml.Name) (xml.Attr, error) {
-	//pp.Println(name)
-	return xml.Attr{
-		conf.Name,
-		conf.value,
-	}, nil
-}
-
-func (conf *Mdclass) UnmarshalXMLAttr(attr xml.Attr) error {
-
-	conf.Name = attr.Name
-	conf.value = attr.Value
-
-	return nil
-}
-
-func (conf *Name) MarshalXMLAttr(name xml.Name) (xml.Attr, error) {
-	//pp.Println(name)
-	return xml.Attr{
-		conf.Name,
-		conf.value,
-	}, nil
-}
-
-func (conf *Name) UnmarshalXMLAttr(attr xml.Attr) error {
-
-	conf.Name = attr.Name
-	conf.value = attr.Value
-
-	return nil
-}
-
 func (conf *Configuration) Unpack(cfg UnpackConfig) error {
 
-	for _, name := range conf.SubsystemsNames {
+	for _, name := range conf.ConfigurationChildObjects.Subsystems {
 
 		subsystem := Subsystem{}
-		err := Unpack(cfg.WithName(name, "Subsystem"), &subsystem)
+		err := Unpack(cfg.WithName(name.String(), "Subsystem"), &subsystem)
 		if err != nil {
 			return err
 		}
@@ -160,10 +165,10 @@ func (conf *Configuration) Unpack(cfg UnpackConfig) error {
 		conf.Subsystems = append(conf.Subsystems, subsystem)
 	}
 
-	for _, name := range conf.CatalogsNames {
+	for _, name := range conf.ConfigurationChildObjects.Catalogs {
 
 		value := Catalog{}
-		err := Unpack(cfg.WithName(name, "Catalog"), &value)
+		err := Unpack(cfg.WithName(name.String(), "Catalog"), &value)
 		if err != nil {
 			return err
 		}

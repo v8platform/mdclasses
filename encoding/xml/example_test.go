@@ -136,14 +136,14 @@ func ExampleUnmarshal() {
 		return
 	}
 	fmt.Printf("XMLName: %#v\n", v.XMLName)
-	fmt.Printf("Name: %q\n", v.Name)
+	fmt.Printf("ref: %q\n", v.Name)
 	fmt.Printf("Phone: %q\n", v.Phone)
 	fmt.Printf("Email: %v\n", v.Email)
 	fmt.Printf("Groups: %v\n", v.Groups)
 	fmt.Printf("Address: %v\n", v.Address)
 	// Output:
-	// XMLName: xml.Name{Space:"", Local:"Person"}
-	// Name: "Grace R. Emlin"
+	// XMLName: xml.ref{Space:"", Local:"Person"}
+	// ref: "Grace R. Emlin"
 	// Phone: "none"
 	// Email: [{home gre@example.com} {work gre@work.com}]
 	// Groups: [Friends Squash]
