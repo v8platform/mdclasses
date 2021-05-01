@@ -94,7 +94,7 @@ type ConfigurationProperties struct {
 	DefaultRunMode                          string                           `xml:"defaultRunMode"`
 	UsePurposes                             string                           `xml:"usePurposes"`
 	ScriptVariant                           string                           `xml:"scriptVariant"`
-	DefaultRoles                            []MDOTypeRef                     `xml:"defaultRoles"`
+	DefaultRoles                            MDOTypeRefList                   `xml:"defaultRoles"`
 	Vendor                                  string                           `xml:"vendor"`
 	Version                                 string                           `xml:"version"`
 	UpdateCatalogAddress                    string                           `xml:"updateCatalogAddress,omitempty"`
@@ -123,45 +123,45 @@ type ConfigurationProperties struct {
 }
 
 type ConfigurationChildObjects struct {
-	Subsystems                  []MDOTypeRef `xml:"subsystems"`
-	StyleItems                  []MDOTypeRef `xml:"styleItems"`
-	CommonPictures              []MDOTypeRef `xml:"commonPictures"`
-	SessionParameters           []MDOTypeRef `xml:"sessionParameters"`
-	Roles                       []MDOTypeRef `xml:"roles"`
-	CommonTemplates             []MDOTypeRef `xml:"commonTemplates"`
-	FilterCriteria              []MDOTypeRef `xml:"filterCriteria"`
-	CommonModules               []MDOTypeRef `xml:"commonModules"`
-	CommonAttributes            []MDOTypeRef `xml:"commonAttributes"`
-	ExchangePlans               []MDOTypeRef `xml:"exchangePlans"`
-	XDTOPackages                []MDOTypeRef `xml:"xDTOPackages"`
-	WebServices                 []MDOTypeRef `xml:"webServices"`
-	HttpServices                []MDOTypeRef `xml:"httpServices"`
-	WsReferences                []MDOTypeRef `xml:"wsReferences"`
-	EventSubscriptions          []MDOTypeRef `xml:"eventSubscriptions"`
-	ScheduledJobs               []MDOTypeRef `xml:"scheduledJobs"`
-	SettingsStorages            []MDOTypeRef `xml:"settingsStorages"`
-	FunctionalOptions           []MDOTypeRef `xml:"functionalOptions"`
-	FunctionalOptionsParameters []MDOTypeRef `xml:"functionalOptionsParameters"`
-	DefinedTypes                []MDOTypeRef `xml:"definedTypes"`
-	CommonCommands              []MDOTypeRef `xml:"commonCommands"`
-	CommandGroups               []MDOTypeRef `xml:"commandGroups"`
-	Constants                   []MDOTypeRef `xml:"constants"`
-	CommonForms                 []MDOTypeRef `xml:"commonForms"`
-	Catalogs                    []MDOTypeRef `xml:"catalogs"`
-	Documents                   []MDOTypeRef `xml:"documents"`
-	DocumentNumerators          []MDOTypeRef `xml:"documentNumerators"`
-	DocumentJournals            []MDOTypeRef `xml:"documentJournals"`
-	Enums                       []MDOTypeRef `xml:"enums"`
-	Reports                     []MDOTypeRef `xml:"reports"`
-	DataProcessors              []MDOTypeRef `xml:"dataProcessors"`
-	InformationRegisters        []MDOTypeRef `xml:"informationRegisters"`
-	AccumulationRegisters       []MDOTypeRef `xml:"accumulationRegisters"`
-	ChartsOfCharacteristicTypes []MDOTypeRef `xml:"chartsOfCharacteristicTypes"`
-	BusinessProcesses           []MDOTypeRef `xml:"businessProcesses"`
-	Tasks                       []MDOTypeRef `xml:"tasks"`
-	WebService                  []MDOTypeRef `xml:"serviceService"`
-	WSReference                 []MDOTypeRef `xml:"wsReferenceReference"`
-	XDTOPackage                 []MDOTypeRef `xml:"xdtoPackage"`
+	Subsystems                  MDOTypeRefList `xml:"subsystems"`
+	StyleItems                  MDOTypeRefList `xml:"styleItems"`
+	CommonPictures              MDOTypeRefList `xml:"commonPictures"`
+	SessionParameters           MDOTypeRefList `xml:"sessionParameters"`
+	Roles                       MDOTypeRefList `xml:"roles"`
+	CommonTemplates             MDOTypeRefList `xml:"commonTemplates"`
+	FilterCriteria              MDOTypeRefList `xml:"filterCriteria"`
+	CommonModules               MDOTypeRefList `xml:"commonModules"`
+	CommonAttributes            MDOTypeRefList `xml:"commonAttributes"`
+	ExchangePlans               MDOTypeRefList `xml:"exchangePlans"`
+	XDTOPackages                MDOTypeRefList `xml:"xDTOPackages"`
+	WebServices                 MDOTypeRefList `xml:"webServices"`
+	HttpServices                MDOTypeRefList `xml:"httpServices"`
+	WsReferences                MDOTypeRefList `xml:"wsReferences"`
+	EventSubscriptions          MDOTypeRefList `xml:"eventSubscriptions"`
+	ScheduledJobs               MDOTypeRefList `xml:"scheduledJobs"`
+	SettingsStorages            MDOTypeRefList `xml:"settingsStorages"`
+	FunctionalOptions           MDOTypeRefList `xml:"functionalOptions"`
+	FunctionalOptionsParameters MDOTypeRefList `xml:"functionalOptionsParameters"`
+	DefinedTypes                MDOTypeRefList `xml:"definedTypes"`
+	CommonCommands              MDOTypeRefList `xml:"commonCommands"`
+	CommandGroups               MDOTypeRefList `xml:"commandGroups"`
+	Constants                   MDOTypeRefList `xml:"constants"`
+	CommonForms                 MDOTypeRefList `xml:"commonForms"`
+	Catalogs                    MDOTypeRefList `xml:"catalogs"`
+	Documents                   MDOTypeRefList `xml:"documents"`
+	DocumentNumerators          MDOTypeRefList `xml:"documentNumerators"`
+	DocumentJournals            MDOTypeRefList `xml:"documentJournals"`
+	Enums                       MDOTypeRefList `xml:"enums"`
+	Reports                     MDOTypeRefList `xml:"reports"`
+	DataProcessors              MDOTypeRefList `xml:"dataProcessors"`
+	InformationRegisters        MDOTypeRefList `xml:"informationRegisters"`
+	AccumulationRegisters       MDOTypeRefList `xml:"accumulationRegisters"`
+	ChartsOfCharacteristicTypes MDOTypeRefList `xml:"chartsOfCharacteristicTypes"`
+	BusinessProcesses           MDOTypeRefList `xml:"businessProcesses"`
+	Tasks                       MDOTypeRefList `xml:"tasks"`
+	WebService                  MDOTypeRefList `xml:"serviceService"`
+	WSReference                 MDOTypeRefList `xml:"wsReferenceReference"`
+	XDTOPackage                 MDOTypeRefList `xml:"xdtoPackage"`
 }
 
 const ConfigurationFile = "Configuration.mdo"
@@ -171,27 +171,27 @@ func (conf *Configuration) Unpack(cfg UnpackConfig) error {
 	conf.idxMDOType = make(idxMDOTypeRef)
 	cfg.IdxObjects = conf.idxMDOType
 
-	err := EachMDOTypeRef(conf.ConfigurationChildObjects.Subsystems).Unpack(cfg, &conf.Subsystems)
+	err := conf.ConfigurationChildObjects.Subsystems.Unpack(cfg, &conf.Subsystems)
 	if err != nil {
 		return err
 	}
 
-	err = EachMDOTypeRef(conf.ConfigurationChildObjects.Catalogs).Unpack(cfg, &conf.Catalogs)
+	err = conf.ConfigurationChildObjects.Catalogs.Unpack(cfg, &conf.Catalogs)
 	if err != nil {
 		return err
 	}
 
-	err = EachMDOTypeRef(conf.ConfigurationChildObjects.Documents).Unpack(cfg, &conf.Documents)
+	err = conf.ConfigurationChildObjects.Documents.Unpack(cfg, &conf.Documents)
 	if err != nil {
 		return err
 	}
 
-	err = EachMDOTypeRef(conf.ConfigurationChildObjects.CommonTemplates).Unpack(cfg, &conf.CommonTemplates)
+	err = conf.ConfigurationChildObjects.CommonTemplates.Unpack(cfg, &conf.CommonTemplates)
 	if err != nil {
 		return err
 	}
 
-	err = EachMDOTypeRef(conf.ConfigurationChildObjects.CommonModules).Unpack(cfg, &conf.CommonModules)
+	err = conf.ConfigurationChildObjects.CommonModules.Unpack(cfg, &conf.CommonModules)
 	if err != nil {
 		return err
 	}

@@ -142,9 +142,9 @@ func (m MDOTypeRef) Unpack(cfg UnpackConfig, value interface{}) error {
 	return err
 }
 
-type EachMDOTypeRef []MDOTypeRef
+type MDOTypeRefList []MDOTypeRef
 
-func (e EachMDOTypeRef) Unpack(cfg UnpackConfig, value interface{}) error {
+func (e MDOTypeRefList) Unpack(cfg UnpackConfig, value interface{}) error {
 
 	var v reflect.Value
 

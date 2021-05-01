@@ -10,7 +10,7 @@ type CommonModule struct {
 	ExternalConnection        bool   `xml:"externalConnection"`
 	ClientOrdinaryApplication bool   `xml:"clientOrdinaryApplication"`
 	Client                    bool   `xml:"client"`
-	ServerCall                bool   `xml:"server_call"`
+	ServerCall                bool   `xml:"serverCall"`
 	Privileged                bool   `xml:"privileged"`
 	ReturnValuesReuse         string `xml:"returnValuesReuse"`
 }

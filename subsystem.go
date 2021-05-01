@@ -8,12 +8,12 @@ import (
 type Subsystem struct {
 	MDOBaseType
 	SubsystemChildSubsystems
-	XMLName                   xml.Name     `xml:"Subsystem"`
-	IncludeHelpInContents     bool         `xml:"includeHelpInContents"`
-	IncludeInCommandInterface bool         `xml:"includeInCommandInterface"`
-	Subsystems                []*Subsystem `xml:"-"`
-	Content                   []MDOTypeRef `xml:"content"`
-	ParentSubsystem           MDOTypeRef   `xml:"parentSubsystem"`
+	XMLName                   xml.Name       `xml:"Subsystem"`
+	IncludeHelpInContents     bool           `xml:"includeHelpInContents"`
+	IncludeInCommandInterface bool           `xml:"includeInCommandInterface"`
+	Subsystems                []*Subsystem   `xml:"-"`
+	Content                   MDOTypeRefList `xml:"content"`
+	ParentSubsystem           MDOTypeRef     `xml:"parentSubsystem"`
 }
 
 type SubsystemChildSubsystems struct {
@@ -34,16 +34,9 @@ func (conf *Subsystem) Unpack(cfg UnpackConfig) error {
 			parentMDO,
 		))
 
-		// subsystem := Subsystem{}
-		// err := Unpack(cfg.WithName(name, "Subsystem"), &subsystem)
-		// if err != nil {
-		// 	return err
-		// }
-		//
-		// conf.Subsystems = append(conf.Subsystems, subsystem)
 	}
 
-	err := EachMDOTypeRef(subsystems).Unpack(cfg, &conf.Subsystems)
+	err := MDOTypeRefList(subsystems).Unpack(cfg, &conf.Subsystems)
 	if err != nil {
 		return err
 	}
