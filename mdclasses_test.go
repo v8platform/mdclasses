@@ -1,8 +1,12 @@
 package mdclasses
 
 import (
+	"bytes"
+	"github.com/stretchr/testify/require"
 	"github.com/v8platform/mdclasses/encoding/xml"
+	"io/ioutil"
 	"os"
+	"path/filepath"
 	"reflect"
 	"testing"
 )
@@ -59,7 +63,13 @@ func Test(t *testing.T) {
 				t.Errorf("UnpackConfiguration() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			xmlFile, err := os.Create("./tests/metadata/edt/src/Configuration/Configuration.mdo")
+
+			TempDir, err := ioutil.TempDir(os.TempDir(), "prefix")
+			if err != nil {
+				t.Fatalf("Error create temp dir %s", TempDir)
+			}
+			os.MkdirAll(filepath.Join(TempDir, "Configuration"), os.ModePerm)
+			xmlFile, err := os.Create(filepath.Join(TempDir, "Configuration", "Configuration.mdo"))
 			if err != nil {
 				t.Fatalf("Ошибка тестирования %v", got)
 				return
@@ -72,6 +82,26 @@ func Test(t *testing.T) {
 				t.Fatalf("Ошибка тестирования %v", got)
 				return
 			}
+				require.True(t, fileCompare(t, filepath.Join(tt.dir, "Configuration", "Configuration.mdo"), xmlFile.Name()) )
 		})
+
 	}
+}
+
+func fileCompare(t *testing.T, file1, file2 string) bool {
+	// per comment, better to not read an entire file into memory
+	// this is simply a trivial example.
+	f1, err1 := ioutil.ReadFile(file1)
+
+	if err1 != nil {
+		t.Fatalf("Ошибка тестирования %v", err1)
+	}
+
+	f2, err2 := ioutil.ReadFile(file2)
+
+	if err2 != nil {
+		t.Fatalf("Ошибка тестирования %v", err1)
+	}
+
+	return bytes.Equal(f1, f2) // Per comment, this is significantly more performant.
 }
