@@ -42,9 +42,9 @@ type Configuration struct {
 	// CommonPictures              []MDOTypeRef `xml:"commonPictures"`
 	// SessionParameters           []MDOTypeRef `xml:"sessionParameters"`
 	// Roles                       []MDOTypeRef `xml:"roles"`
-	CommonTemplates []*CommonTemplates
+	CommonTemplates []*CommonTemplates `xml:"-"`
 	// FilterCriteria              []MDOTypeRef `xml:"filterCriteria"`
-	CommonModules []*CommonModule
+	CommonModules []*CommonModule `xml:"-"`
 	// CommonAttributes            []MDOTypeRef `xml:"commonAttributes"`
 	// ExchangePlans               []MDOTypeRef `xml:"exchangePlans"`
 	// XDTOPackages                []MDOTypeRef `xml:"xDTOPackages"`
@@ -62,8 +62,8 @@ type Configuration struct {
 	// Constants                   []MDOTypeRef `xml:"constants"`
 	// CommonForms                 []MDOTypeRef `xml:"commonForms"`
 	// CatalogsNames               []MDOTypeRef `xml:"catalogs"`
-	Catalogs  []*Catalog
-	Documents []*Document
+	Catalogs  []*Catalog  `xml:"-"`
+	Documents []*Document `xml:"-"`
 	// DocumentNumerators          []MDOTypeRef `xml:"documentNumerators"`
 	// DocumentJournals            []MDOTypeRef `xml:"documentJournals"`
 	// Enums                       []MDOTypeRef `xml:"enums"`
