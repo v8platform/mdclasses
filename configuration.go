@@ -8,12 +8,11 @@ import (
 var log = logos.New("github.com/v8platform/mdclasses").Sugar()
 
 type MDOBaseType struct {
-	Name    string               `xml:"name"`
-	Synonym []ObjectKeyValueType `xml:"synonym,allowempty"`
-	Uuid    string               `xml:"uuid,attr"`
-	Mdclass xml.Attr             `xml:"mdclass,attr"`
-	Xsi     xml.Attr             `xml:"xsi,attr"`
-	Core    xml.Attr             `xml:"core,attr"`
+	Name    string   `xml:"name"`
+	Mdclass xml.Attr `xml:"mdclass,attr"`
+	Xsi     xml.Attr `xml:"xsi,attr"`
+	Core    xml.Attr `xml:"core,attr"`
+	Uuid    string   `xml:"uuid,attr"`
 }
 type ContainedObject struct {
 	ClassId  string `xml:"classId,attr,allowempty"`
@@ -90,36 +89,38 @@ type MobileApplicationFunctionalities struct {
 }
 
 type ConfigurationProperties struct {
-	ConfigurationExtensionCompatibilityMode string                           `xml:"configurationExtensionCompatibilityMode"`
-	DefaultRunMode                          string                           `xml:"defaultRunMode"`
-	UsePurposes                             []string                         `xml:"usePurposes"`
-	ScriptVariant                           string                           `xml:"scriptVariant"`
-	DefaultRoles                            MDOTypeRefList                   `xml:"defaultRoles"`
-	Vendor                                  string                           `xml:"vendor"`
-	Version                                 string                           `xml:"version"`
-	UpdateCatalogAddress                    string                           `xml:"updateCatalogAddress,omitempty"`
-	UseManagedFormInOrdinaryApplication     string                           `xml:"useManagedFormInOrdinaryApplication"`
-	UseOrdinaryFormInManagedApplication     string                           `xml:"useOrdinaryFormInManagedApplication"`
-	ReportsVariantsStorage                  string                           `xml:"reportsVariantsStorage"`
-	DefaultReportForm                       MDOTypeRef                       `xml:"defaultReportForm"`
-	DefaultReportVariantForm                MDOTypeRef                       `xml:"defaultReportVariantForm"`
-	DefaultReportSettingsForm               MDOTypeRef                       `xml:"defaultReportSettingsForm"`
-	DefaultSearchForm                       MDOTypeRef                       `xml:"defaultSearchForm"`
-	UsedMobileApplicationFunctionalities    MobileApplicationFunctionalities `xml:"usedMobileApplicationFunctionalities,omitempty"`
-	RequiredMobileApplicationPermissions    []string                         `xml:"requiredMobileApplicationPermissions"`
-	MainSectionPicture                      string                           `xml:"mainSectionPicture,allowempty"`
-	DefaultLanguage                         MDOTypeRef                       `xml:"defaultLanguage"`
-	BriefInformation                        ObjectKeyValueType               `xml:"briefInformation"`
-	DetailedInformation                     ObjectKeyValueType               `xml:"detailedInformation"`
-	Splash                                  string                           `xml:"splash,omitempty"`
-	Copyright                               ObjectKeyValueType               `xml:"copyright"`
-	VendorInformationAddress                ObjectKeyValueType               `xml:"vendorInformationAddress"`
-	ConfigurationInformationAddress         ObjectKeyValueType               `xml:"configurationInformationAddress,omitempty"`
-	DataLockControlMode                     string                           `xml:"dataLockControlMode"`
-	ObjectAutonumerationMode                string                           `xml:"objectAutonumerationMode"`
-	ModalityUseMode                         string                           `xml:"modalityUseMode"`
-	InterfaceCompatibilityMode              string                           `xml:"interfaceCompatibilityMode"`
-	CompatibilityMode                       string                           `xml:"compatibilityMode"`
+	ConfigurationExtensionCompatibilityMode         string                            `xml:"configurationExtensionCompatibilityMode,omitempty"`
+	DefaultRunMode                                  string                            `xml:"defaultRunMode,omitempty"`
+	UsePurposes                                     []string                          `xml:"usePurposes,omitempty"`
+	ScriptVariant                                   string                            `xml:"scriptVariant,omitempty"`
+	Vendor                                          string                            `xml:"vendor,omitempty"`
+	Version                                         string                            `xml:"version,omitempty"`
+	UpdateCatalogAddress                            string                            `xml:"updateCatalogAddress,omitempty"`
+	UseManagedFormInOrdinaryApplication             string                            `xml:"useManagedFormInOrdinaryApplication,omitempty"`
+	UseOrdinaryFormInManagedApplication             string                            `xml:"useOrdinaryFormInManagedApplication,omitempty"`
+	DefaultRoles                                    MDOTypeRefList                    `xml:"defaultRoles,omitempty"`
+	ReportsVariantsStorage                          string                            `xml:"reportsVariantsStorage,omitempty"`
+	DefaultReportForm                               MDOTypeRef                        `xml:"defaultReportForm,omitempty"`
+	DefaultReportVariantForm                        MDOTypeRef                        `xml:"defaultReportVariantForm,omitempty"`
+	DefaultReportSettingsForm                       MDOTypeRef                        `xml:"defaultReportSettingsForm,omitempty"`
+	DefaultSearchForm                               MDOTypeRef                        `xml:"defaultSearchForm,omitempty"`
+	UsedMobileApplicationFunctionalities            *MobileApplicationFunctionalities `xml:"usedMobileApplicationFunctionalities,omitempty"`
+	RequiredMobileApplicationPermissions            []string                          `xml:"requiredMobileApplicationPermissions,omitempty"`
+	MainSectionPicture                              string                            `xml:"mainSectionPicture,omitempty"`
+	DefaultLanguage                                 MDOTypeRef                        `xml:"defaultLanguage,omitempty"`
+	BriefInformation                                ObjectKeyValueType                `xml:"briefInformation,omitempty"`
+	DetailedInformation                             ObjectKeyValueType                `xml:"detailedInformation,omitempty"`
+	Splash                                          string                            `xml:"splash,omitempty"`
+	Copyright                                       ObjectKeyValueType                `xml:"copyright,omitempty"`
+	VendorInformationAddress                        ObjectKeyValueType                `xml:"vendorInformationAddress,omitempty"`
+	ConfigurationInformationAddress                 ObjectKeyValueType                `xml:"configurationInformationAddress,omitempty"`
+	DataLockControlMode                             string                            `xml:"dataLockControlMode,omitempty"`
+	ObjectAutonumerationMode                        string                            `xml:"objectAutonumerationMode,omitempty"`
+	SynchronousExtensionAndAddInCallUseMode         string                            `xml:"synchronousExtensionAndAddInCallUseMode,omitempty"`
+	SynchronousPlatformExtensionAndAddInCallUseMode string                            `xml:"synchronousPlatformExtensionAndAddInCallUseMode,omitempty"`
+	ModalityUseMode                                 string                            `xml:"modalityUseMode,omitempty"`
+	InterfaceCompatibilityMode                      string                            `xml:"interfaceCompatibilityMode,omitempty"`
+	CompatibilityMode                               string                            `xml:"compatibilityMode,omitempty"`
 }
 
 type ConfigurationChildObjects struct {

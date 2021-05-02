@@ -78,11 +78,13 @@ func Test(t *testing.T) {
 			encoder := xml.NewEncoder(xmlFile)
 			encoder.Indent("", "  ")
 			err = encoder.Encode(&got)
+			xmlFile.WriteString("\n")
+
 			if err != nil {
 				t.Fatalf("Ошибка тестирования %v", got)
 				return
 			}
-				require.True(t, fileCompare(t, filepath.Join(tt.dir, "Configuration", "Configuration.mdo"), xmlFile.Name()) )
+			require.True(t, fileCompare(t, filepath.Join(tt.dir, "Configuration", "Configuration.mdo"), xmlFile.Name()))
 		})
 
 	}
