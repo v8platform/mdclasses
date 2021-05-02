@@ -21,10 +21,10 @@ type ContainedObject struct {
 }
 
 type Language struct {
-	Uuid         string             `xml:"uuid,attr"`
-	Name         string             `xml:"name"`
-	Synonym      ObjectKeyValueType `xml:"synonym"`
-	LanguageCode string             `xml:"languageCode"`
+	Uuid         string               `xml:"uuid,attr"`
+	Name         string               `xml:"name"`
+	Synonym      []ObjectKeyValueType `xml:"synonym"`
+	LanguageCode string               `xml:"languageCode"`
 }
 
 type Configuration struct {
