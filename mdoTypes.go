@@ -78,6 +78,14 @@ func (m MDOType) Group() string {
 		return "CommonTemplates"
 	case COMMON_MODULE:
 		return "CommonModules"
+	case FORM:
+		return "Forms"
+	//case COMMON_MODULE:
+	//	return "CommonModules"
+	//case COMMON_MODULE:
+	//	return "CommonModules"
+	//case COMMON_MODULE:
+	//	return "CommonModules"
 	default:
 		return ""
 	}
@@ -115,6 +123,10 @@ func (m MDOTypeRef) Empty() bool {
 }
 
 func (m MDOTypeRef) String() string {
+
+	if len(m.ref) == 0 {
+		return ""
+	}
 
 	if m.parent == nil || m.parent.Empty() {
 		return fmt.Sprintf("%s.%s", m.mdoType, m.ref)

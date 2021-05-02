@@ -8,12 +8,12 @@ import (
 var log = logos.New("github.com/v8platform/mdclasses").Sugar()
 
 type MDOBaseType struct {
-	Name    string             `xml:"name"`
-	Synonym ObjectKeyValueType `xml:"synonym"`
-	Uuid    string             `xml:"uuid,attr"`
-	Mdclass xml.Attr           `xml:"mdclass,attr"`
-	Xsi     xml.Attr           `xml:"xsi,attr"`
-	Core    xml.Attr           `xml:"core,attr"`
+	Name    string               `xml:"name"`
+	Synonym []ObjectKeyValueType `xml:"synonym,allowempty"`
+	Uuid    string               `xml:"uuid,attr"`
+	Mdclass xml.Attr             `xml:"mdclass,attr"`
+	Xsi     xml.Attr             `xml:"xsi,attr"`
+	Core    xml.Attr             `xml:"core,attr"`
 }
 type ContainedObject struct {
 	ClassId  string `xml:"classId,attr,allowempty"`
@@ -92,7 +92,7 @@ type MobileApplicationFunctionalities struct {
 type ConfigurationProperties struct {
 	ConfigurationExtensionCompatibilityMode string                           `xml:"configurationExtensionCompatibilityMode"`
 	DefaultRunMode                          string                           `xml:"defaultRunMode"`
-	UsePurposes                             string                           `xml:"usePurposes"`
+	UsePurposes                             []string                         `xml:"usePurposes"`
 	ScriptVariant                           string                           `xml:"scriptVariant"`
 	DefaultRoles                            MDOTypeRefList                   `xml:"defaultRoles"`
 	Vendor                                  string                           `xml:"vendor"`
@@ -125,6 +125,7 @@ type ConfigurationProperties struct {
 type ConfigurationChildObjects struct {
 	Subsystems                  MDOTypeRefList `xml:"subsystems"`
 	StyleItems                  MDOTypeRefList `xml:"styleItems"`
+	Styles                      MDOTypeRefList `xml:"styles"`
 	CommonPictures              MDOTypeRefList `xml:"commonPictures"`
 	SessionParameters           MDOTypeRefList `xml:"sessionParameters"`
 	Roles                       MDOTypeRefList `xml:"roles"`
@@ -150,6 +151,7 @@ type ConfigurationChildObjects struct {
 	Catalogs                    MDOTypeRefList `xml:"catalogs"`
 	Documents                   MDOTypeRefList `xml:"documents"`
 	DocumentNumerators          MDOTypeRefList `xml:"documentNumerators"`
+	Sequences                   MDOTypeRefList `xml:"sequences"`
 	DocumentJournals            MDOTypeRefList `xml:"documentJournals"`
 	Enums                       MDOTypeRefList `xml:"enums"`
 	Reports                     MDOTypeRefList `xml:"reports"`
@@ -157,6 +159,10 @@ type ConfigurationChildObjects struct {
 	InformationRegisters        MDOTypeRefList `xml:"informationRegisters"`
 	AccumulationRegisters       MDOTypeRefList `xml:"accumulationRegisters"`
 	ChartsOfCharacteristicTypes MDOTypeRefList `xml:"chartsOfCharacteristicTypes"`
+	ChartsOfAccounts            MDOTypeRefList `xml:"chartsOfAccounts"`
+	AccountingRegisters         MDOTypeRefList `xml:"accountingRegisters"`
+	ChartsOfCalculationTypes    MDOTypeRefList `xml:"chartsOfCalculationTypes"`
+	CalculationRegisters        MDOTypeRefList `xml:"calculationRegisters"`
 	BusinessProcesses           MDOTypeRefList `xml:"businessProcesses"`
 	Tasks                       MDOTypeRefList `xml:"tasks"`
 	WebService                  MDOTypeRefList `xml:"serviceService"`
