@@ -29,11 +29,10 @@ type Language struct {
 
 type Configuration struct {
 	MDOBaseType
-	ConfigurationProperties
-	ConfigurationChildObjects
 
 	XMLName          xml.Name          `xml:"mdclass Configuration"`
 	ContainedObjects []ContainedObject `xml:"containedObjects,allowempty"`
+	ConfigurationProperties
 
 	Languages  []*Language  `xml:"languages"`
 	Subsystems []*Subsystem `xml:"-"`
@@ -74,8 +73,9 @@ type Configuration struct {
 	// ChartsOfCharacteristicTypes []MDOTypeRef `xml:"chartsOfCharacteristicTypes"`
 	// BusinessProcesses           []MDOTypeRef `xml:"businessProcesses"`
 	// Tasks                       []MDOTypeRef `xml:"tasks"`
+	ConfigurationChildObjects
 
-	idxMDOType idxMDOTypeRef
+	idxMDOType idxMDOTypeRef `xml:"-"`
 }
 
 type idxMDOTypeRef map[MDOTypeRef]interface{}
