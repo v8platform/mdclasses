@@ -69,17 +69,17 @@ func TestMDOTypeRefExist(t *testing.T) {
 		parent:  nil,
 		raw:     "Subsystem.ПерваяПодсистема",
 	}
-	require.True(t,got.ConfigurationChildObjects.Subsystems.Exist(&subsystem))
+	require.True(t, got.ConfigurationChildObjects.Subsystems.Exist(subsystem))
 }
 
-func TestMDOTypeRefGetIndex(t *testing.T)  {
+func TestMDOTypeRefGetIndex(t *testing.T) {
 	got, err := UnpackConfiguration("tests/metadata/edt/src")
 	if err != nil {
 		t.Errorf("UnpackConfiguration() error = %v", err)
 		return
 	}
-	index, err := got.ConfigurationChildObjects.Subsystems.GetIndex("Subsystem.ВтораяПодсистема")
-	if err != nil {
+	index := got.ConfigurationChildObjects.Subsystems.GetIndex("Subsystem.ВтораяПодсистема")
+	if index < 0 {
 		t.Errorf("Ошибка поиска дочернего объекта = %v", err)
 	}
 	require.True(t, index == 1)
