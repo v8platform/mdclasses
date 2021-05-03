@@ -94,12 +94,12 @@ type ConfigurationProperties struct {
 	DefaultRunMode                                  string                            `xml:"defaultRunMode,omitempty"`
 	UsePurposes                                     []string                          `xml:"usePurposes,omitempty"`
 	ScriptVariant                                   string                            `xml:"scriptVariant,omitempty"`
+	DefaultRoles                                    MDOTypeRefList                    `xml:"defaultRoles,omitempty"`
 	Vendor                                          string                            `xml:"vendor,omitempty"`
 	Version                                         string                            `xml:"version,omitempty"`
 	UpdateCatalogAddress                            string                            `xml:"updateCatalogAddress,omitempty"`
 	UseManagedFormInOrdinaryApplication             string                            `xml:"useManagedFormInOrdinaryApplication,omitempty"`
 	UseOrdinaryFormInManagedApplication             string                            `xml:"useOrdinaryFormInManagedApplication,omitempty"`
-	DefaultRoles                                    MDOTypeRefList                    `xml:"defaultRoles,omitempty"`
 	ReportsVariantsStorage                          string                            `xml:"reportsVariantsStorage,omitempty"`
 	DefaultReportForm                               MDOTypeRef                        `xml:"defaultReportForm,omitempty"`
 	DefaultReportVariantForm                        MDOTypeRef                        `xml:"defaultReportVariantForm,omitempty"`
@@ -107,11 +107,11 @@ type ConfigurationProperties struct {
 	DefaultSearchForm                               MDOTypeRef                        `xml:"defaultSearchForm,omitempty"`
 	UsedMobileApplicationFunctionalities            *MobileApplicationFunctionalities `xml:"usedMobileApplicationFunctionalities,omitempty"`
 	RequiredMobileApplicationPermissions            []string                          `xml:"requiredMobileApplicationPermissions,omitempty"`
-	MainSectionPicture                              string                            `xml:"mainSectionPicture,omitempty"`
+	MainSectionPicture                              string                            `xml:"mainSectionPicture,allowempty"`
 	DefaultLanguage                                 MDOTypeRef                        `xml:"defaultLanguage,omitempty"`
 	BriefInformation                                ObjectKeyValueType                `xml:"briefInformation,omitempty"`
 	DetailedInformation                             ObjectKeyValueType                `xml:"detailedInformation,omitempty"`
-	Splash                                          string                            `xml:"splash,omitempty"`
+	Splash                                          string                            `xml:"splash,allowempty"`
 	Copyright                                       ObjectKeyValueType                `xml:"copyright,omitempty"`
 	VendorInformationAddress                        ObjectKeyValueType                `xml:"vendorInformationAddress,omitempty"`
 	ConfigurationInformationAddress                 ObjectKeyValueType                `xml:"configurationInformationAddress,omitempty"`

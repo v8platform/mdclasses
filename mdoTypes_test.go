@@ -1,6 +1,7 @@
 package mdclasses
 
 import (
+	"github.com/stretchr/testify/require"
 	"reflect"
 	"testing"
 )
@@ -54,4 +55,47 @@ func TestNewMDOTypeRefFromString(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestMDOTypeRefExist(t *testing.T) {
+	got, err := UnpackConfiguration("tests/metadata/edt/src")
+	if err != nil {
+		t.Errorf("UnpackConfiguration() error = %v", err)
+		return
+	}
+	subsystem := MDOTypeRef{
+		mdoType: "Subsystem",
+		ref:     "ПерваяПодсистема",
+		parent:  nil,
+		raw:     "Subsystem.ПерваяПодсистема",
+	}
+	require.True(t,got.ConfigurationChildObjects.Subsystems.Exist(&subsystem))
+}
+
+func TestMDOTypeRefGetIndex(t *testing.T)  {
+	got, err := UnpackConfiguration("tests/metadata/edt/src")
+	if err != nil {
+		t.Errorf("UnpackConfiguration() error = %v", err)
+		return
+	}
+	index, err := got.ConfigurationChildObjects.Subsystems.GetIndex("Subsystem.ВтораяПодсистема")
+	if err != nil {
+		t.Errorf("Ошибка поиска дочернего объекта = %v", err)
+	}
+	require.True(t, index == 1)
+}
+
+func TestMDOTypeRefDelete(t *testing.T) {
+	got, err := UnpackConfiguration("tests/metadata/edt/src")
+	if err != nil {
+		t.Errorf("UnpackConfiguration() error = %v", err)
+		return
+	}
+	ref := got.ConfigurationChildObjects.Subsystems
+	newChild, err := ref.Delete(1)
+	if err != nil {
+		t.Errorf("Ошибка поиска дочернего объекта = %v", err)
+	}
+	got.ConfigurationChildObjects.Subsystems = newChild
+	require.True(t, len(got.ConfigurationChildObjects.Subsystems) == 1)
 }

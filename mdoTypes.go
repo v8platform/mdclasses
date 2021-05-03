@@ -193,6 +193,47 @@ func (e MDOTypeRefList) Unpack(cfg UnpackConfig, value interface{}) error {
 	return nil
 }
 
+// Проверяет существование объекта.
+func (e MDOTypeRefList) Exist(typeRef *MDOTypeRef) bool {
+	for _, t := range e {
+		if typeRef.raw != "" && t.raw == typeRef.raw {
+			return true
+		}
+		if t.mdoType == typeRef.Type() && t.ref == typeRef.Ref() {
+			return true
+		}
+	}
+	return false
+}
+
+// Возвращает индекс элемента в массиве
+func (e MDOTypeRefList) GetIndex(raw string) (int, error) {
+	for i,t := range e{
+		if raw != "" && t.raw == raw {
+			return i, nil
+		}
+	}
+	return 0, errors.New(fmt.Sprintf("Object not contains %s", raw))
+}
+
+
+// Удаляет элемент по индексу
+func (e MDOTypeRefList) Delete(index int) ([]MDOTypeRef, error) {
+	if len(e) > index {
+		return RemoveElement(e, index), nil
+	}
+	return e, errors.New(fmt.Sprintf("Error delete object from index %v", index))
+}
+
+func RemoveElement(list []MDOTypeRef, i int) []MDOTypeRef {
+	if i < len(list)-1 {
+		list = append(list[:i], list[i+1:]...)
+	} else {
+		list = list[:i]
+	}
+	return list
+}
+
 func reflectAlloc(typ reflect.Type) reflect.Value {
 	if typ.Kind() == reflect.Ptr {
 		return reflect.New(typ.Elem())
