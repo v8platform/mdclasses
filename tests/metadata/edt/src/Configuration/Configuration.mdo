@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Configuration xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="46c7c1d0-b04d-4295-9b04-ae3207c18d29">
   <name>Конфигурация</name>
+  <synonym>
+    <key>ru</key>
+    <value>Управление торговлей, редакция 11</value>
+  </synonym>
   <containedObjects classId="9cd510cd-abfc-11d4-9434-004095e12fc7" objectId="6b9cfff9-b36e-4dc0-947d-9ae7d8eafbff"/>
   <containedObjects classId="9fcd25a0-4822-11d4-9414-008048da11f9" objectId="7cf1638d-e924-4cda-9c28-e32ac23e9bd7"/>
   <containedObjects classId="e3687481-0a87-462c-a166-9f34594f9bba" objectId="3982f5e9-e852-4ca4-bac4-0dcb8fc6119a"/>

@@ -29,8 +29,9 @@ type Language struct {
 type Configuration struct {
 	MDOBaseType
 
-	XMLName          xml.Name          `xml:"mdclass Configuration"`
-	ContainedObjects []ContainedObject `xml:"containedObjects,allowempty"`
+	XMLName          xml.Name           `xml:"mdclass Configuration"`
+	Synonym          ObjectKeyValueType `xml:"synonym"`
+	ContainedObjects []ContainedObject  `xml:"containedObjects,allowempty"`
 	ConfigurationProperties
 
 	Languages  []*Language  `xml:"languages"`
