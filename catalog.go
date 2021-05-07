@@ -10,6 +10,7 @@ type Catalog struct {
 	FullTextSearchOnInputByString string              `xml:"fullTextSearchOnInputByString"`
 	StandardAttributes            []StandardAttribute `xml:"standardAttributes"`
 	CreateOnInput                 string              `xml:"createOnInput"`
+	Help                          Help                `xml:"help"`
 	DataLockControlMode           string              `xml:"dataLockControlMode"`
 	FullTextSearch                string              `xml:"fullTextSearch"`
 	ObjectPresentation            ObjectKeyValueType  `xml:"objectPresentation"`
