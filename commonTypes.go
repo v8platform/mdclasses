@@ -81,3 +81,9 @@ type MDOProducedTypes struct {
 	ListType      ObjectTypeRef `xml:"listType"`
 	ManagerType   ObjectTypeRef `xml:"managerType"`
 }
+
+type Help struct {
+	Pages struct {
+		Lang string `xml:"lang"`
+	} `xml:"pages"`
+}

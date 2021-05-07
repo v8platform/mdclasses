@@ -66,11 +66,11 @@ type Configuration struct {
 	// DocumentNumerators          []MDOTypeRef `xml:"documentNumerators"`
 	// DocumentJournals            []MDOTypeRef `xml:"documentJournals"`
 	// Enums                       []MDOTypeRef `xml:"enums"`
-	// Reports                     []MDOTypeRef `xml:"reports"`
+	Reports []*Report `xml:"-"`
 	// DataProcessors              []MDOTypeRef `xml:"dataProcessors"`
-	// InformationRegisters        []MDOTypeRef `xml:"informationRegisters"`
+	InformationRegisters []*InformationRegister `xml:"-"`
 	// AccumulationRegisters       []MDOTypeRef `xml:"accumulationRegisters"`
-	// ChartsOfCharacteristicTypes []MDOTypeRef `xml:"chartsOfCharacteristicTypes"`
+	ChartsOfCharacteristicTypes []*ChartOfCharacteristicType `xml:"-"`
 	// BusinessProcesses           []MDOTypeRef `xml:"businessProcesses"`
 	// Tasks                       []MDOTypeRef `xml:"tasks"`
 	ConfigurationChildObjects
@@ -111,7 +111,7 @@ type ConfigurationProperties struct {
 	DefaultLanguage                                 MDOTypeRef                        `xml:"defaultLanguage,omitempty"`
 	BriefInformation                                ObjectKeyValueType                `xml:"briefInformation,omitempty"`
 	DetailedInformation                             ObjectKeyValueType                `xml:"detailedInformation,omitempty"`
-	Splash                                          string                            `xml:"splash,allowempty"`
+	Splash                                          string                            `xml:"splash,omitempty,allowempty"`
 	Copyright                                       ObjectKeyValueType                `xml:"copyright,omitempty"`
 	VendorInformationAddress                        ObjectKeyValueType                `xml:"vendorInformationAddress,omitempty"`
 	ConfigurationInformationAddress                 ObjectKeyValueType                `xml:"configurationInformationAddress,omitempty"`
@@ -199,10 +199,26 @@ func (conf *Configuration) Unpack(cfg UnpackConfig) error {
 		return err
 	}
 
+	err = conf.ConfigurationChildObjects.Reports.Unpack(cfg, &conf.Reports)
+	if err != nil {
+		return err
+	}
+
+	err = conf.ConfigurationChildObjects.InformationRegisters.Unpack(cfg, &conf.InformationRegisters)
+	if err != nil {
+		return err
+	}
+
+	err = conf.ConfigurationChildObjects.ChartsOfCharacteristicTypes.Unpack(cfg, &conf.ChartsOfCharacteristicTypes)
+	if err != nil {
+		return err
+	}
+
 	err = conf.ConfigurationChildObjects.CommonModules.Unpack(cfg, &conf.CommonModules)
 	if err != nil {
 		return err
 	}
+
 	// for _, mdoTypeRef := range conf.ConfigurationChildObjects.Subsystems {
 	//
 	// 	subsystem := Subsystem{}

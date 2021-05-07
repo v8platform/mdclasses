@@ -80,6 +80,12 @@ func (m MDOType) Group() string {
 		return "CommonModules"
 	case FORM:
 		return "Forms"
+	case REPORT:
+		return "Reports"
+	case INFORMATION_REGISTER:
+		return "InformationRegisters"
+	case CHART_OF_CHARACTERISTIC_TYPES:
+		return "ChartsOfCharacteristicTypes"
 	//case COMMON_MODULE:
 	//	return "CommonModules"
 	//case COMMON_MODULE:

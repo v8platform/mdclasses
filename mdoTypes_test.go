@@ -99,3 +99,15 @@ func TestMDOTypeRefDelete(t *testing.T) {
 	got.ConfigurationChildObjects.Subsystems = newChild
 	require.True(t, len(got.ConfigurationChildObjects.Subsystems) == 1)
 }
+
+func TestMDOTypeRefCreate(t *testing.T) {
+	got, err := UnpackConfiguration("tests/metadata/edt/src")
+	if err != nil {
+		t.Errorf("UnpackConfiguration() error = %v", err)
+		return
+	}
+
+	MDOTypeRef := NewMDOTypeRefFromString("Subsystem.NewSubsystem")
+	got.ConfigurationChildObjects.Subsystems = append(got.ConfigurationChildObjects.Subsystems, MDOTypeRef)
+	require.True(t, true)
+}
