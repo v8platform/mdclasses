@@ -30,7 +30,7 @@ type Configuration struct {
 	MDOBaseType
 
 	XMLName          xml.Name           `xml:"mdclass Configuration"`
-	Synonym          ObjectKeyValueType `xml:"synonym"`
+	Synonym          []ObjectKeyValueType `xml:"synonym"`
 	ContainedObjects []ContainedObject  `xml:"containedObjects,allowempty"`
 	ConfigurationProperties
 
