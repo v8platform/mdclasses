@@ -201,25 +201,13 @@ func (e MDOTypeRefList) Unpack(cfg UnpackConfig, value interface{}) error {
 
 // Проверяет существование объекта.
 func (e MDOTypeRefList) Exist(typeRef MDOTypeRef) bool {
-
-	if typeRef.raw != "" {
-		return e.GetIndex(typeRef.raw) > -1
-	}
-	if typeRef.mdoType != "" && typeRef.ref != "" {
-		for _, t := range e {
-			if t.mdoType == typeRef.Type() && t.ref == typeRef.Ref() {
-				return true
-			}
-		}
-	}
-
-	return false
+	return e.GetIndex(typeRef) > -1
 }
 
 // Возвращает индекс элемента в массиве
-func (e MDOTypeRefList) GetIndex(raw string) int {
+func (e MDOTypeRefList) GetIndex(typeRef MDOTypeRef) int {
 	for i, t := range e {
-		if raw != "" && t.raw == raw {
+		if t.mdoType == typeRef.mdoType && t.ref == typeRef.ref {
 			return i
 		}
 	}
