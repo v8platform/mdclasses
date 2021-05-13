@@ -30,7 +30,7 @@ type Configuration struct {
 	MDOBaseType
 
 	XMLName          xml.Name           `xml:"mdclass Configuration"`
-	Synonym          ObjectKeyValueType `xml:"synonym"`
+	Synonym          []ObjectKeyValueType `xml:"synonym"`
 	ContainedObjects []ContainedObject  `xml:"containedObjects,allowempty"`
 	ConfigurationProperties
 
@@ -66,11 +66,11 @@ type Configuration struct {
 	// DocumentNumerators          []MDOTypeRef `xml:"documentNumerators"`
 	// DocumentJournals            []MDOTypeRef `xml:"documentJournals"`
 	// Enums                       []MDOTypeRef `xml:"enums"`
-	// Reports                     []MDOTypeRef `xml:"reports"`
+	Reports []*Report `xml:"-"`
 	// DataProcessors              []MDOTypeRef `xml:"dataProcessors"`
-	// InformationRegisters        []MDOTypeRef `xml:"informationRegisters"`
+	InformationRegisters []*InformationRegister `xml:"-"`
 	// AccumulationRegisters       []MDOTypeRef `xml:"accumulationRegisters"`
-	// ChartsOfCharacteristicTypes []MDOTypeRef `xml:"chartsOfCharacteristicTypes"`
+	ChartsOfCharacteristicTypes []*ChartOfCharacteristicType `xml:"-"`
 	// BusinessProcesses           []MDOTypeRef `xml:"businessProcesses"`
 	// Tasks                       []MDOTypeRef `xml:"tasks"`
 	ConfigurationChildObjects
@@ -94,12 +94,12 @@ type ConfigurationProperties struct {
 	DefaultRunMode                                  string                            `xml:"defaultRunMode,omitempty"`
 	UsePurposes                                     []string                          `xml:"usePurposes,omitempty"`
 	ScriptVariant                                   string                            `xml:"scriptVariant,omitempty"`
+	DefaultRoles                                    MDOTypeRefList                    `xml:"defaultRoles,omitempty"`
 	Vendor                                          string                            `xml:"vendor,omitempty"`
 	Version                                         string                            `xml:"version,omitempty"`
 	UpdateCatalogAddress                            string                            `xml:"updateCatalogAddress,omitempty"`
 	UseManagedFormInOrdinaryApplication             string                            `xml:"useManagedFormInOrdinaryApplication,omitempty"`
 	UseOrdinaryFormInManagedApplication             string                            `xml:"useOrdinaryFormInManagedApplication,omitempty"`
-	DefaultRoles                                    MDOTypeRefList                    `xml:"defaultRoles,omitempty"`
 	ReportsVariantsStorage                          string                            `xml:"reportsVariantsStorage,omitempty"`
 	DefaultReportForm                               MDOTypeRef                        `xml:"defaultReportForm,omitempty"`
 	DefaultReportVariantForm                        MDOTypeRef                        `xml:"defaultReportVariantForm,omitempty"`
@@ -107,11 +107,11 @@ type ConfigurationProperties struct {
 	DefaultSearchForm                               MDOTypeRef                        `xml:"defaultSearchForm,omitempty"`
 	UsedMobileApplicationFunctionalities            *MobileApplicationFunctionalities `xml:"usedMobileApplicationFunctionalities,omitempty"`
 	RequiredMobileApplicationPermissions            []string                          `xml:"requiredMobileApplicationPermissions,omitempty"`
-	MainSectionPicture                              string                            `xml:"mainSectionPicture,omitempty"`
+	MainSectionPicture                              string                            `xml:"mainSectionPicture,allowempty"`
 	DefaultLanguage                                 MDOTypeRef                        `xml:"defaultLanguage,omitempty"`
 	BriefInformation                                ObjectKeyValueType                `xml:"briefInformation,omitempty"`
 	DetailedInformation                             ObjectKeyValueType                `xml:"detailedInformation,omitempty"`
-	Splash                                          string                            `xml:"splash,omitempty"`
+	Splash                                          string                            `xml:"splash,omitempty,allowempty"`
 	Copyright                                       ObjectKeyValueType                `xml:"copyright,omitempty"`
 	VendorInformationAddress                        ObjectKeyValueType                `xml:"vendorInformationAddress,omitempty"`
 	ConfigurationInformationAddress                 ObjectKeyValueType                `xml:"configurationInformationAddress,omitempty"`
@@ -199,10 +199,26 @@ func (conf *Configuration) Unpack(cfg UnpackConfig) error {
 		return err
 	}
 
+	err = conf.ConfigurationChildObjects.Reports.Unpack(cfg, &conf.Reports)
+	if err != nil {
+		return err
+	}
+
+	err = conf.ConfigurationChildObjects.InformationRegisters.Unpack(cfg, &conf.InformationRegisters)
+	if err != nil {
+		return err
+	}
+
+	err = conf.ConfigurationChildObjects.ChartsOfCharacteristicTypes.Unpack(cfg, &conf.ChartsOfCharacteristicTypes)
+	if err != nil {
+		return err
+	}
+
 	err = conf.ConfigurationChildObjects.CommonModules.Unpack(cfg, &conf.CommonModules)
 	if err != nil {
 		return err
 	}
+
 	// for _, mdoTypeRef := range conf.ConfigurationChildObjects.Subsystems {
 	//
 	// 	subsystem := Subsystem{}

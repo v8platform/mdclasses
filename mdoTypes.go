@@ -80,6 +80,12 @@ func (m MDOType) Group() string {
 		return "CommonModules"
 	case FORM:
 		return "Forms"
+	case REPORT:
+		return "Reports"
+	case INFORMATION_REGISTER:
+		return "InformationRegisters"
+	case CHART_OF_CHARACTERISTIC_TYPES:
+		return "ChartsOfCharacteristicTypes"
 	//case COMMON_MODULE:
 	//	return "CommonModules"
 	//case COMMON_MODULE:
@@ -191,6 +197,38 @@ func (e MDOTypeRefList) Unpack(cfg UnpackConfig, value interface{}) error {
 	}
 
 	return nil
+}
+
+// Проверяет существование объекта.
+func (e MDOTypeRefList) Exist(typeRef MDOTypeRef) bool {
+	return e.GetIndex(typeRef) > -1
+}
+
+// Возвращает индекс элемента в массиве
+func (e MDOTypeRefList) GetIndex(typeRef MDOTypeRef) int {
+	for i, t := range e {
+		if t.mdoType == typeRef.mdoType && t.ref == typeRef.ref {
+			return i
+		}
+	}
+	return -1
+}
+
+// Удаляет элемент по индексу
+func (e MDOTypeRefList) Delete(index int) ([]MDOTypeRef, error) {
+	if len(e) > index {
+		return removeElement(e, index), nil
+	}
+	return e, errors.New(fmt.Sprintf("Error delete object from index %v", index))
+}
+
+func removeElement(list []MDOTypeRef, i int) []MDOTypeRef {
+	if i < len(list)-1 {
+		list = append(list[:i], list[i+1:]...)
+	} else {
+		list = list[:i]
+	}
+	return list
 }
 
 func reflectAlloc(typ reflect.Type) reflect.Value {

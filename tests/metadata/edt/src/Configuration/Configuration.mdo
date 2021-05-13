@@ -16,9 +16,9 @@
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
   <scriptVariant>Russian</scriptVariant>
+  <defaultRoles>Role.Роль1</defaultRoles>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
-  <defaultRoles>Role.Роль1</defaultRoles>
   <requiredMobileApplicationPermissions>Multimedia</requiredMobileApplicationPermissions>
   <requiredMobileApplicationPermissions>Location</requiredMobileApplicationPermissions>
   <requiredMobileApplicationPermissions>Contacts</requiredMobileApplicationPermissions>
