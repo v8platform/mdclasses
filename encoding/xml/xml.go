@@ -1886,7 +1886,7 @@ var (
 	escLT   = []byte("&lt;")
 	escGT   = []byte("&gt;")
 	escTab  = []byte("&#x9;")
-	escNL   = []byte("&#xA;")
+	escNL   = []byte("\n")
 	escCR   = []byte("&#xD;")
 	escFFFD = []byte("\uFFFD") // Unicode replacement character
 )
@@ -1920,10 +1920,10 @@ func escapeText(w io.Writer, s []byte, escapeNewline bool) error {
 		case '\t':
 			esc = escTab
 		case '\n':
-			if !escapeNewline {
+			//if !escapeNewline {
 				continue
-			}
-			esc = escNL
+			//}
+			//esc = escNL
 		case '\r':
 			esc = escCR
 		default:

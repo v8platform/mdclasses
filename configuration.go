@@ -14,6 +14,8 @@ type MDOBaseType struct {
 	Core    xml.Attr `xml:"core,attr"`
 	Uuid    string   `xml:"uuid,attr"`
 }
+
+
 type ContainedObject struct {
 	ClassId  string `xml:"classId,attr,allowempty"`
 	ObjectId string `xml:"objectId,attr,allowempty"`
@@ -30,7 +32,7 @@ type Configuration struct {
 	MDOBaseType
 
 	XMLName          xml.Name           `xml:"mdclass Configuration"`
-	Synonym          []ObjectKeyValueType `xml:"synonym"`
+	Synonym          ObjectKeyValueType `xml:"synonym"`
 	ContainedObjects []ContainedObject  `xml:"containedObjects,allowempty"`
 	ConfigurationProperties
 
@@ -107,7 +109,7 @@ type ConfigurationProperties struct {
 	DefaultSearchForm                               MDOTypeRef                        `xml:"defaultSearchForm,omitempty"`
 	UsedMobileApplicationFunctionalities            *MobileApplicationFunctionalities `xml:"usedMobileApplicationFunctionalities,omitempty"`
 	RequiredMobileApplicationPermissions            []string                          `xml:"requiredMobileApplicationPermissions,omitempty"`
-	MainSectionPicture                              string                            `xml:"mainSectionPicture,allowempty"`
+	MainSectionPicture                              string                            `xml:"mainSectionPicture,allowempty,omitempty"`
 	DefaultLanguage                                 MDOTypeRef                        `xml:"defaultLanguage,omitempty"`
 	BriefInformation                                ObjectKeyValueType                `xml:"briefInformation,omitempty"`
 	DetailedInformation                             ObjectKeyValueType                `xml:"detailedInformation,omitempty"`

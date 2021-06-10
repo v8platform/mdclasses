@@ -78,13 +78,7 @@ func TestMDOTypeRefGetIndex(t *testing.T) {
 		t.Errorf("UnpackConfiguration() error = %v", err)
 		return
 	}
-	mdo := MDOTypeRef{
-		mdoType: "Subsystem",
-		ref:     "ВтораяПодсистема",
-		parent:  nil,
-		raw:     "",
-	}
-	index := got.ConfigurationChildObjects.Subsystems.GetIndex(mdo)
+	index := got.ConfigurationChildObjects.Subsystems.GetIndex("Subsystem.ВтораяПодсистема")
 	if index < 0 {
 		t.Errorf("Ошибка поиска дочернего объекта = %v", err)
 	}

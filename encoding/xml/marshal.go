@@ -369,11 +369,11 @@ func (p *printer) createAttrPrefix(url string) string {
 	p.attrPrefix[url] = prefix
 	p.attrNS[prefix] = url
 
-	p.WriteString(`xmlns:`)
-	p.WriteString(prefix)
-	p.WriteString(`="`)
-	EscapeText(p, []byte(url))
-	p.WriteString(`" `)
+	//p.WriteString(`xmlns:`)
+	//p.WriteString(prefix)
+	//p.WriteString(`="`)
+	//EscapeText(p, []byte(url))
+	//p.WriteString(`" `)
 
 	p.prefixes = append(p.prefixes, prefix)
 
@@ -414,7 +414,7 @@ var (
 
 // marshalValue writes one or more XML elements representing val.
 // If val was obtained from a struct field, finfo must have its details.
-func (p *printer) marshalValue(val reflect.Value, finfo *fieldInfo, startTemplate *StartElement) error {
+func (p *printer) marshalValue(val reflect.Value, finfo *fieldInfo, startTemplate *StartElement) error{
 	if startTemplate != nil && startTemplate.Name.Local == "" {
 		return fmt.Errorf("xml: EncodeElement of StartElement with missing name")
 	}
@@ -422,14 +422,23 @@ func (p *printer) marshalValue(val reflect.Value, finfo *fieldInfo, startTemplat
 	if !val.IsValid() {
 		return nil
 	}
-	if finfo != nil && finfo.flags&fOmitEmpty != 0 && isEmptyValue(val) {
+	// Пропускаем пустые поля
+	emptyValue := isEmptyValue(val)
+
+	if finfo != nil && finfo.flags&fOmitEmpty != 0 && emptyValue {
 		return nil
 	}
 
+	// Сразу закрываем тег, если свойство пустое
 	emptyTag := false
-	//if finfo != nil && finfo.flags&fAllowEmpty != 0 && isEmptyValue(val) {
-	if finfo != nil && finfo.flags&fAllowEmpty != 0 {
-		emptyTag = true
+	if finfo != nil && finfo.flags&fAllowEmpty != 0  {
+		// Нужно разобраться как закрывать пустые блоки с атрибутами
+		if emptyValue {
+			emptyTag = true
+		}else {
+			emptyTag = true
+		}
+
 	}
 
 	// Drill into interfaces and pointers.
@@ -990,6 +999,10 @@ func (p *printer) marshalStruct(tinfo *typeInfo, val reflect.Value) error {
 		if err := p.marshalValue(vf, finfo, nil); err != nil {
 			return err
 		}
+		// не пересносится закрывающий тег в некоторых блоках
+		if finfo.flags&fAllowEmpty != 0 && len(tinfo.fields) - 1 == i {
+			p.WriteString("")
+		}
 	}
 	s.trim(nil)
 	return p.cachedWriteError()
@@ -1093,6 +1106,7 @@ func isEmptyValue(v reflect.Value) bool {
 		if v.CanInterface() && v.Type().Implements(nullableType) {
 			return v.Interface().(Nullable).IsNull()
 		}
+
 	case reflect.Interface, reflect.Ptr:
 		return v.IsNil()
 	}

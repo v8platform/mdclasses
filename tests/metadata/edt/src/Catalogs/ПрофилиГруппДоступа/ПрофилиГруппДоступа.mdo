@@ -1,0 +1,1089 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f31f3dab-5796-47ac-a54d-3081f8cad817">
+  <producedTypes>
+    <objectType typeId="44600bf4-9d74-4786-9f6b-e7484f53af5d" valueTypeId="bc36cccd-4727-4bdb-9f9b-6a181a74aeac"/>
+    <refType typeId="f223bc15-d6a5-4ad5-9a54-2b0ef1599929" valueTypeId="3b4e5a44-81e9-46a2-b2bc-a7724d49518a"/>
+    <selectionType typeId="0b2e4efa-a9b6-4d6a-a262-a51625735dc2" valueTypeId="ec991f76-b24a-4895-acec-45b915cbb422"/>
+    <listType typeId="6c6dc10e-c5a3-4f7c-97a4-64121b78fd1d" valueTypeId="8fbe4e6a-2bbe-46a6-bebd-777a7cab0f5e"/>
+    <managerType typeId="502a0b37-d721-49b3-8986-c373e526e041" valueTypeId="335b4f5d-db39-4d6c-aa4b-effdbddc81d0"/>
+  </producedTypes>
+  <name>ПрофилиГруппДоступа</name>
+  <synonym>
+    <key>ru</key>
+    <value>Профили групп доступа</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.ПрофилиГруппДоступа.StandardAttribute.Description</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>PredefinedDataName</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Predefined</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Ref</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>DeletionMark</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>IsFolder</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Owner</name>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Parent</name>
+    <synonym>
+      <key>ru</key>
+      <value>Группа (папка)</value>
+    </synonym>
+    <toolTip>
+      <key>ru</key>
+      <value>Группа (папка), объединяющая профили для удобства поиска</value>
+    </toolTip>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:ReferenceValue">
+      <value>Catalog.ПрофилиГруппДоступа.EmptyRef</value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Description</name>
+    <toolTip>
+      <key>ru</key>
+      <value>Наименование профиля групп доступа</value>
+    </toolTip>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Code</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <createOnInput>Use</createOnInput>
+  <includeHelpInContents>true</includeHelpInContents>
+  <help>
+    <pages>
+      <lang>ru</lang>
+    </pages>
+  </help>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>ru</key>
+    <value>Профиль групп доступа</value>
+  </objectPresentation>
+  <hierarchical>true</hierarchical>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <descriptionLength>150</descriptionLength>
+  <codeType>String</codeType>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <predefined>
+    <items id="cf963903-6960-4958-a5d4-886894b6ec8b">
+      <name>АдминистрированиеИНСИ</name>
+      <description>Администрирование и НСИ</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="6c4b0307-43a4-4141-9c35-3dd7e9586d41">
+        <name>Администратор</name>
+        <description>Администратор</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="101d8475-84ef-4d02-b6d1-b026baba0ccc">
+        <name>ОтветственныйЗаВедениеНоменклатуры</name>
+        <description>Ответственный за ведение номенклатуры (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="932c3320-f64e-4f35-a8a0-47e9727c0b2c">
+        <name>ОтветственныйЗаВедениеПартнеров</name>
+        <description>Ответственный за ведение партнеров (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="6100e47d-25bf-4fe2-a7e5-9e357fd3bee9">
+        <name>ОтветственныйЗаВедениеФизлиц</name>
+        <description>Ответственный за ведение физических лиц (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="4871ded3-fdd7-4616-a7fd-c373544d7af5">
+        <name>ОтветственныйЗаВедениеОбъектовЭксплуатации</name>
+        <description>Ответственный за ведение объектов эксплуатации (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+    </items>
+    <items id="95029120-7f54-4e7f-8546-f76e05dc46c5">
+      <name>Бюджетирование</name>
+      <description>Бюджетирование</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="53a7d9c2-0f28-44e0-832e-ee646a4f07d8">
+        <name>АдминистраторБюджетнойМодели</name>
+        <description>Администратор бюджетной модели (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="42bc07c9-a248-47a3-833e-0bc334a551df">
+        <name>ИсполнительБюджетногоПроцесса</name>
+        <description>Исполнитель бюджетного процесса (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="003e5213-36fb-4fa1-b63b-5da5148276fd">
+        <name>КонтролерБюджетирования</name>
+        <description>Контролер бюджетирования (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="48579fb7-a32f-479d-a3cd-d861e922e8b2">
+        <name>КоординаторБюджетирования</name>
+        <description>Координатор бюджетирования (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="751a1d40-4c4a-4ab2-a05c-d27ee8f5b51a">
+        <name>УправлениеЛимитамиПоДаннымБюджетирования</name>
+        <description>Управление лимитами по данным бюджетирования (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+    </items>
+    <items id="f7af7d17-a212-466b-8348-b94e2d6b84a7">
+      <name>ГосударственныеИнформационныеСистемы</name>
+      <description>Государственные информационные системы</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="a339784d-176e-44f0-9083-4e00240f598e">
+        <name>ВетеринарныйВрач</name>
+        <description>Ветеринарный врач</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+    </items>
+    <items id="1bfb3e5e-dfd4-4f01-a39b-ebb61460edf4">
+      <name>ЗакупкиИЗапасы</name>
+      <description>Закупки и запасы</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="ea6bc964-d923-4a65-960d-c6a1be849254">
+        <name>ДиспетчерСборкиИКурьерскойДоставки</name>
+        <description>Диспетчер сборки и курьерской доставки</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="28f1fe22-299d-4135-ac9f-fe338ce51571">
+        <name>Кладовщик</name>
+        <description>Кладовщик</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="12bb4321-60bb-4bbd-a1fc-4c84fb3c1133">
+        <name>МенеджерПоЗакупкам</name>
+        <description>Менеджер по закупкам</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="e5d97caa-7019-44d2-b36e-7b71f6133219">
+        <name>МенеджерПоОбеспечениюПотребностей</name>
+        <description>Менеджер по обеспечению потребностей</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="54aa0dd2-9cb3-4b7c-93ca-fa1495d6be17">
+        <name>ПользовательМобильногоРабочегоМестаСборкиИКурьерскойДоставки</name>
+        <description>Пользователь мобильного рабочего места сборки и курьерской доставки</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="d709cde6-925c-4497-997f-f3dd0870ffee">
+        <name>РаботникСклада</name>
+        <description>Работник склада</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="19037231-7da0-406f-a223-28687ce22545">
+        <name>УчастникСогласованияУсловийЗакупок</name>
+        <description>Участник согласования условий закупок (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+    </items>
+    <items id="12dad8e9-e0e4-4c6e-a20d-c02a80416c24">
+      <name>ЗарплатаИКадры</name>
+      <description>Зарплата и кадры</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="f7a987ad-e3ae-43d9-a7f3-5821150d0983">
+        <name>Аудитор</name>
+        <description>Аудитор</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="bc7b77fe-4f55-4e8c-9e7d-0386cccbd6dc">
+        <name>Кадровик</name>
+        <description>Кадровик</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="800b49ac-88aa-4af8-868f-4dde9078f5cd">
+        <name>КадровикБезДоступаКЗарплате</name>
+        <description>Кадровик (без доступа к зарплате)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="b1cb6273-89cc-41fa-8cb7-ae19150153ee">
+        <name>КадровикРасчетчик</name>
+        <description>Кадровик расчетчик</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="cfb310fe-d389-430d-bc89-7f1d4bf0f54e">
+        <name>Расчетчик</name>
+        <description>Расчетчик</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="a5a25235-1309-4ec2-af3a-3d3b225d55a0">
+        <name>СтаршийКадровик</name>
+        <description>Старший кадровик</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="bcf631d2-6ecf-4ff9-918a-196455e7945f">
+        <name>СтаршийКадровикРасчетчик</name>
+        <description>Старший кадровик расчетчик</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="5347d68d-30cc-4e04-bfd5-2a9707291dbf">
+        <name>СтаршийРасчетчик</name>
+        <description>Старший расчетчик</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="b626ea2e-d497-41ea-be7b-421701d5edf8">
+        <name>Табельщик</name>
+        <description>Табельщик</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+    </items>
+    <items id="5357b17a-928d-40b1-9362-07a8d74ff59e">
+      <name>МеждународныйФинансовыйУчет</name>
+      <description>Международный финансовый учет</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="a710f198-2e62-4a11-9b0e-40b79ca97aec">
+        <name>АналитикМеждународногоУчета</name>
+        <description>Аналитик международного учета (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="55e653bc-b975-48bc-beb5-aa97125cd1ff">
+        <name>БухгалтерМеждународногоУчета</name>
+        <description>Бухгалтер международного учета</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="8d2d58eb-0619-4bb9-8f8d-119e01c112ad">
+        <name>ПользовательОтчетностиМеждународногоУчета</name>
+        <description>Пользователь отчетности международного учета (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+    </items>
+    <items id="e33aa1b5-a75b-4652-90bd-2a2a9513870c">
+      <name>Планирование</name>
+      <description>Планирование</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="13c4f08a-e4be-410a-8da1-da15a6cd42ae">
+        <name>АдминистраторПланирования</name>
+        <description>Администратор планирования (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="bb7809ab-e004-47d1-91dc-fc6890929f62">
+        <name>УчастникПланированияПроизводства</name>
+        <description>Участник планирования производства (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="0fdfcb03-2816-46d0-803c-973176e3a150">
+        <name>УчастникПланированияСборокРазборок</name>
+        <description>Участник планирования сборок разборок (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="1da6b0fe-a98b-45ed-a1f3-ad93006f8b6d">
+        <name>УчастникПланированияЗакупок</name>
+        <description>Участник планирования закупок (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="5af7496c-185c-4557-9873-8c3107ee53f9">
+        <name>УчастникПланированияПродажПоКатегориям</name>
+        <description>Участник планирования продаж по категориям (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="c21be442-ab4e-4203-a6be-41b0fdd23e24">
+        <name>УчастникПланированияПродаж</name>
+        <description>Участник планирования продаж (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="0c694308-6b73-4dd5-8226-0c59cbaf0a50">
+        <name>УчастникПланированияВнутреннихПотреблений</name>
+        <description>Участник планирования внутренних потреблений (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+    </items>
+    <items id="c7ed5335-859f-423f-82c3-4d27a38b24a2">
+      <name>Продажи</name>
+      <description>Продажи</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="e8cb8e74-7d48-47c5-98ad-3743261e61f7">
+        <name>Клиент</name>
+        <description>Клиент</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="806daef6-c289-49e0-9652-38dcf3fa7677">
+        <name>Маркетолог</name>
+        <description>Маркетолог</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="44d4fd93-99ca-40e7-be0a-3b0321a39d3b">
+        <name>МенеджерПоПродажам</name>
+        <description>Менеджер по продажам</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="4c72e308-ff96-40b3-b066-f2dfda73d323">
+        <name>МенеджерПоРозничнойТорговле</name>
+        <description>Менеджер по розничной торговле</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="b93bb8a1-04fa-4c1a-ac3c-75fb05366782">
+        <name>ПродавецКассирККМ</name>
+        <description>Продавец-кассир ККМ</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="a50e4b77-ee50-42cb-a07b-7825f37dee6d">
+        <name>Респондент</name>
+        <description>Респондент</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="ae883b07-11cf-4bea-9bce-46473350db16">
+        <name>РуководительОтделаПродаж</name>
+        <description>Руководитель отдела продаж</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="ef2371ca-1f4a-4480-be8c-fcb685871343">
+        <name>СупервайзерТорговыхПредставителей</name>
+        <description>Супервайзер торговых представителей</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="3afd420c-f9e9-4a88-975e-2e31547ee74c">
+        <name>ТорговыйПредставитель</name>
+        <description>Торговый представитель</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="6c5ff2cf-6901-4412-a930-fa04bad5cf0b">
+        <name>УчастникСогласованияУсловийПродаж</name>
+        <description>Участник согласования условий продаж (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="9838ae68-ebd3-4e82-b62c-d39c379a928b">
+        <name>УчастникСогласованияЦенНоменклатуры</name>
+        <description>Участник согласования цен номенклатуры (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+    </items>
+    <items id="0801d37a-ae7e-42c8-a6c4-18942ec8fb2f">
+      <name>Производство</name>
+      <description>Производство</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="90a9321f-a088-47f1-afd4-47b8f052ebc1">
+        <name>ГлавныйДиспетчер</name>
+        <description>Главный диспетчер производства</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="2c1871fb-5fef-408d-adf8-4edcb6ab6c5c">
+        <name>ЛокальныйДиспетчер</name>
+        <description>Локальный диспетчер производства</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="45eb00cd-0ca0-4d6d-b08d-cadf202c2c07">
+        <name>МенеджерПоПереработкеДавальческогоСырья</name>
+        <description>Менеджер по переработке давальческого сырья</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="bb8c428e-cd13-4ba4-a514-89f5ba894559">
+        <name>МенеджерПоПроизводствуНаСтороне</name>
+        <description>Менеджер по производству на стороне</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="a90d907c-a823-454b-8bc0-5e5f1807c835">
+        <name>МенеджерПроизводства</name>
+        <description>Менеджер производства</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="fd7b587b-ad0a-486e-9512-ad99447c8b89">
+        <name>Технолог</name>
+        <description>Технолог</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="88ab3adb-2675-49d1-89c3-c296d98e1233">
+        <name>ЭкономистПроизводства</name>
+        <description>Экономист производства</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+    </items>
+    <items id="4c578c3d-ccc2-48f0-aff8-808a3436b763">
+      <name>Прочее</name>
+      <description>Прочее</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="d3e34937-0a73-4468-8105-8f9ab0e311ac">
+        <name>МенеджерПоДоставке</name>
+        <description>Менеджер по доставке</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="6797cdb5-c0f0-4814-8b18-3a6ef417dd52">
+        <name>ОтветственныйЗаВедениеВзаимодействий</name>
+        <description>Ответственный за ведение взаимодействий (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="1c7bc32a-60eb-4395-ab8d-87fd6103a095">
+        <name>ОтветственныйЗаОбменЭД</name>
+        <description>Ответственный за обмен электронными документами (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="215eed70-fec8-4813-8fdf-d4f0e48ee0c9">
+        <name>ПользовательМобильногоПриложения1СМониторERP</name>
+        <description>Пользователь мобильного приложения &quot;1C:Монитор ERP&quot; (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="81868489-66a6-40bd-bf4d-243b38003e13">
+        <name>УчастникУправленияПоЦелям</name>
+        <description>Участник управления по целям (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+    </items>
+    <items id="521121f0-915a-429e-ad9d-96ae89492b26">
+      <name>УправлениеРемонтами</name>
+      <description>Управление ремонтами</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="aa7f3ae5-3b21-498c-bd3a-3d9a005f2eaf">
+        <name>ОтветственныйЗаВедениеНСИУР</name>
+        <description>Ответственный за ведение НСИ управления ремонтами</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="21f44963-d50c-4cf5-ba7d-4eea317974a9">
+        <name>ПланировщикРемонтов</name>
+        <description>Планировщик ремонтов</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="a8aa578d-c4f7-49a7-b4b2-0a19e46bce0e">
+        <name>Ремонтник</name>
+        <description>Ремонтник</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="3be46362-d57a-494a-a0af-4fcf2d5268c9">
+        <name>Эксплуатационник</name>
+        <description>Эксплуатационник</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+    </items>
+    <items id="613abb46-c3e9-4ab6-a007-7599c6b6512f">
+      <name>Финансы</name>
+      <description>Финансы</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="84acd69c-4114-4d0a-82b2-226033948e12">
+        <name>Бухгалтер</name>
+        <description>Бухгалтер</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="69a36a75-c176-46bb-950d-d780f7463713">
+        <name>БухгалтерПоВнеоборотнымАктивам</name>
+        <description>Бухгалтер по внеоборотным активам</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="66db1fed-b624-44eb-b74e-4884f543838d">
+        <name>ИнициаторЗаявокНаРасходованиеДенежныхСредств</name>
+        <description>Инициатор заявок на расходование денежных средств</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="9f46c8c7-1a0c-4ecb-aea8-0be64724b259">
+        <name>Казначей</name>
+        <description>Казначей</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="1167e360-4f81-4114-968e-c4264a06baa0">
+        <name>Кассир</name>
+        <description>Кассир</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="4e46851a-0ff9-47dd-bfad-0ee5abf864f2">
+        <name>УчастникРасчетовМеждуОрганизациями</name>
+        <description>Участник расчетов между организациями (дополнительный)</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+      <content id="485d23db-673c-446b-adab-8fd27de6e0e5">
+        <name>ФинансовыйАналитик</name>
+        <description>Финансовый аналитик</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
+    </items>
+  </predefined>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.ПрофилиГруппДоступа.Form.ФормаЭлемента</defaultObjectForm>
+  <defaultFolderForm>Catalog.ПрофилиГруппДоступа.Form.ФормаГруппы</defaultFolderForm>
+  <defaultListForm>Catalog.ПрофилиГруппДоступа.Form.ФормаСписка</defaultListForm>
+  <defaultChoiceForm>Catalog.ПрофилиГруппДоступа.Form.ФормаСписка</defaultChoiceForm>
+  <defaultFolderChoiceForm>Catalog.ПрофилиГруппДоступа.Form.ФормаВыбораГруппы</defaultFolderChoiceForm>
+  <attributes uuid="cd59707e-b9e4-4038-8203-ae22a8060e8d">
+    <name>ИдентификаторПоставляемыхДанных</name>
+    <synonym>
+      <key>ru</key>
+      <value>Идентификатор поставляемых данных</value>
+    </synonym>
+    <type>
+      <types>UUID</types>
+    </type>
+    <toolTip>
+      <key>ru</key>
+      <value>Для профилей, поставляемых в составе конфигурации, содержит идентификатор по которому можно найти описание поставляемого профиля.</value>
+    </toolTip>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="db497857-33d3-49a1-b328-dfc62c973ecb">
+    <name>ПоставляемыйПрофильИзменен</name>
+    <synonym>
+      <key>ru</key>
+      <value>Поставляемый профиль изменен</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <toolTip>
+      <key>ru</key>
+      <value>Флажок установлен Истина, когда профиль групп доступа является поставляемым и был изменен администратором по сравнению с поставкой</value>
+    </toolTip>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="139c001c-7b07-465a-9187-399ad32d294f">
+    <name>Комментарий</name>
+    <synonym>
+      <key>ru</key>
+      <value>Комментарий</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <toolTip>
+      <key>ru</key>
+      <value>Произвольная строка</value>
+    </toolTip>
+    <multiLine>true</multiLine>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <tabularSections uuid="5d228ce4-069e-4f98-beed-b8e1de17c3d9">
+    <producedTypes>
+      <objectType typeId="926989ac-849e-47f4-9491-3c7dc717d42c" valueTypeId="e47fdad6-6a00-4db3-8ba8-ecd6cb388e6d"/>
+      <rowType typeId="8a8d4fab-b7f3-482f-b7bf-9d51cb486e4f" valueTypeId="9ab86c34-1190-4dda-b1f6-03d5fa52df14"/>
+    </producedTypes>
+    <name>Роли</name>
+    <synonym>
+      <key>ru</key>
+      <value>Роли</value>
+    </synonym>
+    <standardAttributes>
+      <dataHistory>Use</dataHistory>
+      <name>LineNumber</name>
+      <fillValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </standardAttributes>
+    <attributes uuid="9770fc09-87bf-4fce-9b0d-410efd30edae">
+      <name>Роль</name>
+      <synonym>
+        <key>ru</key>
+        <value>Роль</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ИдентификаторыОбъектовРасширений</types>
+        <types>CatalogRef.ИдентификаторыОбъектовМетаданных</types>
+      </type>
+      <toolTip>
+        <key>ru</key>
+        <value>Разрешенное действие (роль), заданное для профиля групп доступа</value>
+      </toolTip>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <indexing>Index</indexing>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="3d73d5ff-995e-40ed-a401-cec2a3d12c8f">
+    <producedTypes>
+      <objectType typeId="4386d851-6b14-42f0-b1d2-0f7834b5ed74" valueTypeId="80fc5a3b-610b-4176-91c2-af81a5fa95a2"/>
+      <rowType typeId="5ed52a66-d618-45aa-a604-a1cef7cf69d6" valueTypeId="e916ada5-d3d9-46d6-bbbf-b586f5c912a0"/>
+    </producedTypes>
+    <name>ВидыДоступа</name>
+    <synonym>
+      <key>ru</key>
+      <value>Виды доступа</value>
+    </synonym>
+    <standardAttributes>
+      <dataHistory>Use</dataHistory>
+      <name>LineNumber</name>
+      <fillValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </standardAttributes>
+    <attributes uuid="20156709-1481-4007-8e89-9ce79fc589fc">
+      <name>ВидДоступа</name>
+      <synonym>
+        <key>ru</key>
+        <value>Вид доступа</value>
+      </synonym>
+      <comment>Представлен пустой ссылкой основного типа значений</comment>
+      <type>
+        <types>DefinedType.ЗначениеДоступа</types>
+      </type>
+      <toolTip>
+        <key>ru</key>
+        <value>Возможный &quot;разрез&quot; ограничения прав доступа
+в заданном списке разрешенных действий (ролей)</value>
+      </toolTip>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <indexing>Index</indexing>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="fbcda361-0ef2-47b4-ba1c-1d1952898bd3">
+      <name>Предустановленный</name>
+      <synonym>
+        <key>ru</key>
+        <value>Предустановленный</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <toolTip>
+        <key>ru</key>
+        <value>Доступ по предустановленному
+виду запрещен,
+разрешенные значения
+задаются в профиле,
+а не в группах доступа</value>
+      </toolTip>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="7e7c5abd-b645-4de5-a40e-5805ec4456e2">
+      <name>ВсеРазрешены</name>
+      <synonym>
+        <key>ru</key>
+        <value>Все разрешены</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <toolTip>
+        <key>ru</key>
+        <value>Способ определения разрешенных значений доступа</value>
+      </toolTip>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="763a16c3-a728-4b65-a485-705990310b4a">
+    <producedTypes>
+      <objectType typeId="c6b9ee21-63d0-468e-a640-3601fa356db6" valueTypeId="c07170f5-98ed-4b1a-aad2-8e2908e42d7c"/>
+      <rowType typeId="6e575b99-3c29-4541-a8a1-34c4db7e0d2f" valueTypeId="1aa8141e-446a-467f-ace4-8186fdbd01ad"/>
+    </producedTypes>
+    <name>ЗначенияДоступа</name>
+    <synonym>
+      <key>ru</key>
+      <value>Значения доступа</value>
+    </synonym>
+    <standardAttributes>
+      <dataHistory>Use</dataHistory>
+      <name>LineNumber</name>
+      <fillValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </standardAttributes>
+    <attributes uuid="65338920-c744-4d1e-b351-848b90a3feda">
+      <name>ВидДоступа</name>
+      <synonym>
+        <key>ru</key>
+        <value>Вид доступа</value>
+      </synonym>
+      <comment>Представлен пустой ссылкой основного типа значений</comment>
+      <type>
+        <types>DefinedType.ЗначениеДоступа</types>
+      </type>
+      <toolTip>
+        <key>ru</key>
+        <value>Предустановленный вид доступа, по которому задано предустановленное значение доступа</value>
+      </toolTip>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <indexing>Index</indexing>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="2aedb1ac-caf1-45c7-913e-82a36637d5d4">
+      <name>ЗначениеДоступа</name>
+      <synonym>
+        <key>ru</key>
+        <value>Значение доступа</value>
+      </synonym>
+      <type>
+        <types>DefinedType.ЗначениеДоступа</types>
+      </type>
+      <toolTip>
+        <key>ru</key>
+        <value>Предустановленное разрешенное или запрещенное значение доступа.</value>
+      </toolTip>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <indexing>Index</indexing>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="65f3ad72-ed03-482b-a2f1-05053eef408a">
+      <name>ВключаяНижестоящие</name>
+      <synonym>
+        <key>ru</key>
+        <value>Включая нижестоящие</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="e177e258-7d0c-4fe1-80e5-3b89de9e23d9">
+    <producedTypes>
+      <objectType typeId="696a18e1-0956-43df-849f-6f767288e55c" valueTypeId="aeeb637b-215b-49a3-813f-496091e8d7f0"/>
+      <rowType typeId="8f17ac1f-6dbb-446c-bc3d-3d571bf1d177" valueTypeId="5dbbdcc8-1149-487b-a45c-45b7a01c7e64"/>
+    </producedTypes>
+    <name>Назначение</name>
+    <synonym>
+      <key>ru</key>
+      <value>Назначение</value>
+    </synonym>
+    <fillChecking>ShowError</fillChecking>
+    <standardAttributes>
+      <dataHistory>Use</dataHistory>
+      <name>LineNumber</name>
+      <fillValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </standardAttributes>
+    <attributes uuid="3f25ac9f-c6b4-4ccc-bec4-a90c99403823">
+      <name>ТипПользователей</name>
+      <synonym>
+        <key>ru</key>
+        <value>Тип пользователей</value>
+      </synonym>
+      <type>
+        <types>DefinedType.Пользователь</types>
+      </type>
+      <toolTip>
+        <key>ru</key>
+        <value>Пустая ссылка на допустимый тип объектов авторизации</value>
+      </toolTip>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <forms uuid="56177464-5e9f-4598-96bc-eb311993c503">
+    <name>ФормаЭлемента</name>
+    <synonym>
+      <key>ru</key>
+      <value>Форма элемента</value>
+    </synonym>
+    <help>
+      <pages>
+        <lang>ru</lang>
+      </pages>
+    </help>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="c2308e60-2844-4bd8-bc8a-c9c20e5fc62d">
+    <name>ФормаСписка</name>
+    <synonym>
+      <key>ru</key>
+      <value>Форма списка</value>
+    </synonym>
+    <help>
+      <pages>
+        <lang>ru</lang>
+      </pages>
+    </help>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="bdfe65f4-4174-4e66-915c-943137981cf0">
+    <name>ФормаГруппы</name>
+    <synonym>
+      <key>ru</key>
+      <value>Форма группы</value>
+    </synonym>
+    <help>
+      <pages>
+        <lang>ru</lang>
+      </pages>
+    </help>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="5271de2d-d3a0-4128-90e0-cd8e1ea2ad30">
+    <name>ФормаВыбораГруппы</name>
+    <synonym>
+      <key>ru</key>
+      <value>Форма выбора группы</value>
+    </synonym>
+    <help>
+      <pages>
+        <lang>ru</lang>
+      </pages>
+    </help>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <commands uuid="c895d58a-5be1-4157-81af-f4f6db9b4b9e">
+    <name>ГруппыДоступа</name>
+    <synonym>
+      <key>ru</key>
+      <value>Группы доступа</value>
+    </synonym>
+    <group>FormNavigationPanelGoTo</group>
+    <commandParameterType>
+      <types>CatalogRef.ПрофилиГруппДоступа</types>
+    </commandParameterType>
+    <representation>Auto</representation>
+    <shortcut></shortcut>
+  </commands>
+</mdclass:Catalog>

@@ -114,6 +114,7 @@
   <constants>Constant.Константа1</constants>
   <commonForms>CommonForm.Форма</commonForms>
   <catalogs>Catalog.Справочник1</catalogs>
+  <catalogs>Catalog.ПрофилиГруппДоступа</catalogs>
   <documents>Document.Документ1</documents>
   <documentNumerators>DocumentNumerator.НумераторДокументов1</documentNumerators>
   <sequences>Sequence.Последовательность1</sequences>
@@ -125,6 +126,7 @@
   <informationRegisters>InformationRegister.РегистрСведений2</informationRegisters>
   <accumulationRegisters>AccumulationRegister.РегистрНакопления1</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.ПланВидовХарактеристик1</chartsOfCharacteristicTypes>
+  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.РазделыДатЗапретаИзменения</chartsOfCharacteristicTypes>
   <chartsOfAccounts>ChartOfAccounts.ПланСчетов1</chartsOfAccounts>
   <accountingRegisters>AccountingRegister.РегистрБухгалтерии1</accountingRegisters>
   <chartsOfCalculationTypes>ChartOfCalculationTypes.ПланВидовРасчета1</chartsOfCalculationTypes>

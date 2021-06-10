@@ -2,16 +2,8 @@ package mdclasses
 
 import "github.com/v8platform/mdclasses/encoding/xml"
 
-type Form struct {
-	MDOBaseType
-	UsePurposes []string `xml:"usePurposes"`
-}
 
-type Command struct {
-	MDOBaseType
-	Group          string `xml:"group"`
-	Representation string `xml:"representation"`
-}
+
 
 type Document struct {
 	MDOBaseType
