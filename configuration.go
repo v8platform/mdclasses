@@ -29,9 +29,9 @@ type Language struct {
 type Configuration struct {
 	MDOBaseType
 
-	XMLName          xml.Name           `xml:"mdclass Configuration"`
+	XMLName          xml.Name             `xml:"mdclass Configuration"`
 	Synonym          []ObjectKeyValueType `xml:"synonym"`
-	ContainedObjects []ContainedObject  `xml:"containedObjects,allowempty"`
+	ContainedObjects []ContainedObject    `xml:"containedObjects,allowempty"`
 	ConfigurationProperties
 
 	Languages  []*Language  `xml:"languages"`
@@ -45,12 +45,12 @@ type Configuration struct {
 	// FilterCriteria              []MDOTypeRef `xml:"filterCriteria"`
 	CommonModules []*CommonModule `xml:"-"`
 	// CommonAttributes            []MDOTypeRef `xml:"commonAttributes"`
-	// ExchangePlans               []MDOTypeRef `xml:"exchangePlans"`
+	ExchangePlans []*ExchangePlan `xml:"-"`
 	// XDTOPackages                []MDOTypeRef `xml:"xDTOPackages"`
 	// WebServices                 []MDOTypeRef `xml:"webServices"`
 	// HttpServices                []MDOTypeRef `xml:"httpServices"`
 	// WsReferences                []MDOTypeRef `xml:"wsReferences"`
-	// EventSubscriptions          []MDOTypeRef `xml:"eventSubscriptions"`
+	EventSubscriptions []*EventSubscription `xml:"-"`
 	// ScheduledJobs               []MDOTypeRef `xml:"scheduledJobs"`
 	// SettingsStorages            []MDOTypeRef `xml:"settingsStorages"`
 	// FunctionalOptions           []MDOTypeRef `xml:"functionalOptions"`
@@ -215,6 +215,16 @@ func (conf *Configuration) Unpack(cfg UnpackConfig) error {
 	}
 
 	err = conf.ConfigurationChildObjects.CommonModules.Unpack(cfg, &conf.CommonModules)
+	if err != nil {
+		return err
+	}
+
+	err = conf.ConfigurationChildObjects.ExchangePlans.Unpack(cfg, &conf.ExchangePlans)
+	if err != nil {
+		return err
+	}
+
+	err = conf.ConfigurationChildObjects.EventSubscriptions.Unpack(cfg, &conf.EventSubscriptions)
 	if err != nil {
 		return err
 	}
