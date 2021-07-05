@@ -66,38 +66,86 @@ func (m *MDOType) UnmarshalText(text []byte) error {
 func (m MDOType) Group() string {
 
 	switch m {
-	case ACCOUNTING_REGISTER:
-		return "AccountingRegisters"
+	case SUBSYSTEM:
+		return "Subsystems"
+	case STYLE_ITEM:
+		return "StyleItems"
+	case STYLE:
+		return "Styles"
+	case COMMON_PICTURE:
+		return "CommonPictures"
+	case SESSION_PARAMETER:
+		return "SessionParameters"
+	case ROLE:
+		return "Roles"
+	case COMMON_TEMPLATE:
+		return "CommonTemplates"
+	case FILTER_CRITERION:
+		return "FilterCriteria"
+	case COMMON_MODULE:
+		return "CommonModules"
+	case COMMON_ATTRIBUTE:
+		return "CommonAttributes"
+	case EXCHANGE_PLAN:
+		return "ExchangePlans"
+	case XDTO_PACKAGE:
+		return "XDTOPackages"
+	case WEB_SERVICE:
+		return "WebServices"
+	case HTTP_SERVICE:
+		return "HttpServices"
+	case WS_REFERENCE:
+		return "WsReferences"
+	case EVENT_SUBSCRIPTION:
+		return "EventSubscriptions"
+	case SCHEDULED_JOB:
+		return "ScheduledJobs"
+	case SETTINGS_STORAGE:
+		return "SettingsStorages"
+	case FUNCTIONAL_OPTION:
+		return "FunctionalOptions"
+	case FUNCTIONAL_OPTIONS_PARAMETER:
+		return "FunctionalOptionsParameters"
+	case DEFINED_TYPE:
+		return "DefinedTypes"
+	case COMMON_COMMAND:
+		return "CommonCommands"
+	case COMMAND_GROUP:
+		return "CommandGroups"
+	case CONSTANT:
+		return "Constants"
+	case COMMON_FORM:
+		return "CommonForms"
 	case CATALOG:
 		return "Catalogs"
 	case DOCUMENT:
 		return "Documents"
-	case SUBSYSTEM:
-		return "Subsystems"
-	case COMMON_TEMPLATE:
-		return "CommonTemplates"
-	case COMMON_MODULE:
-		return "CommonModules"
-	case FORM:
-		return "Forms"
+	case DOCUMENT_NUMERATOR:
+		return "DocumentNumerators"
+	case SEQUENCE:
+		return "Sequences"
+	case DOCUMENT_JOURNAL:
+		return "DocumentJournals"
+	case ENUM:
+		return "Enums"
 	case REPORT:
 		return "Reports"
+	case DATA_PROCESSOR:
+		return "DataProcessors"
 	case INFORMATION_REGISTER:
 		return "InformationRegisters"
-	case CHART_OF_CHARACTERISTIC_TYPES:
-		return "ChartsOfCharacteristicTypes"
-	case EXCHANGE_PLAN:
-		return "ExchangePlans"
-	case EVENT_SUBSCRIPTION:
-		return "EventSubscriptions"
-	case ROLE:
-		return "Roles"
-	//case COMMON_MODULE:
-	//	return "CommonModules"
-	//case COMMON_MODULE:
-	//	return "CommonModules"
-	//case COMMON_MODULE:
-	//	return "CommonModules"
+	case ACCOUNTING_REGISTER:
+		return "AccountingRegisters"
+	case ACCUMULATION_REGISTER:
+		return "AccumulationRegisters"
+	case CHART_OF_CALCULATION_TYPES:
+		return "ChartsOfCalculationTypes"
+	case CALCULATION_REGISTER:
+		return "CalculationRegisters"
+	case BUSINESS_PROCESS:
+		return "BusinessProcesses"
+	case TASK:
+		return "Tasks"
 	default:
 		return ""
 	}
