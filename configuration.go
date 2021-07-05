@@ -167,9 +167,6 @@ type ConfigurationChildObjects struct {
 	CalculationRegisters        MDOTypeRefList `xml:"calculationRegisters"`
 	BusinessProcesses           MDOTypeRefList `xml:"businessProcesses"`
 	Tasks                       MDOTypeRefList `xml:"tasks"`
-	WebService                  MDOTypeRefList `xml:"serviceService"`
-	WSReference                 MDOTypeRefList `xml:"wsReferenceReference"`
-	XDTOPackage                 MDOTypeRefList `xml:"xdtoPackage"`
 }
 
 const ConfigurationFile = "Configuration.mdo"
@@ -256,5 +253,90 @@ func (conf *Configuration) Unpack(cfg UnpackConfig) error {
 	//
 	// }
 
+	return nil
+}
+
+// Возвращает раздел не распаковоанных объектов метаданных по имени типа
+func (o ConfigurationChildObjects) GetChildByType(mdoType MDOType) *MDOTypeRefList {
+	switch mdoType {
+	case SUBSYSTEM:
+		return &o.Subsystems
+	case STYLE_ITEM:
+		return &o.StyleItems
+	case STYLE:
+		return &o.Styles
+	case COMMON_PICTURE:
+		return &o.CommonPictures
+	case SESSION_PARAMETER:
+		return &o.SessionParameters
+	case ROLE:
+		return &o.Roles
+	case COMMON_TEMPLATE:
+		return &o.CommonTemplates
+	case FILTER_CRITERION:
+		return &o.FilterCriteria
+	case COMMON_MODULE:
+		return &o.CommonModules
+	case COMMON_ATTRIBUTE:
+		return &o.CommonAttributes
+	case EXCHANGE_PLAN:
+		return &o.ExchangePlans
+	case XDTO_PACKAGE:
+		return &o.XDTOPackages
+	case WEB_SERVICE:
+		return &o.WebServices
+	case HTTP_SERVICE:
+		return &o.HttpServices
+	case WS_REFERENCE:
+		return &o.WsReferences
+	case EVENT_SUBSCRIPTION:
+		return &o.EventSubscriptions
+	case SCHEDULED_JOB:
+		return &o.ScheduledJobs
+	case SETTINGS_STORAGE:
+		return &o.SettingsStorages
+	case FUNCTIONAL_OPTION:
+		return &o.FunctionalOptions
+	case FUNCTIONAL_OPTIONS_PARAMETER:
+		return &o.FunctionalOptionsParameters
+	case DEFINED_TYPE:
+		return &o.DefinedTypes
+	case COMMON_COMMAND:
+		return &o.CommonCommands
+	case COMMAND_GROUP:
+		return &o.CommandGroups
+	case CONSTANT:
+		return &o.Constants
+	case COMMON_FORM:
+		return &o.CommonForms
+	case CATALOG:
+		return &o.Catalogs
+	case DOCUMENT:
+		return &o.Documents
+	case DOCUMENT_NUMERATOR:
+		return &o.DocumentNumerators
+	case SEQUENCE:
+		return &o.Sequences
+	case DOCUMENT_JOURNAL:
+		return &o.DocumentJournals
+	case ENUM:
+		return &o.Enums
+	case REPORT:
+		return &o.Reports
+	case DATA_PROCESSOR:
+		return &o.DataProcessors
+	case INFORMATION_REGISTER:
+		return &o.InformationRegisters
+	case ACCOUNTING_REGISTER:
+		return &o.AccountingRegisters
+	case CHART_OF_CALCULATION_TYPES:
+		return &o.ChartsOfCalculationTypes
+	case CALCULATION_REGISTER:
+		return &o.CalculationRegisters
+	case BUSINESS_PROCESS:
+		return &o.BusinessProcesses
+	case TASK:
+		return &o.Tasks
+	}
 	return nil
 }
