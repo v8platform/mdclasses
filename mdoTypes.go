@@ -90,6 +90,8 @@ func (m MDOType) Group() string {
 		return "ExchangePlans"
 	case EVENT_SUBSCRIPTION:
 		return "EventSubscriptions"
+	case ROLE:
+		return "Roles"
 	//case COMMON_MODULE:
 	//	return "CommonModules"
 	//case COMMON_MODULE:
@@ -226,6 +228,16 @@ func (e MDOTypeRefList) Delete(index int) ([]MDOTypeRef, error) {
 	return e, errors.New(fmt.Sprintf("Error delete object from index %v", index))
 }
 
+// Возвращает элемент по имени
+func (e MDOTypeRefList) GetByName(name string) (MDOTypeRef, error) {
+	for _, t := range e {
+		if t.ref == name {
+			return t, nil
+		}
+	}
+	return MDOTypeRef{}, errors.Errorf("Нет такого объекта метаданных")
+}
+
 func removeElement(list []MDOTypeRef, i int) []MDOTypeRef {
 	if i < len(list)-1 {
 		list = append(list[:i], list[i+1:]...)
@@ -323,9 +335,11 @@ func (m MDOTypeRef) IsNull() bool {
 }
 
 func (m MDOTypeRef) Filename() string {
-
 	return filepath.Join(m.Dir(), m.ref+ExtMdo)
+}
 
+func (m MDOTypeRef) GetPath() string {
+	return m.Filename()
 }
 
 func (m MDOTypeRef) Dir() string {
