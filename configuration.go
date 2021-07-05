@@ -333,6 +333,8 @@ func (o ConfigurationChildObjects) GetChildByType(mdoType MDOType) *MDOTypeRefLi
 		return &o.AccumulationRegisters
 	case CHART_OF_CALCULATION_TYPES:
 		return &o.ChartsOfCalculationTypes
+	case CHART_OF_CHARACTERISTIC_TYPES:
+		return &o.ChartsOfCharacteristicTypes
 	case CALCULATION_REGISTER:
 		return &o.CalculationRegisters
 	case BUSINESS_PROCESS:
