@@ -329,6 +329,8 @@ func (o ConfigurationChildObjects) GetChildByType(mdoType MDOType) *MDOTypeRefLi
 		return &o.InformationRegisters
 	case ACCOUNTING_REGISTER:
 		return &o.AccountingRegisters
+	case ACCUMULATION_REGISTER:
+		return &o.AccumulationRegisters
 	case CHART_OF_CALCULATION_TYPES:
 		return &o.ChartsOfCalculationTypes
 	case CALCULATION_REGISTER:
@@ -338,5 +340,6 @@ func (o ConfigurationChildObjects) GetChildByType(mdoType MDOType) *MDOTypeRefLi
 	case TASK:
 		return &o.Tasks
 	}
+	log.Warnf("Не найден раздел методанных %s", mdoType)
 	return nil
 }
