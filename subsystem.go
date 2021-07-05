@@ -22,13 +22,13 @@ type SubsystemChildSubsystems struct {
 
 func (conf *Subsystem) Unpack(cfg UnpackConfig) error {
 
-	parentMDO := newMDOTypeRef(SUBSYSTEM, conf.Name, conf.ParentSubsystem)
+	parentMDO := NewMDOTypeRef(SUBSYSTEM, conf.Name, conf.ParentSubsystem)
 
 	var subsystems []MDOTypeRef
 
 	for _, name := range conf.SubsystemChildSubsystems.Subsystems {
 
-		subsystems = append(subsystems, newMDOTypeRef(
+		subsystems = append(subsystems, NewMDOTypeRef(
 			SUBSYSTEM,
 			name,
 			parentMDO,

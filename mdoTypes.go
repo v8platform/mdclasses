@@ -268,7 +268,7 @@ func (m *MDOTypeRef) UnmarshalText(text []byte) error {
 
 }
 
-func newMDOTypeRef(modType MDOType, ref string, parent MDOTypeRef) MDOTypeRef {
+func NewMDOTypeRef(modType MDOType, ref string, parent MDOTypeRef) MDOTypeRef {
 
 	raw := fmt.Sprintf("%s.%s", modType, ref)
 	if modType == REF {
@@ -301,7 +301,7 @@ func NewMDOTypeRefFromString(raw string) MDOTypeRef {
 		ref = values[len(values)-1]
 	}
 
-	return newMDOTypeRef(mdoType, ref, parent)
+	return NewMDOTypeRef(mdoType, ref, parent)
 }
 
 func getParentMDOTypeRef(name string, parent MDOTypeRef) MDOTypeRef {
@@ -321,7 +321,7 @@ func getParentMDOTypeRef(name string, parent MDOTypeRef) MDOTypeRef {
 			parentName := name[0:i]
 			if parentName != "" {
 				values := strings.Split(parentName, ".")
-				val = newMDOTypeRef(MDOType(values[0]), values[1], val)
+				val = NewMDOTypeRef(MDOType(values[0]), values[1], val)
 			}
 		}
 
