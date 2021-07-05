@@ -139,7 +139,9 @@ func (m MDOType) Group() string {
 	case ACCUMULATION_REGISTER:
 		return "AccumulationRegisters"
 	case CHART_OF_CALCULATION_TYPES:
-		return "ChartsOfCalculationTypes"
+		return "ChartOfCalculationTypes"
+	case CHART_OF_CHARACTERISTIC_TYPES:
+		return "ChartOfCharacteristicTypes"
 	case CALCULATION_REGISTER:
 		return "CalculationRegisters"
 	case BUSINESS_PROCESS:
