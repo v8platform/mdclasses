@@ -66,32 +66,86 @@ func (m *MDOType) UnmarshalText(text []byte) error {
 func (m MDOType) Group() string {
 
 	switch m {
-	case ACCOUNTING_REGISTER:
-		return "AccountingRegisters"
+	case SUBSYSTEM:
+		return "Subsystems"
+	case STYLE_ITEM:
+		return "StyleItems"
+	case STYLE:
+		return "Styles"
+	case COMMON_PICTURE:
+		return "CommonPictures"
+	case SESSION_PARAMETER:
+		return "SessionParameters"
+	case ROLE:
+		return "Roles"
+	case COMMON_TEMPLATE:
+		return "CommonTemplates"
+	case FILTER_CRITERION:
+		return "FilterCriteria"
+	case COMMON_MODULE:
+		return "CommonModules"
+	case COMMON_ATTRIBUTE:
+		return "CommonAttributes"
+	case EXCHANGE_PLAN:
+		return "ExchangePlans"
+	case XDTO_PACKAGE:
+		return "XDTOPackages"
+	case WEB_SERVICE:
+		return "WebServices"
+	case HTTP_SERVICE:
+		return "HttpServices"
+	case WS_REFERENCE:
+		return "WsReferences"
+	case EVENT_SUBSCRIPTION:
+		return "EventSubscriptions"
+	case SCHEDULED_JOB:
+		return "ScheduledJobs"
+	case SETTINGS_STORAGE:
+		return "SettingsStorages"
+	case FUNCTIONAL_OPTION:
+		return "FunctionalOptions"
+	case FUNCTIONAL_OPTIONS_PARAMETER:
+		return "FunctionalOptionsParameters"
+	case DEFINED_TYPE:
+		return "DefinedTypes"
+	case COMMON_COMMAND:
+		return "CommonCommands"
+	case COMMAND_GROUP:
+		return "CommandGroups"
+	case CONSTANT:
+		return "Constants"
+	case COMMON_FORM:
+		return "CommonForms"
 	case CATALOG:
 		return "Catalogs"
 	case DOCUMENT:
 		return "Documents"
-	case SUBSYSTEM:
-		return "Subsystems"
-	case COMMON_TEMPLATE:
-		return "CommonTemplates"
-	case COMMON_MODULE:
-		return "CommonModules"
-	case FORM:
-		return "Forms"
+	case DOCUMENT_NUMERATOR:
+		return "DocumentNumerators"
+	case SEQUENCE:
+		return "Sequences"
+	case DOCUMENT_JOURNAL:
+		return "DocumentJournals"
+	case ENUM:
+		return "Enums"
 	case REPORT:
 		return "Reports"
+	case DATA_PROCESSOR:
+		return "DataProcessors"
 	case INFORMATION_REGISTER:
 		return "InformationRegisters"
+	case ACCOUNTING_REGISTER:
+		return "AccountingRegisters"
+	case ACCUMULATION_REGISTER:
+		return "AccumulationRegisters"
 	case CHART_OF_CHARACTERISTIC_TYPES:
 		return "ChartsOfCharacteristicTypes"
-	//case COMMON_MODULE:
-	//	return "CommonModules"
-	//case COMMON_MODULE:
-	//	return "CommonModules"
-	//case COMMON_MODULE:
-	//	return "CommonModules"
+	case CALCULATION_REGISTER:
+		return "CalculationRegisters"
+	case BUSINESS_PROCESS:
+		return "BusinessProcesses"
+	case TASK:
+		return "Tasks"
 	default:
 		return ""
 	}
@@ -222,6 +276,16 @@ func (e MDOTypeRefList) Delete(index int) ([]MDOTypeRef, error) {
 	return e, errors.New(fmt.Sprintf("Error delete object from index %v", index))
 }
 
+// Возвращает элемент по имени
+func (e MDOTypeRefList) GetByName(name string) (MDOTypeRef, error) {
+	for _, t := range e {
+		if t.ref == name {
+			return t, nil
+		}
+	}
+	return MDOTypeRef{}, errors.Errorf("Нет такого объекта метаданных")
+}
+
 func removeElement(list []MDOTypeRef, i int) []MDOTypeRef {
 	if i < len(list)-1 {
 		list = append(list[:i], list[i+1:]...)
@@ -252,7 +316,7 @@ func (m *MDOTypeRef) UnmarshalText(text []byte) error {
 
 }
 
-func newMDOTypeRef(modType MDOType, ref string, parent MDOTypeRef) MDOTypeRef {
+func NewMDOTypeRef(modType MDOType, ref string, parent MDOTypeRef) MDOTypeRef {
 
 	raw := fmt.Sprintf("%s.%s", modType, ref)
 	if modType == REF {
@@ -285,7 +349,7 @@ func NewMDOTypeRefFromString(raw string) MDOTypeRef {
 		ref = values[len(values)-1]
 	}
 
-	return newMDOTypeRef(mdoType, ref, parent)
+	return NewMDOTypeRef(mdoType, ref, parent)
 }
 
 func getParentMDOTypeRef(name string, parent MDOTypeRef) MDOTypeRef {
@@ -305,7 +369,7 @@ func getParentMDOTypeRef(name string, parent MDOTypeRef) MDOTypeRef {
 			parentName := name[0:i]
 			if parentName != "" {
 				values := strings.Split(parentName, ".")
-				val = newMDOTypeRef(MDOType(values[0]), values[1], val)
+				val = NewMDOTypeRef(MDOType(values[0]), values[1], val)
 			}
 		}
 
@@ -319,9 +383,11 @@ func (m MDOTypeRef) IsNull() bool {
 }
 
 func (m MDOTypeRef) Filename() string {
-
 	return filepath.Join(m.Dir(), m.ref+ExtMdo)
+}
 
+func (m MDOTypeRef) GetPath() string {
+	return m.Filename()
 }
 
 func (m MDOTypeRef) Dir() string {

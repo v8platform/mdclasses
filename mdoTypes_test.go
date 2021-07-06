@@ -58,11 +58,7 @@ func TestNewMDOTypeRefFromString(t *testing.T) {
 }
 
 func TestMDOTypeRefExist(t *testing.T) {
-	got, err := UnpackConfiguration("tests/metadata/edt/src")
-	if err != nil {
-		t.Errorf("UnpackConfiguration() error = %v", err)
-		return
-	}
+	got := unpackTestConf(t)
 	subsystem := MDOTypeRef{
 		mdoType: "Subsystem",
 		ref:     "ПерваяПодсистема",
@@ -73,11 +69,7 @@ func TestMDOTypeRefExist(t *testing.T) {
 }
 
 func TestMDOTypeRefGetIndex(t *testing.T) {
-	got, err := UnpackConfiguration("tests/metadata/edt/src")
-	if err != nil {
-		t.Errorf("UnpackConfiguration() error = %v", err)
-		return
-	}
+	got := unpackTestConf(t)
 	mdo := MDOTypeRef{
 		mdoType: "Subsystem",
 		ref:     "ВтораяПодсистема",
@@ -86,17 +78,13 @@ func TestMDOTypeRefGetIndex(t *testing.T) {
 	}
 	index := got.ConfigurationChildObjects.Subsystems.GetIndex(mdo)
 	if index < 0 {
-		t.Errorf("Ошибка поиска дочернего объекта = %v", err)
+		t.Errorf("Ошибка поиска дочернего объекта = %s", mdo.ref)
 	}
 	require.True(t, index == 1)
 }
 
 func TestMDOTypeRefDelete(t *testing.T) {
-	got, err := UnpackConfiguration("tests/metadata/edt/src")
-	if err != nil {
-		t.Errorf("UnpackConfiguration() error = %v", err)
-		return
-	}
+	got := unpackTestConf(t)
 	ref := got.ConfigurationChildObjects.Subsystems
 	newChild, err := ref.Delete(1)
 	if err != nil {
@@ -107,13 +95,21 @@ func TestMDOTypeRefDelete(t *testing.T) {
 }
 
 func TestMDOTypeRefCreate(t *testing.T) {
-	got, err := UnpackConfiguration("tests/metadata/edt/src")
-	if err != nil {
-		t.Errorf("UnpackConfiguration() error = %v", err)
-		return
-	}
+	got := unpackTestConf(t)
 
 	MDOTypeRef := NewMDOTypeRefFromString("Subsystem.NewSubsystem")
 	got.ConfigurationChildObjects.Subsystems = append(got.ConfigurationChildObjects.Subsystems, MDOTypeRef)
 	require.True(t, true)
+}
+
+func TestGetFilename(t *testing.T) {
+	config := UnpackConfig{
+		Base: "tests/metadata/ssl",
+		Path: "tests/metadata/ssl",
+	}
+	path, err := config.getFilename("EventSubscription.АвтономнаяРаботаПроверитьВозможностьЗаписиОбщихДанных")
+	if err != nil {
+		t.Errorf("Ошибка получения пути к файлу %s", err)
+	}
+	require.True(t, path == "")
 }

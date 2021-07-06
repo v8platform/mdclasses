@@ -22,13 +22,13 @@ type SubsystemChildSubsystems struct {
 
 func (conf *Subsystem) Unpack(cfg UnpackConfig) error {
 
-	parentMDO := newMDOTypeRef(SUBSYSTEM, conf.Name, conf.ParentSubsystem)
+	parentMDO := NewMDOTypeRef(SUBSYSTEM, conf.Name, conf.ParentSubsystem)
 
 	var subsystems []MDOTypeRef
 
 	for _, name := range conf.SubsystemChildSubsystems.Subsystems {
 
-		subsystems = append(subsystems, newMDOTypeRef(
+		subsystems = append(subsystems, NewMDOTypeRef(
 			SUBSYSTEM,
 			name,
 			parentMDO,
@@ -85,4 +85,28 @@ func objectByType(contentType string) interface{} {
 	}
 
 	return nil
+}
+
+func (c Subsystem) GetContents() MDOTypeRefList {
+	list := MDOTypeRefList{}
+	addRecurse(&c, &list)
+	return list
+}
+
+func addRecurse(c *Subsystem, list *MDOTypeRefList) {
+	addContents(c, list)
+	for _, childSubsystem := range c.Subsystems {
+		addRecurse(childSubsystem, list)
+	}
+}
+
+func addContents(c *Subsystem, list *MDOTypeRefList) {
+	for _, content := range c.Content {
+		for _, v := range *list {
+			if v.raw == content.raw {
+				return
+			}
+		}
+		*list = append(*list, content)
+	}
 }

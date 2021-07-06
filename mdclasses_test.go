@@ -42,7 +42,7 @@ func TestUnpackConfiguration(t *testing.T) {
 	}
 }
 
-func Test(t *testing.T) {
+func TestCompareFile(t *testing.T) {
 	tests := []struct {
 		name    string
 		dir     string

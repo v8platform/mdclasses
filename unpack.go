@@ -31,10 +31,12 @@ func NewUnpackConfig(base string) UnpackConfig {
 const ExtMdo = ".mdo"
 
 var dirMap = map[string]string{
-	"Configuration": "Configuration", // Для конифгурации
-	"Subsystem":     "Subsystems",
-	"Catalog":       "Catalogs",
-	"Document":      "Documents",
+	"Configuration":     "Configuration", // Для конифгурации
+	"Subsystem":         "Subsystems",
+	"Catalog":           "Catalogs",
+	"Document":          "Documents",
+	"ExchangePlan":      "ExchangePlans",
+	"EventSubscription": "EventSubscriptions",
 }
 
 func (cfg UnpackConfig) WithPath(path string) UnpackConfig {
